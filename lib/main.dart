@@ -1,3 +1,4 @@
+import 'package:darkshop/views/account/account_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        "/":(context) => Scaffold(),
+        "/":(context) => const AccountScreen(),
       },
     );
   }
