@@ -1,2 +1,4 @@
-//xử lý tương tác bên giao diện
-//vd: nhấn nút ...
+class AccountPresenter{
+  //các hàm xử lý giao diện
+  
+}
