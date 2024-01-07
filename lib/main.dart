@@ -1,3 +1,5 @@
+import 'package:darkshop/views/product/productInfo_screen.dart';
+import 'package:darkshop/views/product/product_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        "/":(context) => Scaffold(),
+        "/": (context) => const productInfoScreen(),
       },
     );
   }
