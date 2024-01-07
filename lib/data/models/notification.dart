@@ -1,28 +1,22 @@
-class Notification{
-  int idUser;
+class NotificationInfo {
   DateTime date;
-  String title;
-  String? imagePath;
+  int type;
+  int idObject;
   String description;
   bool read;
 
-  Notification({
-    required this.idUser,
+  NotificationInfo({
     required this.date,
-    required this.title,
+    required this.type,
+    required this.idObject,
     required this.description,
     required this.read,
-  }){
-    if(title == ""){
-      imagePath = "";
-    }
-  }
+  });
 
-  Notification.empty()
-      : idUser = 0,
-        date = DateTime.now(),
-        title = '',
+  NotificationInfo.empty()
+      :date = DateTime.now(),
+        type = 0,
+        idObject = 0,
         description = '',
-        read = false,
-        imagePath = '';
+        read = false;
 }
