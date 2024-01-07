@@ -41,4 +41,8 @@ class NotificationRepository {
   String getNotificationTitle(int type) {
     return Constants.notificationTypes[type] ?? "Không tìm thấy title";
   }
+
+  readNotification(int id) {
+    //cập nhật thuộc tính read = true
+  }
 }
