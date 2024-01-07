@@ -15,7 +15,7 @@ class NotificationCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: GestureDetector(
-        onTap: () => NotificationPresenter().onclickCard(notification.idObject, notification.type),
+        onTap: () => NotificationPresenter().onclickCard(notification.idObject, notification.type, context),
         child: Container(
           height: 100,
           decoration: BoxDecoration(
