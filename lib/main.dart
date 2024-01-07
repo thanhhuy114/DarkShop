@@ -11,13 +11,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'DarkShop',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: "/",
       routes: {
-        "/":(context) => const AccountScreen(),
+        "/":(context) =>const AccountScreen(),
       },
     );
   }
