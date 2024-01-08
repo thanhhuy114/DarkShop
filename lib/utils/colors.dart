@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyColors{
-  static Color background = Colors.orange;
-  static Color backgroundButton = Colors.red;
-  static Color backgroundCard = Colors.red;
-  static Color backgroundAppBar = Colors.red;
-  static Color backgroundUserInfo = Colors.white;
+  static const Color background = Colors.orange;
+  static const Color backgroundButton = Colors.red;
+  static const Color backgroundCard = Colors.red;
+  static const Color backgroundAppBar = Colors.red;
+  static const Color backgroundUserInfo = Colors.white;
 }
