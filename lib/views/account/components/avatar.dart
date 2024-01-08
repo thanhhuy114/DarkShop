@@ -13,7 +13,7 @@ class Avatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => AccountPresenter().chooseAvatar(),
+      onTap: () => AccountPresenter().uploadAvatar(callback),
       child: Container(
                 child: image != null
                     ? SizedBox(
