@@ -1,7 +1,10 @@
-class Product{
+import 'dart:typed_data';
+
+class Product {
+  int id;
   int idType;
-  String image;
-  String imageInfo;
+  Uint8List? image;
+  Uint8List? imageInfo;
   String name;
   String description;
   int price;
@@ -10,6 +13,7 @@ class Product{
   DateTime postAt;
 
   Product({
+    required this.id,
     required this.idType,
     required this.image,
     required this.imageInfo,
@@ -22,9 +26,10 @@ class Product{
   });
 
   Product.empty()
-      : idType = 0,
-        image = '',
-        imageInfo = '',
+      : id = 0,
+        idType = 0,
+        image = null,
+        imageInfo = null,
         name = '',
         description = '',
         price = 0,
