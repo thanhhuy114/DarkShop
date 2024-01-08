@@ -1,13 +1,17 @@
-class User{
+import 'package:flutter/services.dart';
+
+class User {
+  int id;
   bool isAdmin;
   String fullname;
-  String image;
+  Uint8List? image;
   String phone;
   String email;
   String recentAddress;
   bool blocked;
 
   User({
+    required this.id,
     required this.isAdmin,
     required this.fullname,
     required this.image,
@@ -18,9 +22,9 @@ class User{
   });
 
   User.empty()
-      : isAdmin = false,
+      : id = 0,
+        isAdmin = false,
         fullname = '',
-        image = '',
         phone = '',
         email = '',
         recentAddress = '',
