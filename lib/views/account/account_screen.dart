@@ -1,4 +1,8 @@
+import 'package:darkshop/views/account/account_presenter.dart';
+import 'package:darkshop/views/account/components/user_info.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/colors.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -9,9 +13,19 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   @override
+  void initState() {
+    super.initState();
+    AccountPresenter.getUserLogin();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: const Text("Tài khoản"), centerTitle: true, backgroundColor: MyColors.backgroundAppBar,),
+      body: ListView(children: const [
+        UserInfo(),
+      ],),
+      backgroundColor: MyColors.background,
     );
   }
 }
