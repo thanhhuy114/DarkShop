@@ -1,4 +1,4 @@
-import 'package:darkshop/views/account/account_screen.dart';
+import 'package:darkshop/views/search/search_products_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
       routes: {
-        "/":(context) =>const AccountScreen(),
+        "/":(context) =>const SearchProductsScreen(),
       },
     );
   }
