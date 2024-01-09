@@ -88,3 +88,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+   - assets/Duy/1.png
+   - assets/Duy/2.png
+   - assets/Duy/3.png
+   - assets/Duy/4.png
+

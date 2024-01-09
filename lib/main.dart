@@ -1,3 +1,4 @@
+import 'package:darkshop/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,8 +17,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        "/":(context) => Scaffold(),
+        "/": (context) => const Home(),
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
