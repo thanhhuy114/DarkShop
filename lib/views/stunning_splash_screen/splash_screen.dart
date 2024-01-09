@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
         overlays: SystemUiOverlay.values);
     super.dispose();
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
