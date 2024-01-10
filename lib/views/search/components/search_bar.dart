@@ -34,7 +34,7 @@ class SearchBarState extends State<SearchBar> {
           hintText: Constants.search,
           suffixIcon: IconButton(
             onPressed: () {
-              SearchProductsPresenter().getListProductsByKey(
+              SearchProductsPresenter.getListProductsByKey(
                 txtController.text,
                 () {
                   setState(() {});

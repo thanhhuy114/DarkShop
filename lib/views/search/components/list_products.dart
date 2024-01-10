@@ -15,7 +15,10 @@ class _ListProductsState extends State<ListProducts> {
     return Column(
       children: [
         for (int i = 0; i < SearchProductsPresenter.products.length; i++)
-          ProductCard(product: SearchProductsPresenter.products[i])
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: ProductCard(product: SearchProductsPresenter.products[i]),
+          )
       ],
     );
   }
