@@ -16,7 +16,7 @@ class MyCarouselSlider extends StatelessWidget {
 
     return CarouselSlider(
       options: CarouselOptions(
-        height: 200.0,
+        height: 250.0,
         enlargeCenterPage: true,
         autoPlay: true,
         aspectRatio: 16 / 9,

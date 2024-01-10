@@ -1,9 +1,9 @@
 //giao diện product
-import 'package:darkshop/views/product/components/button.dart';
-import 'package:darkshop/views/product/components/carousel_slider.dart';
-import 'package:darkshop/views/product/components/img_button.dart';
-import 'package:darkshop/views/product/components/product_info.dart';
-import 'package:darkshop/views/product/components/specifications_button.dart';
+import 'package:darkshop/views/productDetail/components/button.dart';
+import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
+import 'package:darkshop/views/productDetail/components/img_button.dart';
+import 'package:darkshop/views/productDetail/components/product_info.dart';
+import 'package:darkshop/views/productDetail/components/specifications_button.dart';
 import 'package:flutter/material.dart';
 
 class productScreen extends StatefulWidget {
@@ -19,7 +19,8 @@ class _productScreenState extends State<productScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 185, 88),
       appBar: AppBar(
-        title: const Text("sss"),
+        title: const Text("Thông số kỹ thuật"),
+        backgroundColor: Colors.amber,
       ),
       body: SingleChildScrollView(
           child: Column(

@@ -1,5 +1,5 @@
 //thông tin sản phẩm
-import 'package:darkshop/views/product/components/button.dart';
+import 'package:darkshop/views/productDetail/components/button.dart';
 import 'package:flutter/material.dart';
 
 class productInfo extends StatelessWidget {

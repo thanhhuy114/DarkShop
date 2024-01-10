@@ -1,4 +1,4 @@
-import 'package:darkshop/views/product/components/product_info.dart';
+import 'package:darkshop/views/productDetail/components/product_info.dart';
 import 'package:flutter/material.dart';
 
 class productInfoScreen extends StatefulWidget {
@@ -13,7 +13,11 @@ class _productInfoScreenState extends State<productInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ss'),
+        title: const Text(
+          'Thông số kỹ thuật',
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: Colors.amber,
       ),
       body: SingleChildScrollView(
           child: Container(
