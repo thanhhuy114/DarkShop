@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:dotted_border/dotted_border.dart';
 
 class ImgButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  const ImgButton({super.key, required this.onPressed});
+  VoidCallback ontap;
+  ImgButton({super.key, required this.ontap});
 
   @override
   Widget build(BuildContext context) {
-    return DottedBorder(
-      color: Colors.amber, // Border color
-      strokeWidth: 2,
-      dashPattern: const [6, 3],
-      borderType: BorderType.RRect,
-      radius: const Radius.circular(12),
-      child: GestureDetector(
-        onTap: onPressed,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+        onTap: ontap,
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height / 20,
+            child: Image.asset('assets/logo.png'),
           ),
-          child: Text('Thêm ảnh'),
-        ),
-      ),
-    );
+        ));
   }
 }

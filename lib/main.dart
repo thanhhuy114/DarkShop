@@ -1,7 +1,3 @@
-import 'package:darkshop/views/cart/cart_screen.dart';
-import 'package:darkshop/views/productDetail/productInfo_screen.dart';
-import 'package:darkshop/views/productDetail/product_screen.dart';
-import 'package:darkshop/views/productDetail/productimgzoom_screen.dart';
 import 'package:darkshop/views/productManagement/addProduct_screen.dart';
 import 'package:darkshop/views/productManagement/proMgmt_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        "/": (context) => addProSCreen(),
+        "/": (context) => const addProSCreen(),
       },
     );
   }

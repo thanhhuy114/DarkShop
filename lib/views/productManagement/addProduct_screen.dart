@@ -12,17 +12,15 @@ class _addProSCreenState extends State<addProSCreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Thêm sản phẩm '),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [itemImg()],
-          ),
+        appBar: AppBar(
+          title: const Text('Thêm sản phẩm '),
+          backgroundColor: Colors.redAccent,
         ),
-      ),
-    );
+        body: Container(
+          decoration: const BoxDecoration(color: Colors.amber),
+          child: const Column(
+            children: [ItemImg(), Text('data')],
+          ),
+        ));
   }
 }
