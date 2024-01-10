@@ -26,7 +26,7 @@ class _AccountScreenState extends State<AccountScreen> {
       body: ListView(children: const [
         UserInfo(),
       ],),
-      backgroundColor: MyColors.background,
+      backgroundColor: MyColors.backgroundApp,
     );
   }
 }

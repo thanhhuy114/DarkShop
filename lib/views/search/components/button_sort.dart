@@ -24,7 +24,7 @@ class ButtonSort extends StatelessWidget {
         height: 30,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: seleted ? MyColors.backgroundButton : MyColors.background,
+          color: seleted ? MyColors.backgroundButton : MyColors.backgroundApp,
           border: Border.all(),
         ),
         child: Center(
