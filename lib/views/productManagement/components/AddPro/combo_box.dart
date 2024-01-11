@@ -17,7 +17,7 @@ class _ComboboxState extends State<Combobox> {
           selectedValue = newValue!;
         });
       },
-      items: <String>['Laptop', 'PC', 'TV', 'Linh kiện']
+      items: <String>['Chọn loại sản phẩm', 'Laptop', 'PC', 'TV', 'Linh kiện']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

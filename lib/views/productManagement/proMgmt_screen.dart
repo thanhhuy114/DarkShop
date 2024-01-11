@@ -1,5 +1,5 @@
 //giao diện quan ly san pham
-import 'package:darkshop/views/productManagement/components/item.dart';
+import 'package:darkshop/views/productManagement/components/PM/item.dart';
 import 'package:flutter/material.dart';
 
 class proMgmtScreen extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:darkshop/views/productManagement/components/img_button.dart';
+import 'package:darkshop/views/productManagement/components/AddPro/img_button.dart';
 import 'package:flutter/material.dart';
 
 class ItemImg extends StatelessWidget {

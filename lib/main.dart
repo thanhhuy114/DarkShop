@@ -1,4 +1,5 @@
 import 'package:darkshop/views/productManagement/addProduct_screen.dart';
+import 'package:darkshop/views/productManagement/editProduct_screen.dart';
 import 'package:darkshop/views/productManagement/proMgmt_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        "/": (context) => const addProSCreen(),
+        "/": (context) => const EditProScreen(),
       },
     );
   }

@@ -1,4 +1,4 @@
-import 'package:darkshop/views/productManagement/components/cus_button.dart';
+import 'package:darkshop/views/productManagement/components/PM/cus_button.dart';
 import 'package:flutter/material.dart';
 
 class itemProduct extends StatelessWidget {

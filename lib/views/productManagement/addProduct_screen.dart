@@ -1,6 +1,9 @@
-import 'package:darkshop/views/productManagement/components/itemImg_list.dart';
-import 'package:darkshop/views/productManagement/components/item_name.dart';
-import 'package:darkshop/views/productManagement/components/item_prodparams.dart';
+import 'package:darkshop/views/productManagement/components/AddPro/custom_button.dart';
+import 'package:darkshop/views/productManagement/components/AddPro/itemImg_list.dart';
+import 'package:darkshop/views/productManagement/components/AddPro/item_cb.dart';
+import 'package:darkshop/views/productManagement/components/AddPro/item_container.dart';
+import 'package:darkshop/views/productManagement/components/AddPro/item_name.dart';
+import 'package:darkshop/views/productManagement/components/AddPro/item_prodparams.dart';
 import 'package:flutter/material.dart';
 
 class addProSCreen extends StatefulWidget {
@@ -20,10 +23,16 @@ class _addProSCreenState extends State<addProSCreen> {
         ),
         body: Container(
           decoration: const BoxDecoration(color: Colors.amber),
-          child: Column(
+          child: ListView(
             children: [
               ItemImg(),
               ItemName(),
+              ItemProPara(ontap: () {}),
+              ItemCB(),
+              ItemContainer(icon: Icons.price_change, label: 'Giá'),
+              ItemContainer(icon: Icons.discount_outlined, label: 'Giảm giá'),
+              ItemContainer(icon: Icons.warehouse_outlined, label: 'Kho *'),
+              CusBtn(text: 'Lưu')
             ],
           ),
         ));
