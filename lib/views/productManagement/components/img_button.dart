@@ -12,7 +12,7 @@ class ImgButton extends StatelessWidget {
           padding: EdgeInsets.all(10),
           child: SizedBox(
             height: MediaQuery.of(context).size.height / 20,
-            child: Image.asset('assets/logo.png'),
+            child: Image.asset('assets/add_img.png'),
           ),
         ));
   }

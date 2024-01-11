@@ -1,4 +1,6 @@
 import 'package:darkshop/views/productManagement/components/itemImg_list.dart';
+import 'package:darkshop/views/productManagement/components/item_name.dart';
+import 'package:darkshop/views/productManagement/components/item_prodparams.dart';
 import 'package:flutter/material.dart';
 
 class addProSCreen extends StatefulWidget {
@@ -18,8 +20,11 @@ class _addProSCreenState extends State<addProSCreen> {
         ),
         body: Container(
           decoration: const BoxDecoration(color: Colors.amber),
-          child: const Column(
-            children: [ItemImg(), Text('data')],
+          child: Column(
+            children: [
+              ItemImg(),
+              ItemName(),
+            ],
           ),
         ));
   }
