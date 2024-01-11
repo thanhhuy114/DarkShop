@@ -20,9 +20,9 @@ class InfoOrder extends StatelessWidget {
           height: 5,
         ),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          height: 1,
-          color: Colors.black,
+          // margin: const EdgeInsets.symmetric(horizontal: 10),
+          height: 2,
+          color: Colors.red,
         ),
         const SizedBox(
           height: 10,

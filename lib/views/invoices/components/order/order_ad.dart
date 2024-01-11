@@ -1,6 +1,6 @@
 import 'package:darkshop/views/invoices/components/order/card_product.dart';
 import 'package:darkshop/views/invoices/components/order/two_button.dart';
-import 'package:darkshop/views/invoices/order_detail_u_screen.dart';
+import 'package:darkshop/views/invoices/order_detail_admin_screen.dart';
 import 'package:flutter/material.dart';
 
 class OrderAd extends StatelessWidget {
@@ -16,14 +16,14 @@ class OrderAd extends StatelessWidget {
         );
       },
       child: Container(
-        height: 400,
-        padding: const EdgeInsets.all(10),
+        height: 395,
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(5),
             border: Border.all(color: Colors.black, width: 2),
-            color: const Color.fromARGB(255, 206, 224, 233)),
+            color: Colors.white),
         child: Column(children: [
           //Avatar và tên kh
           Row(
@@ -89,9 +89,9 @@ class OrderAd extends StatelessWidget {
           ),
           //đường kẻ
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            height: 1,
-            color: Colors.black,
+            // margin: const EdgeInsets.symmetric(horizontal: 10),
+            height: 3,
+            color: Colors.red,
           ),
           //khoảng cách
           const SizedBox(
@@ -104,14 +104,14 @@ class OrderAd extends StatelessWidget {
           ),
           //khoảng cách
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
           //nút xác nhận,hủy
           const TwoButton(),
           //khoảng cách
-          const SizedBox(
-            width: 10,
-          ),
+          // const SizedBox(
+          //   width: 10,
+          // ),
           //mã đơn hàng
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

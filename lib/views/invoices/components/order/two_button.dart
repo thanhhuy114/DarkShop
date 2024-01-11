@@ -28,8 +28,9 @@ class TwoButton extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green, // Màu xanh
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                              borderRadius: BorderRadius.circular(6),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 2)),
                         ),
                         child: const Text(
                           'Xác nhận hủy',
@@ -44,8 +45,9 @@ class TwoButton extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red, // Màu đỏ
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                              borderRadius: BorderRadius.circular(6),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 2)),
                         ),
                         child: const Text(
                           'Không',
@@ -60,8 +62,8 @@ class TwoButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.grey,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
+                borderRadius: BorderRadius.circular(6),
+                side: const BorderSide(color: Colors.black, width: 2)),
           ),
           child: const Text(
             'HỦY',
@@ -72,7 +74,7 @@ class TwoButton extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 5),
         ElevatedButton(
           onPressed: () {
             // Xử lý khi nút Xác nhận được nhấn
@@ -80,8 +82,8 @@ class TwoButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.red,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
+                borderRadius: BorderRadius.circular(6),
+                side: const BorderSide(color: Colors.black, width: 2)),
           ),
           child: const Text(
             'Xác nhận',

@@ -1,0 +1,170 @@
+{
+    "users":[
+        {
+            "id":1,
+            "isAdmin":true,
+            "fulName":"Võ Thành Huy",
+            "image":null,
+            "phone":"123456789",
+            "email":"vothanhhuy@example.com",
+            "recentAddress":"123 Main St, New York",
+            "blocked":false
+        },
+        {
+            "id":2,
+            "isAdmin":true,
+            "fulName":"Cao Thịnh Duy",
+            "phone":"123456789",
+            "email":"caothinhduy@example.com",
+            "recentAddress":"123 Main St, New York",
+            "blocked":false
+        },
+        {
+            "id":3,
+            "isAdmin":false,
+            "fulName":"Trần Viết Nam",
+            "image":null,
+            "phone":"123456789",
+            "email":"tranvietnam@example.com",
+            "recentAddress":"123 Main St, New York",
+            "blocked":false
+        },
+        {
+            "id":4,
+            "isAdmin":false,
+            "fulName":"Trần Dương Gia Thịnh",
+            "image":null,
+            "phone":"123456789",
+            "email":"tranduonggiathinh@example.com",
+            "recentAddress":"123 Main St, New York",
+            "blocked":false
+        }
+    ],
+    "products":[
+        {
+            "id":1,
+            "idType":1,
+            "image":null,
+            "imageInfo":null,
+            "name":"Laptop Asus",
+            "desciption":"abc",
+            "price":16999000,
+            "promotion":100000,
+            "repository": 100,
+            "postAt": "2024-01-01"
+        },
+        {
+            "id":2,
+            "idType":1,
+            "image":null,
+            "imageInfo":null,
+            "name":"Laptop Dell",
+            "desciption":"abc",
+            "price":20999000,
+            "promotion":100000,
+            "repository": 100,
+            "postAt": "2024-01-01"
+        },
+        {
+            "id":3,
+            "idType":2,
+            "image":null,
+            "imageInfo":null,
+            "name":"Điện thoại Samsung",
+            "desciption":"abc",
+            "price":17999000,
+            "promotion":100000,
+            "repository": 100,
+            "postAt": "2024-01-01"
+        },
+        {
+            "id":4,
+            "idType":1,
+            "image":null,
+            "imageInfo":null,
+            "name":"Điện thoại Apple",
+            "desciption":"abc",
+            "price":26999000,
+            "promotion":100000,
+            "repository": 100,
+            "postAt": "2024-01-01"
+        }
+    ],
+    "invoices":[
+        {
+            "id":1,
+            "idUser":3,
+            "createAt":"2024-01-01",
+            "idPayment":1,
+            "totalPrice":1000000,
+            "status":1,
+            "note":"abc"
+        },
+        {
+            "id":2,
+            "idUser":3,
+            "createAt":"2024-01-01",
+            "idPayment":1,
+            "totalPrice":1000000,
+            "status":2,
+            "note":"abc"
+        },
+        {
+            "id":3,
+            "idUser":3,
+            "createAt":"2024-01-01",
+            "idPayment":1,
+            "totalPrice":1000000,
+            "status":3,
+            "note":"abc"
+        },
+        {
+            "id":4,
+            "idUser":4,
+            "createAt":"2024-01-01",
+            "idPayment":1,
+            "totalPrice":1000000,
+            "status":4,
+            "note":"abc"
+        },
+        {
+            "id":5,
+            "idUser":4,
+            "createAt":"2024-01-01",
+            "idPayment":1,
+            "totalPrice":1000000,
+            "status":5,
+            "note":"abc"
+        }
+    ],
+    "invoice_details":[
+        {
+            "id":1,
+            "idInvoice":1,
+            "idProduct":1,
+            "count": 1,
+            "totalPrice":1000000
+        },
+        {
+            "id":2,
+            "idInvoice":1,
+            "idProduct":2,
+            "count": 2,
+            "totalPrice":2000000
+        },
+        {
+            "id":3,
+            "idInvoice":1,
+            "idProduct":3,
+            "count": 1,
+            "totalPrice":3000000
+        },
+        {
+            "id":4,
+            "idInvoice":1,
+            "idProduct":4,
+            "count": 2,
+            "totalPrice":4000000
+        }
+    ]
+}

@@ -11,4 +11,13 @@ class InvoiceDetails {
       required this.idProduct,
       required this.count,
       required this.totalPrice});
+
+  factory InvoiceDetails.fromJson(Map<String, dynamic> json) {
+    return InvoiceDetails(
+        id: json['id'],
+        idInvoice: json['idInvoice'],
+        idProduct: json['idProduct'],
+        count: json['count'],
+        totalPrice: json['totalPrice']);
+  }
 }
