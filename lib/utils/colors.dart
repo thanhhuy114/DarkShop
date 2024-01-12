@@ -9,4 +9,5 @@ class MyColors{
   static const Color backgroundCard = Colors.red;
   static const Color backgroundAppBar = Colors.red;
   static const Color backgroundUserInfo = Colors.white;
+  static const Color backgroundSearchSuggestions = Colors.white;
 }
