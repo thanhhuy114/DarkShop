@@ -19,12 +19,17 @@ class Constants {
 
   static const String avatarDefault = "assets/image_user/avt_default.png";
   static const String account = "Tài khoản";
+  static const String usersManagement = "Quản lý người dùng";
+  static const String listUser = "Danh sách người dùng";
   static const String notification = "Thông báo";
   static const String fullname = "Họ và tên";
   static const String email = "Email";
   static const String phone = "Số điện thoại";
   static const String address = "Địa chỉ";
+  static const String blocked = "Bị khóa";
   static const String changePassword = "Đổi mật khẩu";
+  static const String delete = "Xóa";
+  static const String block = "Khóa";
   static const String logout = "Đăng xuất";
 
   static const String related = "Liên quan";

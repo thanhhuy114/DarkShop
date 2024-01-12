@@ -15,7 +15,7 @@ class UserRepository {
         blocked: false);
   }
 
-  Future<List<User>?> getAllUsers() async {
+  Future<List<User>> getAllUsers() async {
     return [
       User(
           id: 1,
@@ -63,6 +63,18 @@ class UserRepository {
   }
   
   deleteAdress(String newAddress, int idUser) async {
+    
+  }
+  
+  blockUser(int idUser) async {
+    
+  }
+  
+  unblockUser(int idUser) async {
+    
+  }
+  
+  deleteUser(int idUser) async {
     
   }
 
