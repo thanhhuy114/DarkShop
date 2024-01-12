@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-//class user
-=======
-import 'package:flutter/services.dart';
+import 'dart:typed_data';
 
 class User {
   int id;
@@ -33,4 +30,3 @@ class User {
         recentAddress = '',
         blocked = false;
 }
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a

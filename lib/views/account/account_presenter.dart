@@ -1,14 +1,10 @@
-<<<<<<< HEAD
-//xử lý tương tác bên giao diện
-//vd: nhấn nút ...
-=======
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:darkshop/data/models/user.dart';
 import 'package:darkshop/data/repositories/user_repository.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AccountPresenter {
@@ -78,4 +74,3 @@ class AccountPresenter {
     //chuyển trang quản lý địa chỉ
   }
 }
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a

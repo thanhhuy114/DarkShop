@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-//giao diện tài khoản
-=======
+import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:darkshop/views/account/components/user_info.dart';
 import 'package:flutter/material.dart';
-
-import '../../utils/colors.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -25,12 +21,17 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text(Constants.account), centerTitle: true, backgroundColor: MyColors.backgroundAppBar,),
-      body: ListView(children: const [
-        UserInfo(),
-      ],),
+      appBar: AppBar(
+        title: const Text(Constants.account),
+        centerTitle: true,
+        backgroundColor: MyColors.backgroundAppBar,
+      ),
+      body: ListView(
+        children: const [
+          UserInfo(),
+        ],
+      ),
       backgroundColor: MyColors.backgroundApp,
     );
   }
 }
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a

@@ -48,10 +48,7 @@ packages:
       sha256: ee67cb0715911d28db6bf4af1026078bd6f0128b07a5f66fb2ed94ec6783c09a
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
     version: "1.18.0"
-=======
-    version: "1.17.0"
   cross_file:
     dependency: transitive
     description:
@@ -60,7 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.3+6"
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -143,8 +139,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
-=======
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -167,13 +161,13 @@ packages:
     source: hosted
     version: "4.0.2"
   image_picker:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: image_picker
-      sha256: "7d7f2768df2a8b0a3cefa5ef4f84636121987d403130e70b17ef7e2cf650ba84"
+      sha256: "26222b01a0c9a2c8fe02fc90b8208bd3325da5ed1f4a2acabf75939031ac0bdd"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.4"
+    version: "1.0.7"
   image_picker_android:
     dependency: transitive
     description:
@@ -238,7 +232,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a
   lints:
     dependency: transitive
     description:
@@ -270,10 +263,7 @@ packages:
       sha256: a6e590c838b18133bb482a2745ad77c5bb7715fb0451209e1a7567d416678b8e
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
     version: "1.10.0"
-=======
-    version: "1.8.0"
   mime:
     dependency: transitive
     description:
@@ -282,7 +272,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a
   path:
     dependency: transitive
     description:
@@ -290,10 +279,7 @@ packages:
       sha256: "8829d8a55c13fc0e37127c29fedf290c102f4e40ae94ada574091fe0ff96c917"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
     version: "1.8.3"
-=======
-    version: "1.8.2"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -302,7 +288,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.6"
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a
   sky_engine:
     dependency: transitive
     description: flutter
@@ -355,10 +340,7 @@ packages:
       sha256: "5c2f730018264d276c20e4f1503fd1308dfbbae39ec8ee63c5236311ac06954b"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
     version: "0.6.1"
-=======
-    version: "0.4.16"
   typed_data:
     dependency: transitive
     description:
@@ -367,7 +349,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a
   vector_math:
     dependency: transitive
     description:
@@ -385,9 +366,5 @@ packages:
     source: hosted
     version: "0.3.0"
 sdks:
-<<<<<<< HEAD
   dart: ">=3.2.0-194.0.dev <4.0.0"
-=======
-  dart: ">=2.19.6 <3.0.0"
-  flutter: ">=3.7.0"
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a
+  flutter: ">=3.10.0"

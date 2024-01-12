@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-//chứa các hằng
-=======
 enum NotificationType {
   orderSuccessful,
   newOrder,
@@ -39,6 +36,4 @@ class Constants {
   static const int indexLatestProducts = 1;
   static const int indexPriceIncreaseProducts = 2;
   static const int indexPriceDecreaseProducts = 3;
-  
 }
->>>>>>> acc8e9396b42b0d36a2fe32b2b39f303f164958a
