@@ -5,9 +5,8 @@ import '../../../utils/constants.dart';
 import '../search_products_presenter.dart';
 
 class SearchBar extends StatefulWidget implements PreferredSizeWidget {
-  const SearchBar({Key? key, required this.txt}) : super(key: key);
-
-  final String txt;
+  const SearchBar({Key? key, required this.presenter}) : super(key: key);
+  final SearchProductsPresenter presenter;
 
   @override
   SearchBarState createState() => SearchBarState();
@@ -17,34 +16,34 @@ class SearchBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class SearchBarState extends State<SearchBar> {
-  late TextEditingController txtController;
-
-  @override
-  void initState() {
-    super.initState();
-    txtController = TextEditingController(text: widget.txt);
-  }
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: TextField(
-        controller: txtController,
-        decoration: InputDecoration(
-          hintText: Constants.search,
-          suffixIcon: IconButton(
-            onPressed: () {
-              SearchProductsPresenter.getListProductsByKey(
-                txtController.text,
-                () {
-                  setState(() {});
+      title: Container(
+        height: 30,
+        margin: const EdgeInsets.all(20),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
+        child: 
+            TextField(
+              controller: widget.presenter.txtSearch,
+              decoration: InputDecoration(
+                hintText: Constants.search,
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    widget.presenter.getListProductsByKey(
+                      widget.presenter.txtSearch.text
+                    );
+                  },
+                  icon: const Icon(Icons.search_rounded),
+                ),
+              ),
+              onChanged: (value) {
+                  widget.presenter.getSuggestionsByKey();
                 },
-              );
-            },
-            icon: const Icon(Icons.search_rounded),
-          ),
-        ),
-        onChanged: (value) {},
+                onTap: widget.presenter.onClickSearchTextField,
+            ),
+          
+        
       ),
       centerTitle: true,
       backgroundColor: MyColors.backgroundAppBar,

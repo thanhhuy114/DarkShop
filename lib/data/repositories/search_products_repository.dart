@@ -1,7 +1,7 @@
 import 'package:darkshop/data/models/product.dart';
 
 class SearchProductsRepository {
-  static Future<List<Product>> getListProductsByKey(String key) async {
+  Future<List<Product>> getListProductsByKey(String key) async {
     return [
       Product(
           id: 0,
@@ -28,7 +28,15 @@ class SearchProductsRepository {
     ];
   }
 
-  static Future<List<Product>> getListProductsByType(int idType) async {
+  Future<List<Product>> getListProductsByType(String type) async {
     return [];
+  }
+
+  Future<List<String>> getSuggestions() async {
+    return ["Apple", "Banana", "Cherry", "Date", "Grape"];
+  }
+
+  Future<List<String>> getListProductTypes() async {
+    return ["type1", "type1"];
   }
 }
