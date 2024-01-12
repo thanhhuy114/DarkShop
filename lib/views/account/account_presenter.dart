@@ -5,6 +5,7 @@ import 'package:darkshop/data/repositories/user_repository.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// ignore: depend_on_referenced_packages
 import 'package:image_picker/image_picker.dart';
 
 class AccountPresenter {
@@ -15,10 +16,6 @@ class AccountPresenter {
     userLogin = await UserRepository().getUserLogin();
 
     return userLogin;
-  }
-
-  static Future<List<User>?> getAllUsers() async {
-    return await UserRepository().getAllUsers();
   }
 
   static Uint8List convertStringToUint8List(String base64String) {
