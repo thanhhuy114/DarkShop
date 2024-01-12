@@ -26,6 +26,8 @@ class Constants {
   static const String email = "Email";
   static const String phone = "Số điện thoại";
   static const String address = "Địa chỉ";
+  static const String addressManagement = "Quản lý địa chỉ";
+  static const String recentUsed = "Sử dụng gần đây";
   static const String blocked = "Bị khóa";
   static const String changePassword = "Đổi mật khẩu";
   static const String delete = "Xóa";
@@ -41,5 +43,4 @@ class Constants {
   static const int indexLatestProducts = 1;
   static const int indexPriceIncreaseProducts = 2;
   static const int indexPriceDecreaseProducts = 3;
-  
 }

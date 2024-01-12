@@ -10,4 +10,5 @@ class MyColors{
   static const Color backgroundAppBar = Colors.red;
   static const Color backgroundUserInfo = Colors.white;
   static const Color backgroundSearchSuggestions = Colors.white;
+  static const Color backgroundAddress = Colors.white;
 }
