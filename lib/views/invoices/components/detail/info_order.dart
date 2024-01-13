@@ -27,12 +27,12 @@ class InfoOrder extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        const Align(
+        Align(
           alignment: Alignment.topLeft,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+            children: const [
               Text(
                 'Mã đơn hàng: ',
                 style: TextStyle(fontSize: fontSize),

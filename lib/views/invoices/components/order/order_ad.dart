@@ -113,7 +113,7 @@ class OrderAd extends StatelessWidget {
           //   width: 10,
           // ),
           //mã đơn hàng
-          const Row(
+           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Mã đơn hàng:'),
