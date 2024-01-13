@@ -1,39 +1,19 @@
 import 'package:darkshop/data/models/address.dart';
 import 'package:darkshop/utils/colors.dart';
-import 'package:darkshop/utils/constants.dart';
+import 'package:darkshop/views/address_management/address_management_presenter.dart';
 import 'package:flutter/material.dart';
 
 class AddressCard extends StatelessWidget {
   const AddressCard(
-      {super.key, required this.address, required this.isRecentUsed});
+      {super.key, required this.address, required this.presenter});
+  final AddressManagementPresenter presenter;
   final Address address;
-  final bool isRecentUsed;
 
   @override
   Widget build(BuildContext context) {
-    if (isRecentUsed) {
+    {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-              color: MyColors.backgroundAddress,
-              borderRadius: BorderRadius.circular(5)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                Constants.recentUsed,
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-              ),
-              Text(address.address)
-            ],
-          ),
-        ),
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(3.0),
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -46,7 +26,9 @@ class AddressCard extends StatelessWidget {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      presenter.onEditAddress(address);
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                           color: MyColors.backgroundButton,
@@ -58,7 +40,7 @@ class AddressCard extends StatelessWidget {
                     height: 5,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: presenter.deleteAddress,
                     child: Container(
                       decoration: BoxDecoration(
                           color: MyColors.backgroundButton,

@@ -38,6 +38,8 @@ class Constants {
   static const String latest = "Mới nhất";
   static const String price = "Giá";
   static const String search = "Tìm kiếm";
+  
+  static const String addAddress = "Thêm địa chỉ";
 
   static const int indexRelatedProducts = 0;
   static const int indexLatestProducts = 1;
