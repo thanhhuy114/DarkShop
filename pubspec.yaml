@@ -46,6 +46,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  image_picker: ^1.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -61,13 +62,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/Duy/1.png
-    - assets/Duy/2.png
-    - assets/Duy/3.png
-    - assets/Duy/4.png
-    - assets/Duy/5.png
-    - assets/Duy/sp1.jpg
+    - assets/Duy/
     - assets/data.json
+    - assets/image_user/avt_default.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -95,5 +92,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
- 
-
