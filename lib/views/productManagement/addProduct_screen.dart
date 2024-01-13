@@ -25,14 +25,16 @@ class _addProSCreenState extends State<addProSCreen> {
           decoration: const BoxDecoration(color: Colors.amber),
           child: ListView(
             children: [
-              ItemImg(),
-              ItemName(),
+              const ItemImg(),
+              const ItemName(),
               ItemProPara(ontap: () {}),
-              ItemCB(),
-              ItemContainer(icon: Icons.price_change, label: 'Giá'),
-              ItemContainer(icon: Icons.discount_outlined, label: 'Giảm giá'),
-              ItemContainer(icon: Icons.warehouse_outlined, label: 'Kho *'),
-              CusBtn(text: 'Lưu')
+              const ItemCB(),
+              const ItemContainer(icon: Icons.price_change, label: 'Giá'),
+              const ItemContainer(
+                  icon: Icons.discount_outlined, label: 'Giảm giá'),
+              const ItemContainer(
+                  icon: Icons.warehouse_outlined, label: 'Kho *'),
+              const CusBtn(text: 'Lưu')
             ],
           ),
         ));

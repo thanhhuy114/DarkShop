@@ -1,3 +1,4 @@
+import 'package:darkshop/views/productManagement/editProduct_screen.dart';
 import 'package:darkshop/views/search/search_products_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
       routes: {
-        "/": (context) => const SearchProductsScreen(),
+        "/": (context) => const EditProScreen(),
       },
     );
   }
