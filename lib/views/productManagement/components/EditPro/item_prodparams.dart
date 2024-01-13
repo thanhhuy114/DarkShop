@@ -1,12 +1,12 @@
-
 import 'package:flutter/material.dart';
 
 import '../AddPro/img_button.dart';
 
 class ItemProPara extends StatelessWidget {
   final VoidCallback ontap;
-  const ItemProPara({super.key, required this.ontap});
-
+  final TextEditingController proPraEdit = TextEditingController(text: '');
+  ItemProPara({super.key, required this.ontap, required this.proPra});
+  final String proPra;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,12 +22,10 @@ class ItemProPara extends StatelessWidget {
                 textAlign: TextAlign.start,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              const TextField(
+              TextField(
                 maxLength: 3000,
                 maxLines: null,
-                decoration: InputDecoration(
-                  labelText: 'Enter your text (max 3000 characters)',
-                ),
+                controller: proPraEdit,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,3 +1,4 @@
+import 'package:darkshop/views/productManagement/addProduct_screen.dart';
 import 'package:darkshop/views/productManagement/editProduct_screen.dart';
 import 'package:darkshop/views/search/search_products_screen.dart';
 import 'package:flutter/material.dart';

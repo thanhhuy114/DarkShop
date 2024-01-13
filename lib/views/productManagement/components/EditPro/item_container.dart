@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 class ItemContainer extends StatelessWidget {
   final IconData icon;
   final String label;
-  const ItemContainer({super.key, required this.icon, required this.label});
+  final String value;
+  TextEditingController valueEdit = TextEditingController();
+  ItemContainer(
+      {super.key,
+      required this.icon,
+      required this.label,
+      required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +18,7 @@ class ItemContainer extends StatelessWidget {
         color: Colors.white,
         child: TextField(
           keyboardType: TextInputType.number,
+          controller: valueEdit,
           decoration: InputDecoration(
             icon: Icon(icon),
             label: Text(label),
