@@ -29,16 +29,16 @@ class _productScreenState extends State<productScreen> {
             padding: EdgeInsets.all(20.0),
             child: MyCarouselSlider(),
           ),
-          const Row(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
+            children: const [
               imgButton(),
               specsButton(),
             ],
           ),
           Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   const Text(

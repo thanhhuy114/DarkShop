@@ -16,8 +16,8 @@ class _specsButtonState extends State<specsButton> {
       decoration: const BoxDecoration(
         color: Colors.white,
       ),
-      child: const Column(
-        children: [
+      child: Column(
+        children: const [
           Icon(Icons.laptop_mac),
           Text(
             "Thông số kỹ thuật",
