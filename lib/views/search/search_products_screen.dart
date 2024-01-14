@@ -1,11 +1,10 @@
 import 'package:darkshop/views/search/components/list_products.dart';
 import 'package:darkshop/views/search/components/search_bar.dart';
 import 'package:darkshop/views/search/components/search_suggestion.dart';
+import 'package:darkshop/utils/colors.dart';
+import 'package:darkshop/views/search/components/menu_sort.dart';
 import 'package:darkshop/views/search/search_products_presenter.dart';
 import 'package:flutter/material.dart';
-
-import '../../utils/colors.dart';
-import 'components/menu_sort.dart';
 
 class SearchProductsScreen extends StatefulWidget {
   const SearchProductsScreen({super.key});
@@ -34,28 +33,51 @@ class _SearchProductsScreenState extends State<SearchProductsScreen> {
         appBar: SearchBar(presenter: presenter!),
         body: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: ListView(children: [
-            if (!presenter!.isSearch)
-              MenuSort(
-                seletedIndex: presenter!.seletedIndex,
-                updateSeletedIndex: (newIndex) {
-                  setState(() {
-                    presenter!.seletedIndex = newIndex;
-                  });
-                },
-              ),
-            presenter!.isSearch
-                ? SearchSuggestions(
-                    presenter: presenter!,
-                  )
-                : ListProducts(
-                    presenter: presenter!,
-                  )
-          ],),
+          child: ListView(
+            children: [
+              if (!presenter!.isSearch)
+                MenuSort(
+                  seletedIndex: presenter!.seletedIndex,
+                  updateSeletedIndex: (newIndex) {
+                    setState(() {
+                      presenter!.seletedIndex = newIndex;
+                    });
+                  },
+                ),
+              presenter!.isSearch
+                  ? SearchSuggestions(
+                      presenter: presenter!,
+                    )
+                  : ListProducts(
+                      presenter: presenter!,
+                    )
+            ],
+          ),
         ),
         backgroundColor: MyColors.backgroundApp,
       );
     }
     return Container();
+
+    // return Scaffold(
+    //   // appBar: const SearchBar(
+    //   //   // txt: "",
+    //   // ),
+    //   body: Padding(
+    //     padding:  EdgeInsets.all(5.0),
+    //     child: Column(children: [
+    //       MenuSort(
+    //         seletedIndex: seletedIndex,
+    //         updateSeletedIndex: (newIndex) {
+    //           setState(() {
+    //             seletedIndex = newIndex;
+    //           });
+    //         },
+    //       ),
+    //       const ListProducts()
+    //     ]),
+    //   ),
+    //   backgroundColor: MyColors.backgroundApp,
+    // );
   }
 }

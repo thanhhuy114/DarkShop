@@ -1,4 +1,3 @@
-
 //chứa các hàm tương tác dữ liệu với user
 //vd: lấy tất cả user, thêm user vào database
 import 'package:flutter/services.dart';
@@ -40,10 +39,11 @@ class UserRepository {
           blocked: false)
     ];
   }
-  
+
   saveAvatar(Uint8List image, int idUser) async {
     //lưu avatar mới vào database
   }
+
   
   saveFullname(String fullname, int idUser) async {
     
@@ -80,6 +80,7 @@ class UserRepository {
   deleteUser(int idUser) async {
     
   }
+
 
   changePassword(String newPassword, int idUser) async {
     //đổi mất khẩu

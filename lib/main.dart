@@ -1,4 +1,4 @@
-import 'package:darkshop/views/address_management/address_management_screen.dart';
+import 'package:darkshop/views/productManagement/editProduct_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
       routes: {
-        "/":(context) =>const AddressManagementScreen(),
+        "/": (context) => const EditProScreen(),
       },
     );
   }

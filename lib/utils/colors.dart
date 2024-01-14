@@ -1,6 +1,5 @@
 //chứa các màu trong giao diện
 //vd: màu nền, màu nút
-
 import 'package:flutter/material.dart';
 
 class MyColors {
