@@ -1,14 +1,14 @@
 import 'package:darkshop/views/productDetail/components/product_info.dart';
 import 'package:flutter/material.dart';
 
-class productInfoScreen extends StatefulWidget {
-  const productInfoScreen({super.key});
+class ProductInfoScreen extends StatefulWidget {
+  const ProductInfoScreen({super.key});
 
   @override
-  State<productInfoScreen> createState() => _productInfoScreenState();
+  State<ProductInfoScreen> createState() => _ProductInfoScreenState();
 }
 
-class _productInfoScreenState extends State<productInfoScreen> {
+class _ProductInfoScreenState extends State<ProductInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

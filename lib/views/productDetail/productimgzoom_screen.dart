@@ -2,14 +2,14 @@
 import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class imgZoonScreen extends StatefulWidget {
-  const imgZoonScreen({super.key});
+class ImgZoonScreen extends StatefulWidget {
+  const ImgZoonScreen({super.key});
 
   @override
-  State<imgZoonScreen> createState() => _imgZoonScreenState();
+  State<ImgZoonScreen> createState() => _ImgZoonScreenState();
 }
 
-class _imgZoonScreenState extends State<imgZoonScreen> {
+class _ImgZoonScreenState extends State<ImgZoonScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

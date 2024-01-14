@@ -1,4 +1,4 @@
-import 'package:darkshop/views/productManagement/editProduct_screen.dart';
+import 'package:darkshop/views/stunning_splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,10 +16,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
-      routes: {
-        "/": (context) => const EditProScreen(),
-      },
+      home: const SplashScreen(
+        homeScreen: Scaffold(),
+      ),
     );
   }
 }
