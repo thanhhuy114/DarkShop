@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({super.key, required this.homeScreen});
+  final Widget homeScreen;
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -16,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen>
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     Future.delayed(const Duration(seconds: 4), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => const Scaffold()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => widget.homeScreen));
     });
   }
 
@@ -27,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen>
         overlays: SystemUiOverlay.values);
     super.dispose();
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
