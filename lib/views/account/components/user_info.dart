@@ -15,10 +15,21 @@ class UserInfo extends StatefulWidget {
 }
 
 class _UserInfoState extends State<UserInfo> {
-  User user = AccountPresenter.userLogin!;
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+
+    AccountPresenter.getUserLogin().then((value) {
+      user = value;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (user == null) return Container();
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
@@ -30,22 +41,22 @@ class _UserInfoState extends State<UserInfo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Avatar(
-                image: user.image,
+                image: user!.image,
                 callback: () {
                   setState(() {});
                 }),
           ],
         ),
-        CustomTextfield(title: Constants.fullname, content: user.fullname),
-        CustomTextfield(title: Constants.email, content: user.email),
-        CustomTextfield(title: Constants.phone, content: user.phone),
-        CustomTextfield(
-            title: Constants.address, content: user.recentAddress),
+        CustomTextfield(title: Constants.fullname, content: user!.fullname),
+        CustomTextfield(title: Constants.email, content: user!.email),
+        CustomTextfield(title: Constants.phone, content: user!.phone),
+        CustomTextfield(title: Constants.address, content: user!.recentAddress),
         CustomButton(
             title: Constants.changePassword,
-            onClick:()=> AccountPresenter().gotoChangePassword(context)),
+            onClick: () => AccountPresenter().gotoChangePassword(context)),
         CustomButton(
-            title: Constants.logout, onClick:()=> AccountPresenter().logout()),
+            title: Constants.logout,
+            onClick: () => AccountPresenter().logout()),
       ]),
     );
   }
