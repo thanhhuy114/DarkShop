@@ -68,6 +68,7 @@ flutter:
     - assets/Duy/
     - assets/data.json
     - assets/image_user/avt_default.png
+    - assets/ProductDemo/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
