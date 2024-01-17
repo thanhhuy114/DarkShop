@@ -1,3 +1,4 @@
+import 'package:darkshop/views/productDetail/product_screen.dart';
 import 'package:darkshop/views/stunning_splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(
-        homeScreen: Scaffold(),
+        homeScreen: ProductScreen(),
       ),
     );
   }

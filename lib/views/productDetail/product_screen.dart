@@ -4,6 +4,7 @@ import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:darkshop/views/productDetail/components/img_button.dart';
 import 'package:darkshop/views/productDetail/components/product_info.dart';
 import 'package:darkshop/views/productDetail/components/specifications_button.dart';
+import 'package:darkshop/views/productDetail/product_presenter.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -14,6 +15,12 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  @override
+  void initState() {
+    ProductPresenter.getPro(1);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
