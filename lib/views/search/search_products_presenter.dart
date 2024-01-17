@@ -1,9 +1,11 @@
 import 'package:darkshop/data/models/product.dart';
+import 'package:darkshop/data/models/search_history.dart';
+import 'package:darkshop/data/repositories/search_history_repository.dart';
 import 'package:darkshop/data/repositories/search_products_repository.dart';
 import 'package:flutter/material.dart';
 
 class SearchProductsPresenter {
-  SearchProductsPresenter({required this.suggestions, required this.reload}) {
+  SearchProductsPresenter({required this.reload}) {
     // getSuggestions(String key)
     products = [
       Product(
@@ -29,15 +31,13 @@ class SearchProductsPresenter {
           repository: 99,
           postAt: DateTime.now())
     ];
-    reload();
     getListProductTypes();
   }
 
   TextEditingController txtSearch = TextEditingController();
   bool isSearch = false;
-  List<String> suggestions;
+  List<String> suggestions = [];
   List<String> suggestionsByKey = [];
-  List<String> productTypes = [];
   List<Product> products = [];
   int seletedIndex = 0;
   Function reload;
@@ -60,6 +60,11 @@ class SearchProductsPresenter {
     isSearch = true;
     reload();
   }
+  
+  onClickSuggestion(String key) {
+    isSearch = true;
+    reload();
+  }
 
   getListProductsByKey(String key) {
     SearchProductsRepository().getListProductsByKey(key).then((value) {
@@ -68,13 +73,7 @@ class SearchProductsPresenter {
     });
   }
 
-  getListProductTypes(){
-    SearchProductsRepository().getListProductTypes().then((value) {
-      productTypes = value;
-      reload();
-    });
-  }
-
+  //lấy danh sách sản phẩm theo loại 
   getListProductsByType(String type) {
     SearchProductsRepository().getListProductsByType(type).then((value) {
       products = value;
@@ -88,5 +87,15 @@ class SearchProductsPresenter {
 
   List<Product> sortListLatesProducts() {
     return [];
+  }
+
+  getSearchHistories() async {
+    List<SearchHistory> searchHistorys = await SearchHistoryRepository().getListSearchHistories();
+    return searchHistorys;
+  }
+
+  //lấy danh sách loại sản phẩm
+  Future<List<String>> getListProductTypes()async {
+    return await SearchProductsRepository().getListProductTypes();
   }
 }

@@ -1,10 +1,9 @@
-//xử lý tương tác bên giao diện
-//vd: nhấn nút ...
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:darkshop/data/models/user.dart';
 import 'package:darkshop/data/repositories/user_repository.dart';
 import 'package:darkshop/utils/constants.dart';
+import 'package:darkshop/views/account/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
@@ -71,6 +70,11 @@ class AccountPresenter {
   }
 
   gotoAddressManagement(BuildContext context) {
-    //chuyển trang quản lý địa chỉ
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AccountScreen(),
+      ),
+    );
   }
 }

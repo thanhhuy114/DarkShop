@@ -10,30 +10,11 @@ class SearchSuggestions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if(presenter.txtSearch.text.isEmpty)
-        for (int i = 0; i < presenter.productTypes.length; i++)
+        for (int i = 0; i < presenter.suggestions.length; i++)
           Padding(
             padding: const EdgeInsets.all(1),
             child: GestureDetector(
-              onTap: () => presenter
-                  .getListProductsByType(presenter.productTypes[i]),
-              child: Container(
-                height: 23,
-                width: MediaQuery.of(context).size.width,
-                color: MyColors.backgroundSearchSuggestions,
-                child: Text(
-                  presenter.productTypes[i],
-                ),
-              ),
-            ),
-          ),
-           if(presenter.txtSearch.text.isNotEmpty)
-           for (int i = 0; i < presenter.suggestions.length; i++)
-          Padding(
-            padding: const EdgeInsets.all(1),
-            child: GestureDetector(
-              onTap: () => presenter
-                  .getListProductsByKey(presenter.suggestions[i]),
+              onTap: presenter.onClickSuggestion(presenter.suggestions[i]),
               child: Container(
                 height: 23,
                 width: MediaQuery.of(context).size.width,

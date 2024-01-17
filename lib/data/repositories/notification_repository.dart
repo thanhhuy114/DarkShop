@@ -42,7 +42,7 @@ class NotificationRepository {
     return Constants.notificationTypes[type] ?? "Không tìm thấy title";
   }
 
-  readNotification(int id) {
+  readNotification(int id) async {
     //cập nhật thuộc tính read = true
   }
 }
