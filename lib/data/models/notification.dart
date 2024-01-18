@@ -1,6 +1,6 @@
 class NotificationInfo {
   DateTime date;
-  int type;
+  String type;
   int idObject;
   String description;
   bool read;
@@ -15,7 +15,7 @@ class NotificationInfo {
 
   NotificationInfo.empty()
       :date = DateTime.now(),
-        type = 0,
+        type = "",
         idObject = 0,
         description = '',
         read = false;
