@@ -31,7 +31,6 @@ class SearchProductsPresenter {
           repository: 99,
           postAt: DateTime.now())
     ];
-    suggestions = getSuggestions();
   }
 
   TextEditingController txtSearch = TextEditingController();
@@ -42,15 +41,17 @@ class SearchProductsPresenter {
   int seletedIndex = 0;
   Function reload;
 
-  List<String> getSuggestions() {
-    List<String> results = [];
+  getSuggestions() {
     SearchProductsRepository().getSearchHistory().then((value) {
-      results =value;
+      suggestions = value;
+      reload();
     });
     SearchProductsRepository().getListProductTypes().then((value) {
-      results += value;
+      suggestions += value;
+      reload();
     });
-    return results;
+
+    return suggestions;
   }
 
   getSuggestionsByKey() {
