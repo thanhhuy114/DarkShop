@@ -19,7 +19,7 @@ class NotificationCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 5),
       child: GestureDetector(
         onTap: () => presenter.onclickCard(
-            notification.idObject, notification.type, context),
+            notification.idObject, context),
         child: Container(
           height: 100,
           decoration: BoxDecoration(
@@ -55,7 +55,7 @@ class NotificationCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        presenter.getNotificationTitle(notification.type),
+                        notification.type,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,

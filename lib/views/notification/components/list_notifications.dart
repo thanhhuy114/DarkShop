@@ -1,4 +1,3 @@
-import 'package:darkshop/data/models/notification.dart';
 import 'package:darkshop/views/notification/components/notification_card.dart';
 import 'package:darkshop/views/notification/notification_presenter.dart';
 import 'package:flutter/material.dart';

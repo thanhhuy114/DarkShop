@@ -6,13 +6,13 @@ class NotificationRepository {
     return [
       NotificationInfo(
           date: DateTime.now(),
-          type: Constants.datHangThanhCong,
+          type: Constants.notificationTypes[Constants.datHangThanhCong],
           idObject: 1,
           description: "description description description description description description description description description description description description description description description description description ",
           read: false),
       NotificationInfo(
           date: DateTime.now(),
-          type: Constants.donHangDaHuy,
+          type: Constants.notificationTypes[Constants.donHangDaHuy],
           idObject: 1,
           description: "description description description description description description description ",
           read: true),
@@ -36,10 +36,6 @@ class NotificationRepository {
     } else {
       return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour}:${dateTime.minute}';
     }
-  }
-
-  String getNotificationTitle(int type) {
-    return Constants.notificationTypes[type];
   }
 
   readNotification(int id) async {
