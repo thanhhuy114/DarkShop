@@ -1,6 +1,6 @@
 import 'package:darkshop/views/bottom_bar/user.dart';
-import 'package:darkshop/views/invoices/om_admin_screen.dart';
-import 'package:darkshop/views/invoices/om_user_screen.dart';
+import 'package:darkshop/views/invoices/screen/admin/om_admin_screen.dart';
+import 'package:darkshop/views/invoices/screen/user/om_user_screen.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {

@@ -8,7 +8,7 @@ class TaskMenu extends StatefulWidget {
 }
 
 class TaskMenuState extends State<TaskMenu> {
-  int selectedItemIndex = 0; // Chỉ mục của mục được chọn, ban đầu là 0
+  int selectedItemIndex = 0;
 
   Color getTextColor(int index) {
     return index == selectedItemIndex ? Colors.red : Colors.black;
@@ -29,27 +29,22 @@ class TaskMenuState extends State<TaskMenu> {
           scrollDirection: Axis.horizontal,
           children: [
             Expanded(
-              flex: 2,
               child: buildTaskMenuItem('assets/Duy/1.png', 'Chờ xác nhận', 0),
             ),
             const SizedBox(width: 20),
             Expanded(
-              flex: 2,
               child: buildTaskMenuItem('assets/Duy/2.png', 'Chờ lấy hàng', 1),
             ),
             const SizedBox(width: 20),
             Expanded(
-              flex: 2,
               child: buildTaskMenuItem('assets/Duy/3.png', 'Đang giao', 2),
             ),
             const SizedBox(width: 20),
             Expanded(
-              flex: 2,
               child: buildTaskMenuItem('assets/Duy/4.png', 'Đã giao', 3),
             ),
             const SizedBox(width: 20),
             Expanded(
-              flex: 2,
               child: buildTaskMenuItem('assets/Duy/5.png', 'Đã hủy', 4),
             ),
             const SizedBox(width: 20),
@@ -65,7 +60,7 @@ class TaskMenuState extends State<TaskMenu> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          selectedItemIndex = index; // Cập nhật chỉ mục của mục được chọn
+          selectedItemIndex = index;
         });
       },
       child: Column(
@@ -80,12 +75,11 @@ class TaskMenuState extends State<TaskMenu> {
           Text(
             text,
             style: TextStyle(
-              color: getTextColor(
-                  index), // Xác định màu sắc của chữ dựa trên chỉ mục
+              color: getTextColor(index),
             ),
           ),
           const SizedBox(height: 5),
-          if (isSelected) // Kiểm tra nếu isSelected là true thì hiển thị widget Center
+          if (isSelected)
             Center(
               child: Container(
                 width: 50,

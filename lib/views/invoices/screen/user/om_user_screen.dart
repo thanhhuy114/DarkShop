@@ -1,13 +1,10 @@
-// import 'package:darkshop/data/repositories/invoice_repository.dart';
 import 'package:darkshop/views/invoices/components/order/list_order_ad.dart';
-import 'package:darkshop/views/invoices/components/task_menu.dart';
-import 'package:darkshop/views/invoices/components/title.dart';
+import 'package:darkshop/views/invoices/screen/task_menu.dart';
+import 'package:darkshop/views/invoices/screen/title.dart';
 import 'package:flutter/material.dart';
 
-class OMAdmin extends StatelessWidget {
-  const OMAdmin({super.key});
-
-  // final invoices = await getInvoicesFromJson('assets/data.json');
+class OMUser extends StatelessWidget {
+  const OMUser({super.key});
 
   @override
   Widget build(BuildContext context) {
