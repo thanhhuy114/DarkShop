@@ -20,26 +20,20 @@ class UsersManagementPresenter {
   }
 
   blockUserSeleted() {
-    if (userSeleted != null) {
-      UserRepository().blockUser(userSeleted!.id).then((value) {
-        reload();
-      });
-    }
+    UserRepository().blockUser(userSeleted!.id).then((value) {
+      reload();
+    });
   }
 
   unblockUserSeleted() {
-    if (userSeleted != null) {
-      UserRepository().unblockUser(userSeleted!.id).then((value) {
-        reload();
-      });
-    }
+    UserRepository().unblockUser(userSeleted!.id).then((value) {
+      reload();
+    });
   }
 
   deleteUserSeleted() {
-    if (userSeleted != null) {
-      UserRepository().deleteUser(userSeleted!.id).then((value) {
-        reload();
-      });
-    }
+    UserRepository().deleteUser(userSeleted!.id).then((value) {
+      reload();
+    });
   }
 }

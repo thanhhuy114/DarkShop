@@ -11,6 +11,9 @@ class Constants {
   static const int donHangDaHuy = 2;
   static const int sapHetHang = 3;
 
+  static const String pathClould = "https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/";
+  static const String hosting = 'http://192.168.1.243';
+
   static const String avatarDefault = "assets/image_user/avt_default.png";
   static const String logo = 'assets/logo.png';
   static const String account = "Tài khoản";

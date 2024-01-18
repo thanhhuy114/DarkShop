@@ -12,34 +12,14 @@ class NotificationPresenter {
     return NotificationRepository().getNotificationTime(dateTime);
   }
 
-  //lấy tiêu đề thông báo
-  String getNotificationTitle(int type) {
-    return NotificationRepository().getNotificationTitle(type);
-  }
-
   //lấy danh sách thông báo
   static Future<List<NotificationInfo>> loadNotifications() async {
     return await NotificationRepository().getAllNotifications();
   }
 
   //lấy thông báo bằng id
-  onclickCard(int idObject, int idType, BuildContext context) {
+  onclickCard(int idObject, BuildContext context) {
     NotificationRepository().readNotification(idObject);
-
-    //chuyển đến chi tiết thông báo theo loại thông báo (sản phầm / đơn hàng)
-    switch (idType) {
-      case 1:
-        
-        break;
-      case 2:
-        
-        break;
-      case 3:
-        
-        break;
-      case 4:
-        
-        break;
-    }
+    reload();
   }
 }

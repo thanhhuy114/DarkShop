@@ -4,6 +4,7 @@ import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:darkshop/views/account/components/user_info.dart';
 import 'package:flutter/material.dart';
+
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
@@ -15,7 +16,9 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   void initState() {
     super.initState();
-    AccountPresenter.getUserLogin();
+    AccountPresenter.getUserLogin(5).then((value) {
+      setState(() {});
+    });
   }
 
   @override

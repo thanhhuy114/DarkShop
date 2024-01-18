@@ -1,9 +1,8 @@
-import 'dart:convert';
 import 'dart:typed_data';
 import 'package:darkshop/data/models/user.dart';
 import 'package:darkshop/data/repositories/user_repository.dart';
 import 'package:darkshop/utils/constants.dart';
-import 'package:darkshop/views/account/account_screen.dart';
+import 'package:darkshop/views/address_management/address_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
@@ -12,10 +11,11 @@ import 'package:image_picker/image_picker.dart';
 
 class AccountPresenter {
   static User? userLogin;
+  Function? reload;
 
-  static Future<User?> getUserLogin() async {
+  static Future<User?> getUserLogin(int id) async {
     //tạm thời
-    userLogin = await UserRepository().getUserLogin();
+    userLogin = await UserRepository().getUserById(id);
 
     return userLogin;
   }
@@ -68,7 +68,7 @@ class AccountPresenter {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const AccountScreen(),
+        builder: (context) => const AddressManagementScreen(),
       ),
     );
   }
