@@ -17,7 +17,7 @@ class OMAdmin extends StatelessWidget {
       ),
       body: Container(
         margin: const EdgeInsets.all(5),
-        child: const Column(
+        child:  Column(
           children: [
             TaskMenu(),
             SizedBox(

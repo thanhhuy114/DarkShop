@@ -108,9 +108,9 @@ class OrderAd extends StatelessWidget {
           //nút xác nhận,hủy
           const TwoButton(),
           //mã đơn hàng
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: const [
               Text('Mã đơn hàng:'),
               Text('001'),
             ],
