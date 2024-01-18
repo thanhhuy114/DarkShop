@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 class Product {
@@ -48,6 +49,17 @@ class Product {
         price: json['price'],
         promotion: json['promotion'],
         repository: json['repository'],
-        postAt: json['postAt']);
+        postAt: DateTime.parse(json['postAt']));
+  }
+
+  Future<Uint8List> imageFileToUint8List(String imagePath) async {
+    // Đọc nội dung của tệp hình ảnh thành Uint8List
+    File imageFile = File(imagePath);
+    List<int> imageBytes = await imageFile.readAsBytes();
+
+    // Chuyển đổi List<int> thành Uint8List
+    Uint8List uint8List = Uint8List.fromList(imageBytes);
+
+    return uint8List;
   }
 }

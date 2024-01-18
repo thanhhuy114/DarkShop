@@ -27,7 +27,7 @@ class _SearchProductsScreenState extends State<SearchProductsScreen> {
   Widget build(BuildContext context) {
     if (presenter != null) {
       return Scaffold(
-        appBar: SearchBar(presenter: presenter!),
+        // appBar: SearchBar(presenter: presenter!),
         body: Padding(
           padding: const EdgeInsets.all(5.0),
           child: ListView(

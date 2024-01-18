@@ -21,7 +21,7 @@ class _ImgZoonScreenState extends State<ImgZoonScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [MyCarouselSlider()],
+            // children: const [MyCarouselSlider()],
           ),
         ));
   }

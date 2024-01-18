@@ -16,7 +16,7 @@ class OMUser extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.all(5),
         child:  Column(
-          children: const [
+          children: [
             TaskMenu(),
             SizedBox(
               height: 5,
