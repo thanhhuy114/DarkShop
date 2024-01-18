@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class OMAdmin extends StatelessWidget {
   const OMAdmin({super.key});
 
-  // final invoices = await getInvoicesFromJson('assets/data.json');
 
   @override
   Widget build(BuildContext context) {

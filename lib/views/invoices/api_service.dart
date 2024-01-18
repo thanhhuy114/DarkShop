@@ -1,12 +1,22 @@
+import 'dart:convert';
+
+import 'package:darkshop/data/models/invoices.dart';
 import 'package:http/http.dart' as http;
+
+import '../../data/models/user.dart';
 
 class ApiService {
   final String baseUrl = 'http:localhost:3000';
 
-  //GET ALL
-  Future<http.Response> getAll(String endpoint) async {
+  //GET ALL INVOICE
+  Future<List<Invoice>> getAllUsers(String endpoint) async {
     final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
-    return response;
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = jsonDecode(response.body);
+      return responseData.map((json) => Invoice.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed');
+    }
   }
 
   //GET ONE

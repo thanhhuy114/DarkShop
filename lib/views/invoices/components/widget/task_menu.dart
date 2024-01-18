@@ -16,32 +16,27 @@ class TaskMenuState extends State<TaskMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 100,
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(10, 14, 10, 0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: Colors.black, width: 2),
-          color: Colors.white,
-        ),
-        child: Expanded(
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              buildTaskMenuItem('assets/Duy/1.png', 'Chờ xác nhận', 0),
-              const SizedBox(width: 20),
-              buildTaskMenuItem('assets/Duy/2.png', 'Chờ lấy hàng', 2),
-              const SizedBox(width: 20),
-              buildTaskMenuItem('assets/Duy/3.png', 'Đang giao', 3),
-              const SizedBox(width: 20),
-              buildTaskMenuItem('assets/Duy/4.png', 'Đã giao', 4),
-              const SizedBox(width: 20),
-              buildTaskMenuItem('assets/Duy/5.png', 'Đã hủy', 5),
-              const SizedBox(width: 20),
-            ],
-          ),
-        ),
+      padding: const EdgeInsets.fromLTRB(10, 14, 10, 0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        color: Colors.white,
+      ),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          buildTaskMenuItem('assets/Duy/1.png', 'Chờ xác nhận', 0),
+          const SizedBox(width: 20),
+          buildTaskMenuItem('assets/Duy/2.png', 'Chờ lấy hàng', 2),
+          const SizedBox(width: 20),
+          buildTaskMenuItem('assets/Duy/3.png', 'Đang giao', 3),
+          const SizedBox(width: 20),
+          buildTaskMenuItem('assets/Duy/4.png', 'Đã giao', 4),
+          const SizedBox(width: 20),
+          buildTaskMenuItem('assets/Duy/5.png', 'Đã hủy', 5),
+          const SizedBox(width: 20),
+        ],
       ),
     );
   }
