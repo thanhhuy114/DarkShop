@@ -1,4 +1,3 @@
-import 'package:darkshop/data/models/user.dart';
 import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/views/account/account_presenter.dart';
@@ -15,21 +14,28 @@ class UserInfo extends StatefulWidget {
 }
 
 class _UserInfoState extends State<UserInfo> {
-  User? user;
-
-  @override
-  void initState() {
-    super.initState();
-
-    AccountPresenter.getUserLogin().then((value) {
-      user = value;
-      setState(() {});
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (user == null) return Container();
+    if (AccountPresenter.userLogin == null) {
+      return Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Color.fromARGB(255, 232, 187, 187),
+          Color.fromARGB(255, 239, 186, 11)
+        ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              Constants.logo,
+              width: 150,
+              height: 150,
+            )
+          ],
+        ),
+      );
+    }
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
@@ -41,16 +47,22 @@ class _UserInfoState extends State<UserInfo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Avatar(
-                image: user!.image,
+                image: "${Constants.pathClould}darkshop/image/product/mobile/v3wlmlwnaui5cbbhnutf.webp",
                 callback: () {
                   setState(() {});
                 }),
           ],
         ),
-        CustomTextfield(title: Constants.fullname, content: user!.fullname),
-        CustomTextfield(title: Constants.email, content: user!.email),
-        CustomTextfield(title: Constants.phone, content: user!.phone),
-        CustomTextfield(title: Constants.address, content: user!.recentAddress),
+        CustomTextfield(
+            title: Constants.fullname,
+            content: AccountPresenter.userLogin!.fullname),
+        CustomTextfield(
+            title: Constants.email, content: AccountPresenter.userLogin!.email),
+        CustomTextfield(
+            title: Constants.phone, content: AccountPresenter.userLogin!.phone),
+        CustomTextfield(
+            title: Constants.address,
+            content: AccountPresenter.userLogin!.recentAddress),
         CustomButton(
             title: Constants.changePassword,
             onClick: () => AccountPresenter().gotoChangePassword(context)),
