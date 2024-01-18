@@ -36,24 +36,24 @@ class _ProductScreenState extends State<ProductScreen> {
           future: product,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator(); 
+              return const CircularProgressIndicator(); 
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (!snapshot.hasData) {
-              return Text('No data available'); 
+              return const Text('No data available'); 
             } else {
               Product product = snapshot.data!;
 
               return Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
+                  const Padding(
+                    padding: EdgeInsets.all(20.0),
                     // child: MyCarouselSlider(),
                   ),
-                  const Row(
+                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
+                    children: const [
                       imgButton(),
                       specsButton(),
                     ],
