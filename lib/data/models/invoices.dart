@@ -17,14 +17,4 @@ class Invoice {
     required this.note,
   });
 
-  factory Invoice.fromJson(Map<String, dynamic> json) {
-    return Invoice(
-        id: json['id'],
-        idUser: json['idUser'],
-        createAt: json['createAt'],
-        idPayment: json['idPayment'],
-        totalPrice: json['totalPrice'],
-        status: json['status'],
-        note: json['note']);
-  }
 }

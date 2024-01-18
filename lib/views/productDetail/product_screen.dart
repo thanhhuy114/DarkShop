@@ -1,7 +1,7 @@
 //giao diện product
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/views/productDetail/components/button.dart';
-import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
+// import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:darkshop/views/productDetail/components/img_button.dart';
 import 'package:darkshop/views/productDetail/components/product_info.dart';
 import 'package:darkshop/views/productDetail/components/specifications_button.dart';

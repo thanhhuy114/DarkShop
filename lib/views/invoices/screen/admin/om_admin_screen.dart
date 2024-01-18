@@ -1,7 +1,7 @@
 // import 'package:darkshop/data/repositories/invoice_repository.dart';
 import 'package:darkshop/views/invoices/components/order/list_order_ad.dart';
-import 'package:darkshop/views/invoices/screen/task_menu.dart';
-import 'package:darkshop/views/invoices/screen/title.dart';
+import 'package:darkshop/views/invoices/components/widget/task_menu.dart';
+import 'package:darkshop/views/invoices/components/widget/title.dart';
 import 'package:flutter/material.dart';
 
 class OMAdmin extends StatelessWidget {

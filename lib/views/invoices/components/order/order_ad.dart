@@ -1,7 +1,7 @@
-import 'package:darkshop/views/invoices/components/order/card_product.dart';
-import 'package:darkshop/views/invoices/components/order/two_button.dart';
-import 'package:darkshop/views/invoices/screen/admin/order_detail_admin_screen.dart';
-import 'package:darkshop/views/invoices/order_detail_admin_screen.dart';
+import 'package:darkshop/views/invoices/components/widget/card_product.dart';
+import 'package:darkshop/views/invoices/components/widget/two_button.dart';
+// import 'package:darkshop/views/invoices/screen/admin/order_detail_admin_screen.dart';
+// import 'package:darkshop/views/invoices/order_detail_admin_screen.dart';
 import 'package:flutter/material.dart';
 
 class OrderAd extends StatelessWidget {

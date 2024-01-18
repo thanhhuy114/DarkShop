@@ -1,4 +1,5 @@
-import 'package:darkshop/views/invoices/components/order/card_product.dart';
+// import 'package:darkshop/views/invoices/card_product.dart';
+import 'package:darkshop/views/invoices/components/widget/card_product.dart';
 import 'package:flutter/material.dart';
 
 class InfoProduct extends StatelessWidget {
