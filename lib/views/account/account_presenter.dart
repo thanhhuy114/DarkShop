@@ -20,11 +20,6 @@ class AccountPresenter {
     return userLogin;
   }
 
-  static Uint8List convertStringToUint8List(String base64String) {
-    List<int> bytes = base64.decode(base64String);
-    return Uint8List.fromList(bytes);
-  }
-
   uploadAvatar(Function callback) async {
     XFile? pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
