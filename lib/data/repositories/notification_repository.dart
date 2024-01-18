@@ -2,24 +2,24 @@ import '../../utils/constants.dart';
 import '../models/notification.dart';
 
 class NotificationRepository {
-  List<NotificationInfo> getAllNotifications() {
+  Future<List<NotificationInfo>> getAllNotifications() async {
     return [
       NotificationInfo(
           date: DateTime.now(),
-          type: 1,
+          type: Constants.datHangThanhCong,
           idObject: 1,
-          description: "description description description description description description description description description description ",
+          description: "description description description description description description description description description description description description description description description description description ",
           read: false),
       NotificationInfo(
           date: DateTime.now(),
-          type: 1,
+          type: Constants.donHangDaHuy,
           idObject: 1,
           description: "description description description description description description description ",
           read: true),
     ];
   }
 
-  NotificationInfo getNotificationById(int idNotification) {
+  Future<NotificationInfo> getNotificationById(int idNotification) async {
     return NotificationInfo.empty();
   }
 
@@ -39,7 +39,7 @@ class NotificationRepository {
   }
 
   String getNotificationTitle(int type) {
-    return Constants.notificationTypes[type] ?? "Không tìm thấy title";
+    return Constants.notificationTypes[type];
   }
 
   readNotification(int id) async {

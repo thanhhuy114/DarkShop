@@ -5,8 +5,11 @@ import '../../../utils/colors.dart';
 import '../notification_presenter.dart';
 
 class NotificationCard extends StatelessWidget {
-  const NotificationCard({Key? key, required this.notification})
+  const NotificationCard(
+      {Key? key, required this.notification, required this.presenter})
       : super(key: key);
+
+  final NotificationPresenter presenter;
 
   final NotificationInfo notification;
 
@@ -15,7 +18,8 @@ class NotificationCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: GestureDetector(
-        onTap: () => NotificationPresenter().onclickCard(notification.idObject, notification.type, context),
+        onTap: () => presenter.onclickCard(
+            notification.idObject, notification.type, context),
         child: Container(
           height: 100,
           decoration: BoxDecoration(
@@ -44,16 +48,14 @@ class NotificationCard extends StatelessWidget {
                                 color: Colors.blue,
                               ),
                             Text(
-                              NotificationPresenter()
-                                  .getNotificationTime(notification.date),
+                              presenter.getNotificationTime(notification.date),
                               style: const TextStyle(fontSize: 10),
                             )
                           ],
                         ),
                       ),
                       Text(
-                        NotificationPresenter()
-                            .getNotificationTitle(notification.type),
+                        presenter.getNotificationTitle(notification.type),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -61,7 +63,7 @@ class NotificationCard extends StatelessWidget {
                       ),
                       Text(
                         notification.description,
-                        maxLines: 4,
+                        maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],

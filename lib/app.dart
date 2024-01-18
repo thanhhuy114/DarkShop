@@ -6,7 +6,7 @@ import 'package:darkshop/views/invoices/om_user_screen.dart';
 import 'package:darkshop/views/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
 
-class NavigationHomePage extends StatefulWidget {
+class NavigationHomePage extends StatefulWidget { 
   const NavigationHomePage({super.key});
 
   @override
