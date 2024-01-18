@@ -32,8 +32,8 @@ class SearchProductsRepository {
     return [];
   }
 
-  Future<List<String>> getSuggestions() async {
-    return ["Apple", "Banana", "Cherry", "Date", "Grape"];
+  Future<List<String>> getSearchHistory() async {
+    return ["history1", "history2"];
   }
 
   Future<List<String>> getListProductTypes() async {

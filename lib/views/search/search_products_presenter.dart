@@ -31,7 +31,7 @@ class SearchProductsPresenter {
           repository: 99,
           postAt: DateTime.now())
     ];
-    getListProductTypes();
+    suggestions = getSuggestions();
   }
 
   TextEditingController txtSearch = TextEditingController();
@@ -42,8 +42,15 @@ class SearchProductsPresenter {
   int seletedIndex = 0;
   Function reload;
 
-  static Future<List<String>> getSuggestions() async {
-    return await SearchProductsRepository().getSuggestions();
+  List<String> getSuggestions() {
+    List<String> results = [];
+    SearchProductsRepository().getSearchHistory().then((value) {
+      results =value;
+    });
+    SearchProductsRepository().getListProductTypes().then((value) {
+      results += value;
+    });
+    return results;
   }
 
   getSuggestionsByKey() {
@@ -60,7 +67,13 @@ class SearchProductsPresenter {
     isSearch = true;
     reload();
   }
-  
+
+  exitSearch() {
+    isSearch = false;
+    txtSearch.text = "";
+    reload();
+  }
+
   onClickSuggestion(String key) {
     isSearch = true;
     reload();
@@ -73,7 +86,7 @@ class SearchProductsPresenter {
     });
   }
 
-  //lấy danh sách sản phẩm theo loại 
+  //lấy danh sách sản phẩm theo loại
   getListProductsByType(String type) {
     SearchProductsRepository().getListProductsByType(type).then((value) {
       products = value;
@@ -90,12 +103,13 @@ class SearchProductsPresenter {
   }
 
   getSearchHistories() async {
-    List<SearchHistory> searchHistorys = await SearchHistoryRepository().getListSearchHistories();
+    List<SearchHistory> searchHistorys =
+        await SearchHistoryRepository().getListSearchHistories();
     return searchHistorys;
   }
 
   //lấy danh sách loại sản phẩm
-  Future<List<String>> getListProductTypes()async {
+  Future<List<String>> getListProductTypes() async {
     return await SearchProductsRepository().getListProductTypes();
   }
 }
