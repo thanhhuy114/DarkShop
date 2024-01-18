@@ -34,7 +34,7 @@ class _ProductInfoScreenState extends State<ProductInfoScreen> {
             const SizedBox(
               height: 10,
             ),
-            const productInfo(
+            const ProductInfo(
               textInfo: '''
               Thông tin hàng hóa
               P/N: FX506HF-HN017W
