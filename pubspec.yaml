@@ -31,11 +31,23 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   http: ^1.2.0
+  carousel_slider: ^4.2.1
+  dash: ^1.0.5
+  image_picker: ^1.0.4
+  flutter_keyboard_visibility: ^6.0.0
+  flutter_staggered_grid_view: ^0.7.0
+  shared_preferences: ^2.2.2
+  device_info: ^2.0.3
+  connectivity: ^3.0.6
+  fluttertoast: ^8.2.4
+  connectivity_plus: ^5.0.2
+  firebase_auth: ^4.16.0
+  google_sign_in: ^6.1.6
+  firebase_core: ^2.24.2
 
 dev_dependencies:
   flutter_test:
@@ -60,8 +72,15 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/
+    - assets/Duy/
+    - assets/data.json
+    - assets/image_user/avt_default.png
+    - assets/home_screen/
+    - assets/login_screen/
+    - assets/home_screen/type_product/
+    - assets/ProductDemo/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -89,12 +108,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-  assets:
-   - assets/Duy/1.png
-   - assets/Duy/2.png
-   - assets/Duy/3.png
-   - assets/Duy/4.png
-   - assets/Duy/5.png
-   - assets/Duy/sp1.jpg
-   - assets/data.json
-
+  # see https://flutter.dev/custom-fonts/#from-packages

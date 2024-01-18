@@ -11,7 +11,6 @@
 migrate_working_dir/
 lib/main.dart
 
-
 # IntelliJ related
 *.iml
 *.ipr

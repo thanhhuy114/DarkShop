@@ -1,6 +1,8 @@
 import 'package:darkshop/views/bottom_bar/user.dart';
 import 'package:darkshop/views/invoices/screen/admin/om_admin_screen.dart';
 import 'package:darkshop/views/invoices/screen/user/om_user_screen.dart';
+import 'package:darkshop/views/invoices/om_admin_screen.dart';
+import 'package:darkshop/views/invoices/om_user_screen.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -13,7 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentIndex = 0;
 
-  List<Widget> pages = [const OMAdmin(), const OMUser()];
+  List<Widget> pages = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

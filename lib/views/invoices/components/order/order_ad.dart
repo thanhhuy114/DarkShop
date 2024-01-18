@@ -1,6 +1,7 @@
 import 'package:darkshop/views/invoices/components/order/card_product.dart';
 import 'package:darkshop/views/invoices/components/order/two_button.dart';
 import 'package:darkshop/views/invoices/screen/admin/order_detail_admin_screen.dart';
+import 'package:darkshop/views/invoices/order_detail_admin_screen.dart';
 import 'package:flutter/material.dart';
 
 class OrderAd extends StatelessWidget {
@@ -9,12 +10,12 @@ class OrderAd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const OrderAdminDetail()),
-        );
-      },
+      // onDoubleTap: () {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) =>  OrderAdminDetail()),
+      //   );
+      // },
       child: Container(
         height: 395,
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -59,6 +60,7 @@ class OrderAd extends StatelessWidget {
           ),
           //đường kẻ
           Container(
+            // margin: const EdgeInsets.symmetric(horizontal: 10),
             height: 3,
             color: Colors.red,
           ),
@@ -112,7 +114,7 @@ class OrderAd extends StatelessWidget {
           //   width: 10,
           // ),
           //mã đơn hàng
-          const Row(
+           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Mã đơn hàng:'),

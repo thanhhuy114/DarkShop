@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "598450541730",
+    "project_id": "darkshop-35967",
+    "storage_bucket": "darkshop-35967.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598450541730:android:5d6958c578efe77f7ab3fb",
+        "android_client_info": {
+          "package_name": "com.example.darkshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598450541730-7ec0j50a8r3i60sc3idqn6tlb2arvlfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsGIFRhtZJV0oAGerTOjFiFa1kmhGsipU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598450541730-7ec0j50a8r3i60sc3idqn6tlb2arvlfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
