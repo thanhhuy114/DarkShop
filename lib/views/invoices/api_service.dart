@@ -15,7 +15,7 @@ class ApiService {
       final List<dynamic> responseData = jsonDecode(response.body);
       return responseData.map((json) => Invoice.fromJson(json)).toList();
     } else {
-      throw Exception('Failed');
+      throw Exception('Failed'); 
     }
   }
 
