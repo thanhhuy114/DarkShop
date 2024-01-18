@@ -1,36 +1,41 @@
 //thông tin sản phẩm
-import 'package:darkshop/views/productDetail/components/button.dart';
 import 'package:flutter/material.dart';
-
-class productInfo extends StatelessWidget {
+class ProductInfo extends StatelessWidget {
   final String textInfo;
-  const productInfo({required this.textInfo});
+  const ProductInfo({required this.textInfo});
 
   @override
   Widget build(BuildContext context) {
+    final List<String> lines = textInfo.split('\n');
+
     return Container(
-        width: MediaQuery.of(context).size.width - 20,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for (String line in textInfo.split('\n'))
+      margin: const EdgeInsets.all(10),
+      width: MediaQuery.of(context).size.width - 20,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (String line in lines.take(10)) 
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
                       line.trim(),
-                      style: TextStyle(fontSize: 16.0),
+                      style: const TextStyle(fontSize: 16.0),
                     ),
-                ],
-              ),
-            ),
+                    const SizedBox(height: 8.0), 
+                  ],
+                ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

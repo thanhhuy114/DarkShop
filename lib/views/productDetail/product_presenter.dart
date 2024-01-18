@@ -9,7 +9,7 @@ class ProductPresenter {
   Product? pro;
   ProductPresenter({required this.pro});
 
-  static get _hosting => 'http://192.168.43.228';
+  static get _hosting => 'http://192.168.1.9';
 
   static Future<Product> getPro(int id) async {
     var uri = '$_hosting:3000/products/${id}';
@@ -18,8 +18,8 @@ class ProductPresenter {
       var response = await http.get(Uri.parse(uri));
 
       if (response.statusCode == 200) {
-        var data = json.decode(response.body);
-        print(Product.fromJson(data).toString());
+        var data = json.decode(response.body.toString());
+        print(Product.fromJson(data));
         return Product.fromJson(data);
       } else if (response.statusCode > 200) {
         print('get field: ${response.body}');
@@ -27,8 +27,7 @@ class ProductPresenter {
         print('Error - Status Code: ${response.statusCode}');
       }
     } catch (e) {
-      print(
-          '======================================================================\nError - Catch: $e');
+      print('Error - Catch: $e');
     }
 
     return Product.empty();
