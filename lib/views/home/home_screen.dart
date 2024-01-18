@@ -1,7 +1,10 @@
+import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/views/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'home_presenter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,41 +13,127 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int currentIndexPanner = 0;
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   final ScrollController _scrollController = ScrollController();
+  bool _isSnackbarVisible = false;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   if (MyApp.isLogin == null) {
+    //     if (!await AuthPresenter.isTokenAvailable()) {
+    //       if (mounted && !_isSnackbarVisible) {
+    //         _isSnackbarVisible = true;
+    //         ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
+    //       }
+    //     } else {
+    //       await AuthPresenter.getInstance().checkAuth(
+    //           successful: () {},
+    //           onFailure: () {
+    //             setState(() {});
+    //           });
+    //     }
+    //   } else if (!MyApp.isLogin!) {
+    //     if (mounted && !_isSnackbarVisible) {
+    //       _isSnackbarVisible = true;
+    //       ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
+    //     }
+    //   }
+    // });
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(backgroundColor: Colors.white),
-      body: RefreshIndicator(
-        color: Colors.red,
-        onRefresh: () async {},
-        child: ListView(
-          children: [
-            _buildBaner(),
-            _buildProductTypeCatalog(),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 7),
-              child: Row(
-                children: [
-                  const Text('   DarFla⚡h Sale ',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  _buildTimeCard(),
-                  _buildTimeCard(),
-                  _buildTimeCard(),
-                ],
-              ),
-            ),
-            _buildPromotionCatalog(),
-            const SizedBox(height: 13),
-            _buildProductCatalog(),
-          ],
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        appBar: _buildSearchBar(context),
+        body: RefreshIndicator(
+          color: Colors.red,
+          onRefresh: () async {
+            setState(() {});
+          },
+          child: ListView(
+            children: [
+              _buildSlider(),
+              _buildProductTypeCatalog(),
+              _buildCountDown(),
+              _buildPromotionCatalog(),
+              Container(
+                  margin: const EdgeInsets.only(top: 6), height: 2, color: cl),
+              _buildProductCatalog(),
+            ],
+          ),
+        ));
+  }
+
+  AppBar _buildSearchBar(BuildContext context) {
+    return AppBar(
+        title: GestureDetector(
+          onTap: () {
+            ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 240, 168, 67),
+                        width: 2.5)),
+                width: screenWidth * 0.8,
+                height: screenHeight * 0.046,
+                child: Row(children: [
+                  const SizedBox(width: 10),
+                  Expanded(
+                      child: Text(
+                    'Laptop ThinkPad',
+                    style: TextStyle(
+                        color: Colors.orange, fontSize: screenWidth * 0.037),
+                  )),
+                  Container(
+                    margin: const EdgeInsets.only(right: 5),
+                    width: 50,
+                    height: screenHeight * 0.03,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        gradient: const LinearGradient(
+                            colors: [
+                              Color.fromARGB(255, 231, 190, 163),
+                              Color.fromARGB(255, 234, 63, 24)
+                            ],
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft)),
+                    child: Center(
+                        child: Text('Tìm',
+                            style: TextStyle(fontSize: screenWidth * 0.033))),
+                  )
+                ]),
+              )
+            ],
+          ),
         ),
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer);
+  }
+
+  Padding _buildCountDown() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 7),
+      child: Row(
+        children: [
+          const Text('     DarFla⚡h Sale ',
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 85, 85, 87))),
+          _buildTimeCard(),
+          _buildTimeCard(),
+          _buildTimeCard(),
+        ],
       ),
-      bottomNavigationBar: CustomBottomAppBar(currentIndex: 1, onTap: (_) {}),
     );
   }
 
@@ -54,26 +143,72 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  SizedBox _buildProductCatalog() {
-    return SizedBox(
-      height: 1500,
-      child: MasonryGridView.count(
-        padding: const EdgeInsets.symmetric(horizontal: 14),
-        physics: const NeverScrollableScrollPhysics(),
-        crossAxisCount: 2,
-        mainAxisSpacing: screenWidth * 0.022,
-        crossAxisSpacing: screenWidth * 0.022,
-        itemBuilder: (context, index) {
-          return _buildProduct();
-        },
+  SnackBar snackBar(context) => SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/home_screen/sale.png', width: 20, height: 20),
+            const SizedBox(width: 5),
+            Expanded(
+              child: Text('Có rất nhiều deal hấp dẫn đang đợi bạn',
+                  style: TextStyle(fontSize: screenWidth * 0.033), maxLines: 2),
+            )
+          ],
+        ),
+        backgroundColor: Colors.black.withOpacity(0.65),
+        duration: const Duration(minutes: 5),
+        action: SnackBarAction(
+          textColor: const Color.fromARGB(255, 203, 66, 107),
+          label: 'Đăng nhập',
+          onPressed: () {
+            _isSnackbarVisible = false;
+            Navigator.of(context)
+                .push(createRoutePushUp(screen: const LoginScreen()));
+          },
+        ),
+      );
+
+  Widget _buildProductCatalog() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 13),
+      child: SizedBox(
+        height: 1500,
+        child: MasonryGridView.count(
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisCount: 2,
+          mainAxisSpacing: screenWidth * 0.022,
+          crossAxisSpacing: screenWidth * 0.022,
+          itemBuilder: (context, index) {
+            return _buildProduct(
+                product: Product(
+                    id: 1,
+                    idType: 1,
+                    image: null,
+                    imageInfo: null,
+                    name:
+                        'Laptop Lenovo Thinkpad P52 Core i7-8750H, Ram 32GB, SSD 512GB, 15.6 Inch FHD, Nvidia Quadro P1000',
+                    description: 'assets/logo.png',
+                    price: 15000000,
+                    promotion: 50,
+                    repository: 1,
+                    postAt: DateTime.now()));
+          },
+        ),
       ),
     );
   }
 
-  InkWell _buildProduct() {
+  InkWell _buildProduct({required Product product}) {
     return InkWell(
       borderRadius: BorderRadius.circular(8),
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(createRoutePushThrough(
+            screen: Scaffold(
+          appBar: AppBar(),
+          body: Container(color: Colors.yellow),
+        )));
+      },
       child: Ink(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -91,20 +226,21 @@ class _HomeScreenState extends State<HomeScreen> {
             ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(8)),
-                child: Image.asset('assets/logo.png', fit: BoxFit.contain)),
-            const Padding(
-              padding: EdgeInsets.all(8),
-              child: Text(
-                  'Laptop Lenovo Thinkpad P52 Core i7-8750H, Ram 32GB, SSD 512GB, 15.6 Inch FHD, Nvidia Quadro P1000',
+                child: Image.asset(product.description.toString(),
+                    fit: BoxFit.contain)),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(product.name,
                   maxLines: 2,
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                  style: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.w400),
                   overflow: TextOverflow.ellipsis),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8, bottom: 10),
               child: Row(
                 children: [
-                  Text('15.000.000 ₫',
+                  Text(product.price.toString(),
                       style: TextStyle(
                           fontSize: screenWidth * 0.038,
                           color: Colors.red,
@@ -115,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(5),
                         color: const Color.fromARGB(255, 243, 88, 77)
                             .withOpacity(0.2)),
-                    child: Text('-50%',
+                    child: Text('${product.promotion}%',
                         style: TextStyle(
                             fontSize: screenWidth * 0.03, color: Colors.red)),
                   )
@@ -145,28 +281,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildBaner() {
+  Widget _buildSlider() {
+    int currentPos = 0;
+    int itemCount = 7;
+
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.only(top: 10),
           child: CarouselSlider.builder(
-              itemCount: 7,
-              itemBuilder:
-                  (BuildContext context, int itemIndex, int pageViewIndex) =>
-                      InkWell(
-                        onTap: () {},
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                              'assets/home_screen/spn_${itemIndex + 1}.png',
-                              fit: BoxFit.cover),
-                        ),
-                      ),
+              itemCount: itemCount,
+              itemBuilder: HomePresenter.generateImage,
               options: CarouselOptions(
-                onPageChanged: (index, reason) => setState(() {
-                  currentIndexPanner = index;
-                }),
+                onPageChanged: (index, reason) =>
+                    setState(() => currentPos = index),
                 autoPlay: true,
                 enlargeCenterPage: true,
                 viewportFraction: 0.96,
@@ -174,20 +302,20 @@ class _HomeScreenState extends State<HomeScreen> {
               )),
         ),
         Positioned(
-            bottom: screenHeight * 0.022,
+            bottom: screenHeight * 0.011,
             right: 0,
             left: 0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                  7,
+                  itemCount,
                   (index) => Container(
                         margin: const EdgeInsets.symmetric(horizontal: 2),
                         height: 6,
                         width: 6,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: index != currentIndexPanner
+                          color: index != currentPos
                               ? Colors.white.withOpacity(0.5)
                               : Colors.white,
                         ),
@@ -197,10 +325,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildProductPromotion() {
+  Widget _buildProductPromotion({required Product product}) {
     return InkWell(
         borderRadius: BorderRadius.circular(8),
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(createRoutePushThrough(
+              screen: Scaffold(
+            appBar: AppBar(),
+            body: Container(color: Colors.yellow),
+          )));
+        },
         child: Ink(
           width: (screenWidth - 24) / 3,
           decoration: BoxDecoration(
@@ -276,14 +410,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       // margin: const EdgeInsets.symmetric(horizontal: 5),
       width: (screenWidth - 20 * 6) / 5,
-      color: const Color.fromRGBO(255, 255, 255, 1),
+      color: cl,
       child: Column(children: [
         Container(
           margin: const EdgeInsets.only(top: 2, bottom: 5, right: 2, left: 2),
           height: (screenWidth - 20 * 6) / 5 - 4,
           width: (screenWidth - 20 * 6) / 5,
           decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 240, 158, 158),
+              color: const Color.fromARGB(255, 59, 181, 226),
               borderRadius: BorderRadius.circular(15)),
           child: Image.asset('assets/home_screen/type_product/laptop.png',
               fit: BoxFit.cover),
@@ -295,8 +429,8 @@ class _HomeScreenState extends State<HomeScreen> {
             maxLines: 2,
             style: TextStyle(
                 fontSize: screenWidth * 0.027,
-                fontWeight: FontWeight.w500,
-                color: const Color.fromARGB(255, 54, 53, 53)),
+                fontWeight: FontWeight.w400,
+                color: const Color.fromARGB(255, 77, 73, 73)),
           ),
         )
       ]),
@@ -305,9 +439,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   double _thumbPosition = 0;
 
+  var cl = const Color.fromARGB(255, 244, 208, 157);
   Widget _buildProductTypeCatalog() {
     return Column(children: [
-      SizedBox(
+      Container(
+        padding: const EdgeInsets.only(top: 10),
+        color: cl,
         height: screenWidth * 0.23,
         child: MasonryGridView.count(
           addAutomaticKeepAlives: false,
@@ -320,16 +457,22 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisSpacing: 20,
         ),
       ),
-      _buildScrollCustom(),
+      Container(
+        height: 10,
+        color: cl,
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [_buildCustomScroll()]),
+      )
     ]);
   }
 
-  Widget _buildScrollCustom() {
+  Widget _buildCustomScroll() {
     return Stack(
       children: [
         Container(
           decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 185, 178, 178),
+              color: const Color.fromARGB(255, 194, 187, 187),
               borderRadius: BorderRadius.circular(2)),
           height: 2.8,
           width: 25,
@@ -348,16 +491,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _scrollListener() {
+  void _scrollListener() async {
     if (_scrollController.hasClients) {
       final double maxScrollSize = _scrollController.position.maxScrollExtent;
       final double currentPosition = _scrollController.position.pixels;
-      // _thumbPosition  =
-      // print(_scrollController.position.pixels);
-
-      // final scrollPosition =
-      //     ((_strokeHeight - _thumbHeight) / (maxScrollSize / currentPosition));
-
       setState(() {
         _thumbPosition = (currentPosition * (25 - 8) / maxScrollSize);
       });
@@ -378,60 +515,21 @@ class _HomeScreenState extends State<HomeScreen> {
       height: screenWidth * 0.41,
       child: MasonryGridView.count(
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => _buildProductPromotion(),
+        itemBuilder: (context, index) => _buildProductPromotion(
+            product: Product(
+                id: 1,
+                idType: 1,
+                image: null,
+                imageInfo: null,
+                name:
+                    'Laptop Lenovo Thinkpad P52 Core i7-8750H, Ram 32GB, SSD 512GB, 15.6 Inch FHD, Nvidia Quadro P1000',
+                description: 'assets/logo.png',
+                price: 15000000,
+                promotion: 50,
+                repository: 1,
+                postAt: DateTime.now())),
         crossAxisCount: 1,
         mainAxisSpacing: 6,
-      ),
-    );
-  }
-}
-
-class CustomBottomAppBar extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onTap;
-
-  const CustomBottomAppBar({
-    super.key,
-    required this.currentIndex,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: () {
-              onTap(0);
-            },
-            color: currentIndex == 0 ? Colors.blue : Colors.black,
-          ),
-          IconButton(
-            icon: const Icon(Icons.add_box),
-            onPressed: () {
-              onTap(1);
-            },
-            color: currentIndex == 1 ? Colors.blue : Colors.black,
-          ),
-          IconButton(
-            icon: const Icon(Icons.card_travel),
-            onPressed: () {
-              onTap(2);
-            },
-            color: currentIndex == 2 ? Colors.blue : Colors.black,
-          ),
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {
-              onTap(3);
-            },
-            color: currentIndex == 3 ? Colors.blue : Colors.black,
-          ),
-        ],
       ),
     );
   }
