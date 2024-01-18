@@ -6,4 +6,10 @@ class Address{
   Address.empty():
     id = -1,
     address = "";
+
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return Address(
+        id: json['id'],
+        address: json['idInvoice']);
+  }
 }

@@ -17,7 +17,7 @@ class CardProduct extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-         Expanded(
+        const Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

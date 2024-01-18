@@ -24,7 +24,6 @@ class OrderAdminDetail extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.black, width: 2),
                 color: Colors.white),
             child: const InfoOrder(),
           ),
@@ -34,7 +33,6 @@ class OrderAdminDetail extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.black, width: 2),
                 color: Colors.white),
             child: const InfoProduct(),
           ),

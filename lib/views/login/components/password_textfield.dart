@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../utils/screen_size.dart';
 
+// ignore: must_be_immutable
 class PasswordTextField extends StatefulWidget {
   PasswordTextField(
       {super.key, required this.controller, required this.errorText});

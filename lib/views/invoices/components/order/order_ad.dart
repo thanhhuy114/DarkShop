@@ -1,7 +1,10 @@
-import 'package:darkshop/views/invoices/components/order/card_product.dart';
-import 'package:darkshop/views/invoices/components/order/two_button.dart';
-import 'package:darkshop/views/invoices/order_detail_admin_screen.dart';
+import 'package:darkshop/views/invoices/components/widget/card_product.dart';
+import 'package:darkshop/views/invoices/components/widget/two_button.dart';
+// import 'package:darkshop/views/invoices/screen/admin/order_detail_admin_screen.dart';
+// import 'package:darkshop/views/invoices/order_detail_admin_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../screen/admin/order_detail_admin_screen.dart';
 
 class OrderAd extends StatelessWidget {
   const OrderAd({super.key});
@@ -21,9 +24,7 @@ class OrderAd extends StatelessWidget {
         margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: Colors.black, width: 2),
-            color: Colors.white),
+            borderRadius: BorderRadius.circular(5), color: Colors.white),
         child: Column(children: [
           //Avatar và tên kh
           Row(
@@ -59,7 +60,6 @@ class OrderAd extends StatelessWidget {
           ),
           //đường kẻ
           Container(
-            // margin: const EdgeInsets.symmetric(horizontal: 10),
             height: 3,
             color: Colors.red,
           ),
@@ -89,7 +89,6 @@ class OrderAd extends StatelessWidget {
           ),
           //đường kẻ
           Container(
-            // margin: const EdgeInsets.symmetric(horizontal: 10),
             height: 3,
             color: Colors.red,
           ),
@@ -108,12 +107,8 @@ class OrderAd extends StatelessWidget {
           ),
           //nút xác nhận,hủy
           const TwoButton(),
-          //khoảng cách
-          // const SizedBox(
-          //   width: 10,
-          // ),
           //mã đơn hàng
-           Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Mã đơn hàng:'),
