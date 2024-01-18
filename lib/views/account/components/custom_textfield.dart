@@ -56,7 +56,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                   onPressed: () {
                     AccountPresenter().gotoAddressManagement(context);
                   },
-                  icon: const Icon(Icons.arrow_forward, color: Colors.black,)),
+                  icon: const Icon(Icons.chevron_right, color: Colors.black,)),
         ),
       ),
     );

@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text(title, style: const TextStyle(fontSize: 16),), const Icon(Icons.arrow_forward)],
+            children: [Text(title, style: const TextStyle(fontSize: 16),), const Icon(Icons.chevron_right)],
           ),
         ),
       ),
