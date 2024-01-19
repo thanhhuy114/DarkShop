@@ -14,9 +14,22 @@ class NotificationInfo {
   });
 
   NotificationInfo.empty()
-      :date = DateTime.now(),
+      : date = DateTime.now(),
         type = "",
         idObject = 0,
         description = '',
         read = false;
+
+  factory NotificationInfo.fromJson(Map<String, dynamic> json) {
+    return NotificationInfo(
+        date: DateTime.parse(json['date']),
+        type: json["type"],
+        idObject: json["idObject"],
+        description: json["description"],
+        read: json["isRead"]);
+  }
+
+  Map<String, dynamic> toJson() => {
+    
+  };
 }

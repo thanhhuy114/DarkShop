@@ -1,5 +1,6 @@
 import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/utils/constants.dart';
+import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:darkshop/views/notification/components/list_notifications.dart';
 import 'package:darkshop/views/notification/notification_presenter.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   void initState() {
     super.initState();
-
-    NotificationPresenter.loadNotifications().then((value) {
+    
+    NotificationPresenter.loadNotifications(AccountPresenter.userLogin!.id).then((value) {
       presenter = NotificationPresenter(
           reload: () {
             setState(() {});

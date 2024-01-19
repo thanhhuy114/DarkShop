@@ -13,8 +13,8 @@ class NotificationPresenter {
   }
 
   //lấy danh sách thông báo
-  static Future<List<NotificationInfo>> loadNotifications() async {
-    return await NotificationRepository().getAllNotifications();
+  static Future<List<NotificationInfo>> loadNotifications(int idUser) async {
+    return await NotificationRepository().getAllNotifications(idUser);
   }
 
   //lấy thông báo bằng id
