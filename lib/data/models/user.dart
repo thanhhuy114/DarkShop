@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:darkshop/data/repositories/user_repository.dart';
 
 class User {

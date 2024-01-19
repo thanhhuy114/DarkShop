@@ -11,7 +11,6 @@ import 'package:image_picker/image_picker.dart';
 
 class AccountPresenter {
   static User? userLogin;
-  Function? reload;
 
   static Future<User?> getUserLogin(int id) async {
     //tạm thời
