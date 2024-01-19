@@ -30,6 +30,10 @@ class NotificationInfo {
   }
 
   Map<String, dynamic> toJson() => {
-    
-  };
+        "date": date.toString(),
+        "type": type,
+        "description": description,
+        "idObject": idObject,
+        "isRead": read
+      };
 }
