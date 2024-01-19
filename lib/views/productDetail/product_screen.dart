@@ -1,4 +1,5 @@
 //giao diện product
+import 'package:darkshop/data/models/image_product.dart';
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/views/productDetail/components/button.dart';
 import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
@@ -17,9 +18,11 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   late Future<Product> product;
+  late Future<ImageProduct> productImg;
   @override
   void initState() {
     product = ProductPresenter.getPro(1);
+    productImg = ProductImage.getImg(1);
     super.initState();
   }
 
@@ -28,7 +31,7 @@ class _ProductScreenState extends State<ProductScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 185, 88),
       appBar: AppBar(
-        title: const Text("Thông số kỹ thuật"),
+        title: const Text("Chi tiết sản phẩm"),
         backgroundColor: Colors.amber,
       ),
       body: SingleChildScrollView(
@@ -36,11 +39,11 @@ class _ProductScreenState extends State<ProductScreen> {
           future: product,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator(); 
+              return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (!snapshot.hasData) {
-              return Text('No data available'); 
+              return const Text('No data available');
             } else {
               Product product = snapshot.data!;
 

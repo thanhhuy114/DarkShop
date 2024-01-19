@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+
+var url = '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
 
 class Product {
   int id;
@@ -39,17 +42,25 @@ class Product {
         postAt = DateTime.now();
 
   factory Product.fromJson(Map<String, dynamic> json) {
+    Uint8List? decodeImage(dynamic image) {
+      if (image is String) {
+        return Uint8List.fromList(base64.decode(image));
+      }
+      return null;
+    }
+
     return Product(
-        id: json['id'],
-        idType: json['idType'],
-        image: json['image'],
-        imageInfo: json['imageInfo'],
-        name: json['name'],
-        description: json['description'],
-        price: json['price'],
-        promotion: json['promotion'],
-        repository: json['repository'],
-        postAt: DateTime.parse(json['postAt']));
+      id: json['id'],
+      idType: json['idType'],
+      image: decodeImage(json[url + 'image']),
+      imageInfo: decodeImage(json[url + 'imageInfo']),
+      name: json['name'],
+      description: json['description'],
+      price: json['price'],
+      promotion: json['promotion'],
+      repository: json['repository'],
+      postAt: DateTime.parse(json['postAt']),
+    );
   }
 
   Future<Uint8List> imageFileToUint8List(String imagePath) async {

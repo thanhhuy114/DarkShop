@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class MyCarouselSlider extends StatelessWidget {
-  final List<String> listUrlImg;
+  final  List<String> listUrlImg;
    MyCarouselSlider({super.key,required this.listUrlImg});
 
   @override
