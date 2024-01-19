@@ -18,7 +18,7 @@ class _ImgZoonScreenState extends State<ImgZoonScreen> {
         ),
         body: Container(
           color: Colors.amber.withOpacity(0.5),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             // children: const [MyCarouselSlider()],
