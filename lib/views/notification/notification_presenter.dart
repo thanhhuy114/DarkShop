@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/notification.dart';
 import 'package:darkshop/data/repositories/notification_repository.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,13 @@ class NotificationPresenter {
 
   //lấy danh sách thông báo
   static Future<List<NotificationInfo>> loadNotifications(int idUser) async {
-    return await NotificationRepository().getAllNotifications(idUser);
+    var connectivityResult = await (Connectivity().checkConnectivity());
+
+    if (connectivityResult == ConnectivityResult.none) {
+      return await NotificationRepository().getAllNotifications(idUser);
+    } else {
+      return NotificationLocal().getAllNotifications();
+    }
   }
 
   //lấy thông báo bằng id
@@ -22,4 +29,6 @@ class NotificationPresenter {
     NotificationRepository().readNotification(idObject);
     reload();
   }
+
+  addNotification() {}
 }
