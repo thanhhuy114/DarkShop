@@ -18,6 +18,9 @@ class NotificationRepository {
       List<NotificationInfo> notifications = jsonList
           .map((notificationMap) => NotificationInfo.fromJson(notificationMap))
           .toList();
+
+      NotificationLocal().saveNotifications(notifications);
+
       return notifications;
     } catch (e) {
       print(e);
@@ -53,21 +56,33 @@ class NotificationLocal {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$path/notifications.json');
+
+    File file = File('$path/notifications.json');
+    if (!(await file.exists())) {
+      await file.create(recursive: true);
+    }
+    return file;
   }
 
   Future<String> getStringJson() async {
-    File file = await _localFile;
-    String jsonString = await file.readAsString();
-
-    return jsonString;
+    String s = "";
+    try {
+      final localFile = await _localFile;
+      s = await localFile.readAsString();
+    } catch (e) {
+      print("getStringJsonNotifications() error: $e");
+    }
+    return s;
   }
 
   Future<List<Map<String, dynamic>>> getListMap() async {
     String json = await getStringJson();
-
-    List<Map<String, dynamic>> list =
-        jsonDecode(json).cast<Map<String, dynamic>>();
+    List<Map<String, dynamic>> list = [];
+    try {
+      list = jsonDecode(json).cast<Map<String, dynamic>>();
+    } catch (e) {
+      print(e);
+    }
 
     return list;
   }
@@ -78,8 +93,10 @@ class NotificationLocal {
 
     try {
       results = listMap.map((map) => NotificationInfo.fromJson(map)).toList();
+      print("Lấy danh sách thông bào từ local thành công");
       return results;
     } catch (e) {
+      print("Lấy danh sách thông bào từ local thất bại");
       print(e);
       return results;
     }
