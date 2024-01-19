@@ -1,5 +1,6 @@
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:darkshop/views/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -141,6 +142,11 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     _scrollController.addListener(_scrollListener);
     super.initState();
+
+    //thịnh viết  phần lấy thông tin đăng nhập id = 3
+    AccountPresenter.getUserLogin(3).then((value) {
+      setState(() {});
+    });
   }
 
   SnackBar snackBar(context) => SnackBar(
