@@ -27,7 +27,7 @@ class InfoOrder extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Align(
+         Align(
           alignment: Alignment.topLeft,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

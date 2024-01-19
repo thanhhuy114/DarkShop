@@ -1,5 +1,5 @@
 import 'package:darkshop/views/search/components/list_products.dart';
-import 'package:darkshop/views/search/components/search_bar.dart';
+// import 'package:darkshop/views/search/components/search_bar.dart';
 import 'package:darkshop/views/search/components/search_suggestion.dart';
 import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/views/search/components/menu_sort.dart';

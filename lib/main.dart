@@ -1,5 +1,3 @@
-import 'package:darkshop/views/search/search_products_screen.dart';
-import 'package:darkshop/views/productDetail/product_screen.dart';
 import 'package:darkshop/views/stunning_splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

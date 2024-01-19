@@ -2,7 +2,7 @@ import 'package:darkshop/utils/screen_size.dart';
 import 'package:darkshop/views/account/account_screen.dart';
 import 'package:darkshop/views/cart/cart_screen.dart';
 import 'package:darkshop/views/home/home_screen.dart';
-import 'package:darkshop/views/invoices/om_user_screen.dart';
+import 'package:darkshop/views/invoices/screen/user/om_user_screen.dart';
 import 'package:darkshop/views/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
 

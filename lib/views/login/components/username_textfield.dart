@@ -1,6 +1,7 @@
 import 'package:darkshop/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class UsernameTextfield extends StatelessWidget {
   UsernameTextfield(
       {super.key, required this.controller, required this.errorText});

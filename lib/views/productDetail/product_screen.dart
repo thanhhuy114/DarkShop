@@ -1,7 +1,7 @@
 //giao diện product
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/views/productDetail/components/button.dart';
-import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
+// import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:darkshop/views/productDetail/components/img_button.dart';
 import 'package:darkshop/views/productDetail/components/product_info.dart';
 import 'package:darkshop/views/productDetail/components/specifications_button.dart';
@@ -36,24 +36,24 @@ class _ProductScreenState extends State<ProductScreen> {
           future: product,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator(); 
+              return const CircularProgressIndicator(); 
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (!snapshot.hasData) {
-              return Text('No data available'); 
+              return const Text('No data available'); 
             } else {
               Product product = snapshot.data!;
 
               return Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
+                  const Padding(
+                    padding: EdgeInsets.all(20.0),
                     // child: MyCarouselSlider(),
                   ),
                    Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
+                    children: const [
                       imgButton(),
                       specsButton(),
                     ],
