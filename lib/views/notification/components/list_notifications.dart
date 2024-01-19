@@ -12,6 +12,7 @@ class ListNotifications extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: ListView(
         children: [
+          if(presenter.notifications.isEmpty)const  Text("Không có thông báo!", textAlign: TextAlign.center,),
           for (int i = 0; i < presenter.notifications.length; i++)
             NotificationCard(
               notification: presenter.notifications[i],
