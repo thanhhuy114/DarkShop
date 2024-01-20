@@ -27,7 +27,9 @@ class _UserInfoState extends State<UserInfo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Avatar(
-                image: "${Constants.pathClould}darkshop/image/product/mobile/v3wlmlwnaui5cbbhnutf.webp",
+                image: AccountPresenter.userLogin!.image != null
+                    ? "${Constants.pathClould}${AccountPresenter.userLogin!.image}"
+                    : null,
                 callback: () {
                   setState(() {});
                 }),

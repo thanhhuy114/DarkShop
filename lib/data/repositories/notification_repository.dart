@@ -19,6 +19,8 @@ class NotificationRepository {
           .map((notificationMap) => NotificationInfo.fromJson(notificationMap))
           .toList();
 
+      print("Lấy danh sách thông báo ở sever thành công");
+
       NotificationLocal().saveNotifications(notifications);
 
       return notifications;
