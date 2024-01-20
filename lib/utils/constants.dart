@@ -38,6 +38,7 @@ class Constants {
   static const String search = "Tìm kiếm";
   
   static const String addAddress = "Thêm địa chỉ";
+  static const String noConnected = "Không có kết nối internet";
 
   static const int indexRelatedProducts = 0;
   static const int indexLatestProducts = 1;
