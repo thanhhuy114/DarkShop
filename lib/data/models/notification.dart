@@ -1,5 +1,8 @@
+import 'package:darkshop/views/account/account_presenter.dart';
+
 class NotificationInfo {
   int id;
+  int idUser;
   DateTime date;
   String type;
   int idObject;
@@ -8,6 +11,7 @@ class NotificationInfo {
 
   NotificationInfo({
     required this.id,
+    required this.idUser,
     required this.date,
     required this.type,
     required this.idObject,
@@ -17,6 +21,7 @@ class NotificationInfo {
 
   NotificationInfo.empty()
       : id = -1,
+      idUser = AccountPresenter.userLogin!.id,
         date = DateTime.now(),
         type = "",
         idObject = 0,
@@ -26,6 +31,7 @@ class NotificationInfo {
   factory NotificationInfo.fromJson(Map<String, dynamic> json) {
     return NotificationInfo(
         id: json["id"],
+        idUser: json["idUser"],
         date: DateTime.parse(json['date']),
         type: json["type"],
         idObject: json["idObject"],
@@ -35,6 +41,7 @@ class NotificationInfo {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "idUser": idUser,
         "date": date.toString(),
         "type": type,
         "description": description,
