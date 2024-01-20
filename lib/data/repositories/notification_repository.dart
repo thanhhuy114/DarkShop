@@ -28,6 +28,10 @@ class NotificationRepository {
     }
   }
 
+  addNotification(NotificationInfo notification) async{
+
+  }
+
   Future<void> updateNotification(int notificationId) async {
     try {
       var response = await http.put(

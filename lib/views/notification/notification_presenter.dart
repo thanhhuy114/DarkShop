@@ -8,6 +8,7 @@ class NotificationPresenter {
   NotificationPresenter({required this.reload, required this.notifications});
   Function reload;
   List<NotificationInfo> notifications;
+  static bool connected = false;
 
   //tính thời gian thông báo của 1 thông báo
   String getNotificationTime(DateTime dateTime) {
@@ -19,6 +20,7 @@ class NotificationPresenter {
     var connectivityResult = await (Connectivity().checkConnectivity());
 
     if (connectivityResult != ConnectivityResult.none) {
+      connected = true;
       return await NotificationRepository().getAllNotifications(idUser);
     } else {
       return NotificationLocal().getAllNotifications();
