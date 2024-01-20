@@ -4,10 +4,15 @@ import 'package:darkshop/views/notification/components/notification_card.dart';
 import 'package:darkshop/views/notification/notification_presenter.dart';
 import 'package:flutter/material.dart';
 
-class ListNotifications extends StatelessWidget {
+class ListNotifications extends StatefulWidget {
   const ListNotifications({super.key, required this.presenter});
   final NotificationPresenter presenter;
 
+  @override
+  State<ListNotifications> createState() => _ListNotificationsState();
+}
+
+class _ListNotificationsState extends State<ListNotifications> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,15 +31,15 @@ class ListNotifications extends StatelessWidget {
             ),
           if (!NotificationPresenter.connected)
             const Padding(padding: EdgeInsets.only(top: 5)),
-          if (presenter.notifications.isEmpty)
+          if (widget.presenter.notifications.isEmpty)
             const Text(
               "Không có thông báo!",
               textAlign: TextAlign.center,
             ),
-          for (int i = 0; i < presenter.notifications.length; i++)
+          for (int i = 0; i < widget.presenter.notifications.length; i++)
             NotificationCard(
-              notification: presenter.notifications[i],
-              presenter: presenter,
+              notification: widget.presenter.notifications[i],
+              presenter: widget.presenter,
             )
         ],
       ),

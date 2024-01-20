@@ -1,3 +1,4 @@
+import 'package:darkshop/data/models/notification.dart';
 import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/views/account/account_presenter.dart';
@@ -23,10 +24,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
       NotificationPresenter.loadNotifications(AccountPresenter.userLogin!.id)
           .then((value) {
         presenter = NotificationPresenter(
-            reload: () {
-              setState(() {});
-            },
+            reload: () =>
+              setState(() {}),
             notifications: value);
+
         setState(() {});
       });
     }

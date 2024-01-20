@@ -40,7 +40,6 @@ class NotificationInfo {
   }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "idUser": idUser,
         "date": date.toString(),
         "type": type,

@@ -28,8 +28,24 @@ class NotificationRepository {
     }
   }
 
-  addNotification(NotificationInfo notification) async{
+  addNotification(NotificationInfo newNotification) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${Constants.hosting}:3000/notifications/add'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(newNotification.toJson()),
+      );
 
+      if (response.statusCode == 201) {
+        print('Thêm mới thông báo thành công');
+      } else {
+        print('Lỗi khi thêm mới thông báo');
+      }
+    } catch (e) {
+      print('Lỗi: $e');
+    }
   }
 
   Future<void> updateNotification(int notificationId) async {

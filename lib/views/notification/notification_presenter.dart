@@ -15,7 +15,6 @@ class NotificationPresenter {
     return NotificationRepository().getNotificationTime(dateTime);
   }
 
-  //lấy danh sách thông báo
   static Future<List<NotificationInfo>> loadNotifications(int idUser) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
 
@@ -27,24 +26,18 @@ class NotificationPresenter {
     }
   }
 
-  //lấy thông báo bằng id
-  onclickCard(NotificationInfo notification, BuildContext context) {
-    Connectivity().checkConnectivity().then((value) {
-      if (value != ConnectivityResult.none) {
-        if (!notification.read) {
-          NotificationRepository()
-              .readNotification(notification.id)
-              .then((value) {
-            loadNotifications(AccountPresenter.userLogin!.id).then((value) {
-              reload();
-            });
-          });
-
-          //chuyển dến chi tiết
-        }
+  onclickCard(NotificationInfo notification, BuildContext context) async {
+    if (connected) {
+      if (!notification.read) {
+        await NotificationRepository().readNotification(notification.id);
+        notifications = await loadNotifications(AccountPresenter.userLogin!.id);
+        reload();
+        //chuyển dến chi tiết
       }
-    });
+    }
   }
 
-  addNotification() {}
+  static addNotification(NotificationInfo newNotification) async {
+    await NotificationRepository().addNotification(newNotification);
+  }
 }
