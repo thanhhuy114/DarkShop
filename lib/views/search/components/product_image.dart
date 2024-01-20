@@ -13,13 +13,13 @@ class ProductImage extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       height: 80,
       width: MediaQuery.of(context).size.width * 2 / 6,
-      decoration: BoxDecoration(
-        image: product.image != null
-            ? DecorationImage(
-                image: MemoryImage(product.image!), fit: BoxFit.cover)
-            : const DecorationImage(
-                image: AssetImage(Constants.avatarDefault), fit: BoxFit.cover),
-      ),
+      // decoration: BoxDecoration(
+      //   image: product.image != null
+      //       ? DecorationImage(
+      //           image: MemoryImage(product.image!), fit: BoxFit.cover)
+      //       : const DecorationImage(
+      //           image: AssetImage(Constants.avatarDefault), fit: BoxFit.cover),
+      // ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,

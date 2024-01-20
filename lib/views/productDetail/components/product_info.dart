@@ -1,8 +1,12 @@
 //thông tin sản phẩm
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+
 class ProductInfo extends StatelessWidget {
+  bool lineShow=true;
   final String textInfo;
-  const ProductInfo({required this.textInfo});
+   ProductInfo({required this.textInfo,required this.lineShow});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class ProductInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              for (String line in lines.take(10)) 
+              for ( String line in lines.take(lineShow ? 10:lines.length))
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -29,7 +33,7 @@ class ProductInfo extends StatelessWidget {
                       line.trim(),
                       style: const TextStyle(fontSize: 16.0),
                     ),
-                    const SizedBox(height: 8.0), 
+                    const SizedBox(height: 8.0),
                   ],
                 ),
             ],

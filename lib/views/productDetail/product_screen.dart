@@ -6,11 +6,13 @@ import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:darkshop/views/productDetail/components/img_button.dart';
 import 'package:darkshop/views/productDetail/components/product_info.dart';
 import 'package:darkshop/views/productDetail/components/specifications_button.dart';
+import 'package:darkshop/views/productDetail/productInfo_screen.dart';
 import 'package:darkshop/views/productDetail/product_presenter.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+  final int id;
+  const ProductScreen({super.key, required this.id});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -18,12 +20,22 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   late Future<Product> product;
-  late Future<ImageProduct> productImg;
+  late Future<List<String>> productImg;
   @override
   void initState() {
-    product = ProductPresenter.getPro(1);
-    productImg = ProductImage.getImg(1);
+    _initializeData();
     super.initState();
+  }
+
+  _initializeData() async {
+    try {
+      product = ProductPresenter.getPro(widget.id);
+      productImg = ProductImage.getImg(widget.id);
+      print(ProductPresenter.getPro(widget.id));
+      setState(() {}); // Ensure a rebuild after data is fetched
+    } catch (error) {
+      print("Error fetching product image: $error");
+    }
   }
 
   @override
@@ -32,7 +44,7 @@ class _ProductScreenState extends State<ProductScreen> {
       backgroundColor: const Color.fromARGB(255, 255, 185, 88),
       appBar: AppBar(
         title: const Text("Chi tiết sản phẩm"),
-        backgroundColor: Colors.amber,
+        backgroundColor: Color.fromARGB(255, 255, 185, 88),
       ),
       body: SingleChildScrollView(
         child: FutureBuilder<Product>(
@@ -51,14 +63,15 @@ class _ProductScreenState extends State<ProductScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    // child: MyCarouselSlider(),
+                    child:
+                        MyCarouselSlider(listUrlImg: productImg, height: 250),
                   ),
-                  const Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      imgButton(),
-                      specsButton(),
+                      ImgButton(urlImg: productImg),
+                      specsButton(pro: product),
                     ],
                   ),
                   Padding(
@@ -125,11 +138,17 @@ class _ProductScreenState extends State<ProductScreen> {
                       ],
                     ),
                   ),
-                  ProductInfo(textInfo: product.description.toString()),
+                  ProductInfo(
+                      textInfo: product.description.toString(), lineShow: true),
                   CustomButton(
                     text: 'Xem thêm',
                     icon: Icons.view_agenda_sharp,
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductInfoScreen(pro: product),
+                      ),
+                    ),
                   ),
                 ],
               );

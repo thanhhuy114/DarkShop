@@ -7,8 +7,8 @@ var url = '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
 class Product {
   int id;
   int idType;
-  Uint8List? image;
-  Uint8List? imageInfo;
+  String? image;
+  String? imageInfo;
   String name;
   String description;
   int price;
@@ -42,18 +42,11 @@ class Product {
         postAt = DateTime.now();
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    Uint8List? decodeImage(dynamic image) {
-      if (image is String) {
-        return Uint8List.fromList(base64.decode(image));
-      }
-      return null;
-    }
-
     return Product(
       id: json['id'],
       idType: json['idType'],
-      image: decodeImage(json[url + 'image']),
-      imageInfo: decodeImage(json[url + 'imageInfo']),
+      image: json[url + 'image'],
+      imageInfo: json[url + 'imageInfo'],
       name: json['name'],
       description: json['description'],
       price: json['price'],
@@ -61,16 +54,5 @@ class Product {
       repository: json['repository'],
       postAt: DateTime.parse(json['postAt']),
     );
-  }
-
-  Future<Uint8List> imageFileToUint8List(String imagePath) async {
-    // Đọc nội dung của tệp hình ảnh thành Uint8List
-    File imageFile = File(imagePath);
-    List<int> imageBytes = await imageFile.readAsBytes();
-
-    // Chuyển đổi List<int> thành Uint8List
-    Uint8List uint8List = Uint8List.fromList(imageBytes);
-
-    return uint8List;
   }
 }
