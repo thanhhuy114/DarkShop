@@ -1,4 +1,5 @@
 import 'package:darkshop/data/models/product.dart';
+import 'package:darkshop/main.dart';
 import 'package:darkshop/utils/screen_size.dart';
 import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:darkshop/views/login/login_screen.dart';
@@ -144,9 +145,11 @@ class _HomeScreenState extends State<HomeScreen>
     super.initState();
 
     //thịnh viết  phần lấy thông tin đăng nhập id = 3
-    AccountPresenter.getUserLogin(3).then((value) {
-      setState(() {});
-    });
+    if (MyApp.idUserLogin != null) {
+      AccountPresenter.getUserLogin(MyApp.idUserLogin!).then((value) {
+        setState(() {});
+      });
+    }
   }
 
   SnackBar snackBar(context) => SnackBar(

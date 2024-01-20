@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
 
 // Lưu trạng thái của ứng dụng
   static bool? isLogin;
+  static int? idUserLogin;
   static bool? isAdmin;
 
   @override
