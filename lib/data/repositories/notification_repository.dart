@@ -9,7 +9,7 @@ class NotificationRepository {
   Future<List<NotificationInfo>> getAllNotifications(int idUser) async {
     try {
       var response = await http.get(
-        Uri.parse('${Constants.hosting}:3000/notifications/'),
+        Uri.parse('${Constants.hosting}:3000/notifications/$idUser'),
       );
 
       List<Map<String, dynamic>> jsonList =
