@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/user.dart';
 import 'package:darkshop/data/repositories/user_repository.dart';
 import 'package:darkshop/utils/constants.dart';
@@ -11,12 +12,22 @@ import 'package:image_picker/image_picker.dart';
 
 class AccountPresenter {
   static User? userLogin;
+  static bool connected = false;
 
   static Future<User?> getUserLogin(int id) async {
-    //tạm thời
-    userLogin = await UserRepository().getUserById(id);
+    if(await checkConnection()) {
+      userLogin = await UserRepository().getUserById(id);
+    }else{
+      userLogin = await UserLocal().getUser();
+    }
 
     return userLogin;
+  }
+
+  static checkConnection() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+
+    return connectivityResult != ConnectivityResult.none;
   }
 
   uploadAvatar(Function callback) async {

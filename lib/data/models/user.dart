@@ -43,4 +43,31 @@ class User {
             : UserRepository().getAddressById(json['recentAddressId']),
         blocked: json['blocked']);
   }
+
+  //Hàm chuyển sang json để lưu xuống local
+  Map<String, dynamic> toJsonLocal() {
+    return {
+      'id': id,
+      'isAdmin': isAdmin,
+      'name': fullname,
+      'phone': phone,
+      'email': email,
+      'recentAddressId': recentAddress,
+      'blocked': blocked,
+    };
+  }
+
+  //lấy user từ local
+  factory User.fromJsonLocal(Map<String, dynamic> json) {
+    return User(
+      id: json['id'],
+      isAdmin: json['isAdmin'],
+      fullname: json['name'],
+      image: null, 
+      phone: json['phone'],
+      email: json['email'],
+      recentAddress: json['recentAddressId'],
+      blocked: json['blocked'],
+    );
+  }
 }
