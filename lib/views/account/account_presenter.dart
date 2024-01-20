@@ -27,7 +27,8 @@ class AccountPresenter {
   static checkConnection() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
 
-    return connectivityResult != ConnectivityResult.none;
+    connected = connectivityResult != ConnectivityResult.none;
+    return connected;
   }
 
   uploadAvatar(Function callback) async {

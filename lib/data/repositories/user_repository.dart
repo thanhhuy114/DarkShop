@@ -16,10 +16,14 @@ class UserRepository {
 
       User user = User.fromJson(jsonDecode(response.body));
 
+      print("Lấy user ở server thành công");
+
       UserLocal().saveUser(user);
 
       return user;
     } catch (e) {
+      
+      print("Lấy user ở server thất bại");
       print(e);
       return null;
     }

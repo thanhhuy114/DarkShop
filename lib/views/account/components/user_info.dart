@@ -16,26 +16,6 @@ class UserInfo extends StatefulWidget {
 class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
-    if (AccountPresenter.userLogin == null) {
-      return Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 232, 187, 187),
-          Color.fromARGB(255, 239, 186, 11)
-        ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              Constants.logo,
-              width: 150,
-              height: 150,
-            )
-          ],
-        ),
-      );
-    }
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(

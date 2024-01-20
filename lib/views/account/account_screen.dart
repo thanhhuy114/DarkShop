@@ -21,11 +21,41 @@ class _AccountScreenState extends State<AccountScreen> {
         centerTitle: true,
         backgroundColor: MyColors.backgroundAppBar,
       ),
-      body: ListView(
-        children: const [
-          UserInfo(),
-        ],
-      ),
+      body: AccountPresenter.userLogin == null
+          ? Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                Color.fromARGB(255, 232, 187, 187),
+                Color.fromARGB(255, 239, 186, 11)
+              ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    Constants.logo,
+                    width: 150,
+                    height: 150,
+                  )
+                ],
+              ),
+            )
+          : ListView(
+              children: [
+                !AccountPresenter.connected
+                    ? Container(
+                        height: 20,
+                        width: MediaQuery.of(context).size.width,
+                        color: MyColors.backgoundRowMessage,
+                        child: const Text(
+                          Constants.noConnected,
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    : Container(),
+                const UserInfo(),
+              ],
+            ),
       backgroundColor: MyColors.backgroundApp,
     );
   }
