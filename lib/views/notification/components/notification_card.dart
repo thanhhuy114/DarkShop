@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../data/models/notification.dart';
 import '../../../utils/colors.dart';
 import '../notification_presenter.dart';
@@ -18,8 +17,7 @@ class NotificationCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: GestureDetector(
-        onTap: () => presenter.onclickCard(
-            notification.idObject, context),
+        onTap: () => presenter.onclickCard(notification, context),
         child: Container(
           height: 100,
           decoration: BoxDecoration(

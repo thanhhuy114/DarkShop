@@ -1,4 +1,5 @@
 class NotificationInfo {
+  int id;
   DateTime date;
   String type;
   int idObject;
@@ -6,6 +7,7 @@ class NotificationInfo {
   bool read;
 
   NotificationInfo({
+    required this.id,
     required this.date,
     required this.type,
     required this.idObject,
@@ -14,7 +16,8 @@ class NotificationInfo {
   });
 
   NotificationInfo.empty()
-      : date = DateTime.now(),
+      : id = -1,
+        date = DateTime.now(),
         type = "",
         idObject = 0,
         description = '',
@@ -22,6 +25,7 @@ class NotificationInfo {
 
   factory NotificationInfo.fromJson(Map<String, dynamic> json) {
     return NotificationInfo(
+        id: json["id"],
         date: DateTime.parse(json['date']),
         type: json["type"],
         idObject: json["idObject"],
@@ -30,6 +34,7 @@ class NotificationInfo {
   }
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "date": date.toString(),
         "type": type,
         "description": description,

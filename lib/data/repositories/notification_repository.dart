@@ -28,6 +28,23 @@ class NotificationRepository {
     }
   }
 
+  Future<void> updateNotification(int notificationId) async {
+    try {
+      var response = await http.put(
+        Uri.parse(
+            '${Constants.hosting}:3000/notifications/update/$notificationId'),
+      );
+
+      if (response.statusCode == 200) {
+        print('Cập nhật thông báo thành Đã đọc');
+      } else {
+        print('Cập nhật thông báo thất bại, mã lỗi: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Lỗi khi gọi API cập nhật thông báo: $e');
+    }
+  }
+
   String getNotificationTime(DateTime dateTime) {
     DateTime now = DateTime.now();
     Duration difference = now.difference(dateTime);
@@ -44,7 +61,7 @@ class NotificationRepository {
   }
 
   readNotification(int id) async {
-    //cập nhật thuộc tính read = true
+    await updateNotification(id);
   }
 }
 

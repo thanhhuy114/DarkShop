@@ -19,7 +19,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
   void initState() {
     super.initState();
     
-    NotificationPresenter.loadNotifications(AccountPresenter.userLogin!.id).then((value) {
+    if (AccountPresenter.userLogin!= null) {
+      NotificationPresenter.loadNotifications(AccountPresenter.userLogin!.id).then((value) {
       presenter = NotificationPresenter(
           reload: () {
             setState(() {});
@@ -27,6 +28,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           notifications: value);
       setState(() {});
     });
+    }
   }
 
   @override
