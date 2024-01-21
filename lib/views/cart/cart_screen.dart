@@ -17,7 +17,6 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   var cartsRepository = cartPresenter(cartRepository());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +50,14 @@ class _CartScreenState extends State<CartScreen> {
                     itemBuilder: (context, index) {
                       var cart = snapshot.data?[index];
                       var product = ProductPresenter.getPro(cart!.idProduct);
-                      return ItemCart(product: product, count: cart?.count);
+                      return ItemCart(
+                        product: product,
+                        count: cart?.count,
+                        onPriceChanged: (double price) {
+                          // Xử lý giá đã cập nhật trong CartScreen
+                          print('Updated Price: $price');
+                        },
+                      );
                     },
                   );
                 }

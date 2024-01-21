@@ -9,4 +9,7 @@ abstract class Repository {
   Future<String>deteleCart(Cart Cart);
   //POST
   Future<String>postCart(Cart Cart);
+
+  //LOCAL
+  Future<List<Cart>>getLocal(int id_user);
 }

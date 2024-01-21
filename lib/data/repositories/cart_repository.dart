@@ -5,6 +5,8 @@ import 'package:flutter/src/material/card.dart';
 import '../models/cart.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/cart_local.dart';
+
 class cartRepository implements Repository {
   String db = '''http://192.168.1.3:3000''';
   @override
@@ -14,7 +16,7 @@ class cartRepository implements Repository {
 
   @override
   Future<List<Cart>> getCardList(int id_user) async {
-     List<Cart> cartList = [];
+    List<Cart> cartList = [];
     var url = Uri.parse('$db/cart/all/$id_user');
     var repose = await http.get(url);
     print('Trang thai :$repose.statusCode');
@@ -35,5 +37,13 @@ class cartRepository implements Repository {
   Future<String> pullCart(Cart Cart) {
     // TODO: implement pullCart
     throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Cart>> getLocal(int idUser) async {
+    List<Cart> cartData = await getCardList(idUser);
+    CartService cartService = CartService();
+    await cartService.saveCart(cartData);
+    return cartData;
   }
 }

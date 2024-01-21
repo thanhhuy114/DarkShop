@@ -5,24 +5,26 @@ import 'package:darkshop/views/cart/components/count_product.dart';
 class ItemCart extends StatefulWidget {
   final Future<Product>? product;
   final int? count;
+  final Function(double)? onPriceChanged;
 
   ItemCart({
     Key? key,
     required this.product,
     required this.count,
+    this.onPriceChanged,
   }) : super(key: key);
 
   @override
   State<ItemCart> createState() => _ItemCartState();
 }
 
+var url = '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
+
 class _ItemCartState extends State<ItemCart> {
-  bool isChecked = false; // Cho checkbox đơn lựa chọn
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
-    var url =
-        '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
     return FutureBuilder(
       future: widget.product,
       builder: (context, snapshot) {
@@ -34,6 +36,11 @@ class _ItemCartState extends State<ItemCart> {
           return const Text('Không có dữ liệu');
         } else {
           Product product = snapshot.data as Product;
+          double price =
+              (product.price - (product.price * product.promotion / 100)) *
+                  widget.count!;
+
+          widget.onPriceChanged?.call(price);
 
           return Container(
             height: MediaQuery.of(context).size.height / 4,
@@ -69,12 +76,7 @@ class _ItemCartState extends State<ItemCart> {
                           ),
                         ),
                         Text(
-                          ((product.price -
-                                      (product.price *
-                                          product.promotion /
-                                          100)) *
-                                  widget.count!)
-                              .toString(),
+                          price.toString() + 'VND',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
