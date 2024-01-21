@@ -2,7 +2,6 @@
 //vd: lấy tất cả user, thêm user vào database
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:darkshop/utils/constants.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -60,11 +59,27 @@ class UserRepository {
     //lưu avatar mới vào database
   }
 
-  saveFullname(String fullname, int idUser) async {}
+  update(String json, int idUser) async {
+    try {
+      final response = await http.put(
+        Uri.parse('${Constants.hosting}:3000/users/$idUser'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: json
+      );
 
-  saveEmail(String email, int idUser) async {}
+      if (response.statusCode == 200) {
+        print('Cập nhật user ở sever thành công');
+        
 
-  savePhone(String phone, int idUser) async {}
+      } else {
+        print('Cập nhật user ở sever thất bại');
+      }
+    } catch (e) {
+      print('Lỗi Cập nhật ở sever user: $e');
+    }
+  }
 
   blockUser(int idUser) async {}
 

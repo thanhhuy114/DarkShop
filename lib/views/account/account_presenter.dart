@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/user.dart';
@@ -48,21 +49,24 @@ class AccountPresenter {
     switch (title) {
       case Constants.fullname:
         if (userLogin!.fullname != content) {
-          UserRepository().saveFullname(content, userLogin!.id);
+          UserRepository().update(jsonEncode({"name": content}), userLogin!.id).then((value){
+            getUserLogin(userLogin!.id).then((value){callback();});
+          });
         }
-        callback();
         break;
       case Constants.email:
         if (userLogin!.email != content) {
-          UserRepository().saveEmail(content, userLogin!.id);
+          UserRepository().update(jsonEncode({"email": content}), userLogin!.id).then((value){
+             getUserLogin(userLogin!.id).then((value){callback();});
+          });
         }
-        callback();
         break;
       case Constants.phone:
         if (userLogin!.phone != content) {
-          UserRepository().savePhone(content, userLogin!.id);
+          UserRepository().update(jsonEncode({"phone": content}), userLogin!.id).then((value){
+             getUserLogin(userLogin!.id).then((value){callback();});
+          });
         }
-        callback();
         break;
     }
   }
