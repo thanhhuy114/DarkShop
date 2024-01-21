@@ -24,9 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
 
-    Connectivity()
-        .onConnectivityChanged
-        .listen(_logInPresenter.connectListenner);
+    Connectivity().onConnectivityChanged.listen(connectListenner);
   }
 
   @override
@@ -35,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       dismissOnCapturedTaps: true,
       child: Scaffold(
         appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             elevation: 0,
             leading: IconButton(
                 onPressed: () {
@@ -169,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: const MaterialStatePropertyAll(
                         Color.fromARGB(255, 203, 66, 107))),
                 onPressed: () {
-                  if (_logInPresenter.checkConnet()) {
+                  if (checkConnet()) {
                     if (_logInPresenter.checkLoginCredentials(
                         usernameController.text, passwordController.text,
                         (errorUsername, errorPassword) {

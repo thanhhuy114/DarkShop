@@ -17,6 +17,7 @@ class _NavigationHomePageState extends State<NavigationHomePage> {
   final PageController _controller = PageController();
 
   int _currentIndex = 0;
+  
   onTap(int index) {
     if (index != _currentIndex) {
       setState(() {

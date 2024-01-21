@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/utils/constants.dart';
@@ -16,7 +18,7 @@ class ProductImage extends StatelessWidget {
       decoration: BoxDecoration(
         image: product.image != null
             ? DecorationImage(
-                image: MemoryImage(product.image!), fit: BoxFit.cover)
+                image: MemoryImage(product.image! as Uint8List), fit: BoxFit.cover)
             : const DecorationImage(
                 image: AssetImage(Constants.avatarDefault), fit: BoxFit.cover),
       ),

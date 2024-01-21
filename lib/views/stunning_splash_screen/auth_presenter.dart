@@ -1,16 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:darkshop/main.dart';
+import 'package:darkshop/utils/global_data.dart';
 import 'package:http/http.dart' as http;
 import 'package:darkshop/utils/screen_size.dart';
 import 'package:device_info/device_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthPresenter {
-  final _hosting = 'http://192.168.65.206';
-
   static AuthPresenter? _instance;
-  // Factory constructor để tạo hoặc trả về đối tượng đã tồn tại
   static AuthPresenter getInstance() {
     _instance ??= AuthPresenter();
     return _instance!;
@@ -24,11 +22,12 @@ class AuthPresenter {
   Future<void> checkAuth(
       {required void Function() successful,
       required void Function() onFailure}) async {
-    MyApp.isLogin = await checkToken();
+    GlobalData.isLogin = await checkToken();
 
-    if (MyApp.isLogin!) {
+    if (GlobalData.isLogin!) {
       successful();
     } else {
+      logOut();
       onFailure();
     }
   }
@@ -45,7 +44,7 @@ class AuthPresenter {
   }
 
   Future<bool> logInWithEmail(email) async {
-    var uri = '$_hosting:3000/email-signin';
+    var uri = '$hosting/email-signin';
 
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -77,7 +76,7 @@ class AuthPresenter {
   }
 
   Future<bool> logIned(username, password) async {
-    var uri = '$_hosting:3000/signin';
+    var uri = '$hosting/signin';
 
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -110,7 +109,7 @@ class AuthPresenter {
   }
 
   Future<bool> checkAuthAPI(token) async {
-    var apiUri = '$_hosting:3000/check-auth';
+    var apiUri = '$hosting/check-auth';
 
     try {
       AndroidDeviceInfo? deviceInfo = await getDeviceInfo();

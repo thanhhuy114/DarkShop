@@ -1,8 +1,16 @@
 import 'dart:io';
-
+import 'package:connectivity/connectivity.dart';
+import 'package:darkshop/utils/global_data.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+ConnectivityResult _connectionStatus = ConnectivityResult.wifi;
+const urlImage =
+    'https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245';
+const hosting = 'http://192.168.128.206:3000';
 late double screenWidth;
 late double screenHeight;
 
@@ -71,4 +79,52 @@ Route createRoutePushThrough({required Widget screen}) {
       );
     },
   );
+}
+
+String formatCurrency(int amount) {
+  final formatter = NumberFormat('#,###,###,### ₫', 'vi_VN');
+  return formatter.format(amount);
+}
+
+void logOut() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  if (prefs.containsKey('tokten')) {
+    prefs.remove('token');
+  }
+  GlobalData.isToken = false;
+  GlobalData.isLogin = false;
+  GlobalData.user = null;
+}
+
+bool checkConnet() {
+  if (_connectionStatus == ConnectivityResult.none) {
+    _showToast('Không có kết nối mạng!');
+    return false;
+  }
+  return true;
+}
+
+_showToast(mess, {MaterialColor backgroundColor = Colors.red}) async {
+  Fluttertoast.showToast(
+      msg: mess,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 2,
+      backgroundColor: backgroundColor,
+      textColor: Colors.white,
+      fontSize: screenWidth * 0.033);
+}
+
+void connectListenner(ConnectivityResult result) {
+  if (result != ConnectivityResult.none &&
+      _connectionStatus == ConnectivityResult.none) {
+    _showToast('Đã có kết nối mạng!', backgroundColor: Colors.green);
+  } else if (result == ConnectivityResult.none &&
+      _connectionStatus != ConnectivityResult.none) {
+    _showToast('Không có kết nối mạng!');
+  }
+  _connectionStatus = result;
+
+  GlobalData.isConneted = (_connectionStatus == ConnectivityResult.none);
 }

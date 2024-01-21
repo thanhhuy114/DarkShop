@@ -1,6 +1,5 @@
 import 'package:darkshop/app.dart';
 import 'package:darkshop/utils/screen_size.dart';
-import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,7 +12,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  var authPresenter = AuthPresenter();
 
   @override
   void initState() {

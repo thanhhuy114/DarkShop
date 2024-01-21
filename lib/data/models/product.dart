@@ -2,16 +2,16 @@ import 'dart:io';
 import 'dart:typed_data';
 
 class Product {
-  int id;
-  int idType;
-  Uint8List? image;
-  Uint8List? imageInfo;
-  String name;
-  String description;
-  int price;
-  int promotion;
-  int repository;
-  DateTime postAt;
+  late int id;
+  late int idType;
+  late String? image;
+  late String? imageInfo;
+  late String name;
+  late String description;
+  late int price;
+  late int promotion;
+  late int repository;
+  late DateTime postAt;
 
   Product({
     required this.id,
@@ -38,18 +38,17 @@ class Product {
         repository = 0,
         postAt = DateTime.now();
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
-        id: json['id'],
-        idType: json['idType'],
-        image: json['image'],
-        imageInfo: json['imageInfo'],
-        name: json['name'],
-        description: json['description'],
-        price: json['price'],
-        promotion: json['promotion'],
-        repository: json['repository'],
-        postAt: DateTime.parse(json['postAt']));
+  Product.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    idType = json['idType'];
+    image = json['image'];
+    imageInfo = json['imageInfo'];
+    name = json['name'];
+    description = json['description'];
+    price = json['price'];
+    promotion = json['promotion'];
+    repository = json['repository'];
+    postAt = DateTime.parse(json['postAt']);
   }
 
   Future<Uint8List> imageFileToUint8List(String imagePath) async {

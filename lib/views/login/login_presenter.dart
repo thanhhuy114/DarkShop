@@ -1,5 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/main.dart';
+import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/utils/screen_size.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LogInPresenter {
-  ConnectivityResult _connectionStatus = ConnectivityResult.wifi;
   final AuthPresenter _authPresenter = AuthPresenter();
 
   bool checkLoginCredentials(String username, String password,
@@ -28,25 +28,6 @@ class LogInPresenter {
     return false;
   }
 
-  void connectListenner(ConnectivityResult result) {
-    if (result != ConnectivityResult.none &&
-        _connectionStatus == ConnectivityResult.none) {
-      _showToast('Đã có kết nối mạng!', backgroundColor: Colors.green);
-    } else if (result == ConnectivityResult.none &&
-        _connectionStatus != ConnectivityResult.none) {
-      _showToast('Không có kết nối mạng!');
-    }
-    _connectionStatus = result;
-  }
-
-  bool checkConnet() {
-    if (_connectionStatus == ConnectivityResult.none) {
-      _showToast('Không có kết nối mạng!');
-      return false;
-    }
-    return true;
-  }
-
   void checkLoginValid(username, password, context) async {
     _showLoadingDialog(context);
     late bool result;
@@ -59,7 +40,8 @@ class LogInPresenter {
     _hideLoadingDialog(context);
 
     if (result) {
-       MyApp.isLogin = true;
+      GlobalData.isLogin = true;
+      GlobalData.isToken = true;
       _navigationToHomeScreen(context);
     } else {
       _showToast('Đăng nhập không thành công!');
@@ -77,7 +59,8 @@ class LogInPresenter {
       var email = googleUser!.email;
 
       if (await _authPresenter.logInWithEmail(email)) {
-        MyApp.isLogin = true;
+        GlobalData.isLogin = true;
+        GlobalData.isToken = true;
         _navigationToHomeScreen(context);
       } else {
         _showToast('Đăng nhập không thành công!');
@@ -94,9 +77,9 @@ class LogInPresenter {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return const AlertDialog(
           content: Row(
-            children: const [
+            children: [
               CircularProgressIndicator(),
               SizedBox(width: 20),
               Text("Đăng nhập..."),
