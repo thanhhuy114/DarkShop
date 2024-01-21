@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class cartTotal extends StatefulWidget {
-  int total;
-  cartTotal({super.key, required this.total});
+class CartTotal extends StatefulWidget {
+  double total;
+  CartTotal({super.key, required this.total});
 
   @override
-  State<cartTotal> createState() => _cartTotalState();
+  State<CartTotal> createState() => _CartTotalState();
 }
 
-class _cartTotalState extends State<cartTotal> {
+class _CartTotalState extends State<CartTotal> {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -25,6 +25,14 @@ class ImageProduct {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['image'] = this.image;
+    data['id_product'] = this.id_product;
+    return data;
+  }
+
   List<ImageProduct> listFromJson(List<dynamic> jsonList) {
     return jsonList.map((json) => ImageProduct.fromJson(json)).toList();
   }

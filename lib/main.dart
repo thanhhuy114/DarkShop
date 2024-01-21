@@ -1,3 +1,4 @@
+import 'package:darkshop/views/cart/cart_screen.dart';
 import 'package:darkshop/views/productDetail/productInfo_screen.dart';
 import 'package:darkshop/views/productDetail/product_screen.dart';
 import 'package:darkshop/views/stunning_splash_screen/splash_screen.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         primary: Color.fromARGB(255, 255, 185, 88),
       )),
       debugShowCheckedModeBanner: false,
-      home: ProductScreen(id: 1),
+      home: CartScreen(id_user: 1),
     );
   }
 }
