@@ -47,7 +47,7 @@ class _AddressManagementScreenState extends State<AddressManagementScreen> {
         backgroundColor: MyColors.backgroundAppBar,
       ),
       body: presenter != null
-          ? ListView(
+          ? ListView(padding: const EdgeInsets.only(top: 3),
               children: [
                 if(presenter!.isAdd) AddressEditting(presenter: presenter!),
                 if (presenter!.recentAddress != null) 
@@ -60,20 +60,22 @@ class _AddressManagementScreenState extends State<AddressManagementScreen> {
                 Padding(
                   padding: const EdgeInsets.all(3.0),
                   child: Row(
-                    
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
                         onTap: presenter!.onAddAddress(),
                         child: Container(
                           width: MediaQuery.of(context).size.width/2,
-                          height: 30,
+                          height: 40,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: MyColors.backgroundButton,
                           ),
-                          child: Row(children: const [
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
                             Icon(Icons.add),
-                            Text(Constants.addAddress)
+                            Text(Constants.addAddress, style: TextStyle(fontSize: 14),)
                           ]),
                         ),
                       ),

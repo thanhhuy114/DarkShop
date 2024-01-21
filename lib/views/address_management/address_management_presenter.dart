@@ -1,5 +1,7 @@
 import 'package:darkshop/data/models/address.dart';
 import 'package:darkshop/data/repositories/address_repository.dart';
+import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:flutter/material.dart';
 
 class AddressManagementPresenter {
@@ -36,17 +38,26 @@ class AddressManagementPresenter {
   }
 
   addAddress() {
-    //temp
-    reload();
+    AddressRepository()
+        .addAddress(GlobalData.user!.id, tempAddress)
+        .then((value) {
+      reload();
+    });
   }
 
   updateAddressEditting() {
-    //
-    reload();
+    if (addressEditting != null) {
+      AddressRepository()
+          .updateAddress(addressEditting!.id, tempAddress)
+          .then((value) {
+        reload();
+      });
+    }
   }
 
-  deleteAddress() {
-    //
-    reload();
+  deleteAddress(int idAddress) {
+    AddressRepository().deleteAddress(idAddress).then((value) {
+      reload();
+    });
   }
 }

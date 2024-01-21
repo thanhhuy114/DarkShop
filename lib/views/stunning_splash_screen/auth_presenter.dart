@@ -19,6 +19,11 @@ class AuthPresenter {
     return prefs.containsKey('token');
   }
 
+  static Future<int?> getIdUserbyStore() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('id');
+  }
+
   Future<void> checkAuth(
       {required void Function() successful,
       required void Function() onFailure}) async {
@@ -60,8 +65,14 @@ class AuthPresenter {
 
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
+
+        // luu token
         await prefs.remove('token');
         await prefs.setString('token', data['token']);
+
+        // luu id
+        await prefs.remove('id');
+        await prefs.setString('id', data['id']);
         return true;
       } else if (response.statusCode == 201) {
         print('Login field: ${response.body}');
@@ -93,8 +104,14 @@ class AuthPresenter {
 
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
+
+        // luu token
         await prefs.remove('token');
         await prefs.setString('token', data['token']);
+
+        // luu id
+        await prefs.remove('id');
+        await prefs.setString('id', data['id']);
         return true;
       } else if (response.statusCode == 201) {
         print('Login field: ${response.body}');

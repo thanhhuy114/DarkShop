@@ -40,7 +40,7 @@ class AddressCard extends StatelessWidget {
                     height: 5,
                   ),
                   GestureDetector(
-                    onTap: presenter.deleteAddress,
+                    onTap: (){presenter.deleteAddress(address.id);},
                     child: Container(
                       decoration: BoxDecoration(
                           color: MyColors.backgroundButton,

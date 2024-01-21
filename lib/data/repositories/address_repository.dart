@@ -12,4 +12,16 @@ class AddressRepository {
     return Address(
         id: 1, address: "1, Nguyễn Tất Thành, Quận 4, tp Hồ Chí Minh");
   }
+
+  addAddress(int idUser, String address) async {
+    //thêm
+  }
+
+  updateAddress(int idAddress, String address) async {
+    //sửa
+  }
+
+  deleteAddress(int idAddress) async {
+    //xóa
+  }
 }

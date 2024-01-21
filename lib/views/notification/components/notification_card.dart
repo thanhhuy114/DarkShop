@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
-
 import '../../../data/models/notification.dart';
 import '../../../utils/colors.dart';
 import '../notification_presenter.dart';
 
-class NotificationCard extends StatelessWidget {
-  const NotificationCard({Key? key, required this.notification})
+class NotificationCard extends StatefulWidget {
+  const NotificationCard(
+      {Key? key, required this.notification, required this.presenter})
       : super(key: key);
+
+  final NotificationPresenter presenter;
 
   final NotificationInfo notification;
 
+  @override
+  State<NotificationCard> createState() => _NotificationCardState();
+}
+
+class _NotificationCardState extends State<NotificationCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: GestureDetector(
-        onTap: () => NotificationPresenter().onclickCard(notification.idObject, notification.type, context),
+        onTap: () => widget.presenter.onclickCard(widget.notification, context),
         child: Container(
           height: 100,
           decoration: BoxDecoration(
@@ -37,31 +44,29 @@ class NotificationCard extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            if (!notification.read)
+                            if (!widget.notification.read)
                               const Icon(
                                 Icons.circle,
                                 size: 8.0,
                                 color: Colors.blue,
                               ),
                             Text(
-                              NotificationPresenter()
-                                  .getNotificationTime(notification.date),
+                              widget.presenter.getNotificationTime(widget.notification.date),
                               style: const TextStyle(fontSize: 10),
                             )
                           ],
                         ),
                       ),
                       Text(
-                        NotificationPresenter()
-                            .getNotificationTitle(notification.type),
+                        widget.notification.type,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),
                       ),
                       Text(
-                        notification.description,
-                        maxLines: 4,
+                        widget.notification.description,
+                        maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],

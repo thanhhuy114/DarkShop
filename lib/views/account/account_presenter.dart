@@ -1,29 +1,38 @@
-//xử lý tương tác bên giao diện
-//vd: nhấn nút ...
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/user.dart';
 import 'package:darkshop/data/repositories/user_repository.dart';
+import 'package:darkshop/main.dart';
 import 'package:darkshop/utils/constants.dart';
+import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/views/address_management/address_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
 
 import 'package:image_picker/image_picker.dart';
 
+import '../../data/repositories/notification_repository.dart';
+
 class AccountPresenter {
-  static User? userLogin;
+  static bool connected = false;
 
-  static Future<User?> getUserLogin() async {
-    //tạm thời
-    userLogin = await UserRepository().getUserLogin();
+  static Future<User?> getUserLogin(int id) async {
+    if (await checkConnection()) {
+      GlobalData.user = await UserRepository().getUserById(id);
+    } else {
+      GlobalData.user = await UserLocal().getUser();
+    }
 
-    return userLogin;
+    return GlobalData.user;
   }
 
-  static Uint8List convertStringToUint8List(String base64String) {
-    List<int> bytes = base64.decode(base64String);
-    return Uint8List.fromList(bytes);
+  static checkConnection() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+
+    connected = connectivityResult != ConnectivityResult.none;
+    return connected;
   }
 
   uploadAvatar(Function callback) async {
@@ -34,7 +43,7 @@ class AccountPresenter {
       List<int> imageBytes = await pickedFile.readAsBytes();
       Uint8List uint8list = Uint8List.fromList(imageBytes);
 
-      await UserRepository().saveAvatar(uint8list, userLogin!.id);
+      await UserRepository().saveAvatar(uint8list, GlobalData.user!.id);
       callback();
     }
   }
@@ -42,28 +51,46 @@ class AccountPresenter {
   saveChange(String title, String content, Function callback) {
     switch (title) {
       case Constants.fullname:
-        if (userLogin!.fullname != content) {
-          UserRepository().saveFullname(content, userLogin!.id);
+        if (GlobalData.user!.fullname != content) {
+          UserRepository()
+              .update(jsonEncode({"name": content}), GlobalData.user!.id)
+              .then((value) {
+            getUserLogin(GlobalData.user!.id).then((value) {
+              callback();
+            });
+          });
         }
-        callback();
         break;
       case Constants.email:
-        if (userLogin!.email != content) {
-          UserRepository().saveEmail(content, userLogin!.id);
+        if (GlobalData.user!.email != content) {
+          UserRepository()
+              .update(jsonEncode({"email": content}), GlobalData.user!.id)
+              .then((value) {
+            getUserLogin(GlobalData.user!.id).then((value) {
+              callback();
+            });
+          });
         }
-        callback();
         break;
       case Constants.phone:
-        if (userLogin!.phone != content) {
-          UserRepository().savePhone(content, userLogin!.id);
+        if (GlobalData.user!.phone != content) {
+          UserRepository()
+              .update(jsonEncode({"phone": content}), GlobalData.user!.id)
+              .then((value) {
+            getUserLogin(GlobalData.user!.id).then((value) {
+              callback();
+            });
+          });
         }
-        callback();
         break;
     }
   }
 
-  logout() {
-    //đăng xuất
+  logout(Function reload) async {
+    GlobalData.user = null;
+    await UserLocal().clearUser();
+    await NotificationLocal().clearNotifications();
+    reload();
   }
 
   gotoChangePassword(BuildContext context) {
@@ -71,6 +98,11 @@ class AccountPresenter {
   }
 
   gotoAddressManagement(BuildContext context) {
-    //chuyển trang quản lý địa chỉ
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AddressManagementScreen(),
+      ),
+    );
   }
 }

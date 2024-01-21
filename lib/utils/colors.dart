@@ -6,6 +6,7 @@ class MyColors {
   static const Color backgroundApp = Colors.orange;
   static const Color backgroundPromotion = Colors.orange;
   static const Color promotionPrice = Colors.orange;
+  static const Color backgoundRowMessage= Colors.red;
   static const Color backgoundRowSeleted = Colors.red;
   static const Color backgroundButton = Colors.red;
   static const Color backgroundCard = Colors.red;

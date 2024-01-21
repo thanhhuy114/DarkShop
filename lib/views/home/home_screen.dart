@@ -11,6 +11,9 @@ import 'package:darkshop/views/home/components/product_type.dart';
 import 'package:darkshop/views/home/components/search_bar.dart';
 import 'package:darkshop/views/home/components/slider_image.dart';
 import 'package:darkshop/views/home/home_presenter.dart';
+import 'package:darkshop/main.dart';
+import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:darkshop/views/login/login_screen.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
 import 'package:flutter/material.dart';
@@ -124,9 +127,12 @@ class _HomeScreenState extends State<HomeScreen>
     _scrollProductController = ScrollController();
     _scrollProductController.addListener(_scrollProductListener);
     Connectivity().onConnectivityChanged.listen(connectListenner);
-    super.initState();
 
     if (!GlobalData.isToken!) {
+      //thịnh viết  phần lấy thông tin đăng nhập id = 3
+      AuthPresenter.getIdUserbyStore()
+          .then((idUser) => AccountPresenter.getUserLogin(idUser!));
+
       Future.delayed(const Duration(seconds: 4), () {
         ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
       });
@@ -137,6 +143,8 @@ class _HomeScreenState extends State<HomeScreen>
             ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
           });
     }
+
+    super.initState();
   }
 
   SnackBar snackBar(context) => SnackBar(

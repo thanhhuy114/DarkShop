@@ -1,41 +1,44 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/notification.dart';
 import 'package:darkshop/data/repositories/notification_repository.dart';
+import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPresenter {
+  NotificationPresenter({required this.reload, required this.notifications});
+  Function reload;
+  List<NotificationInfo> notifications;
+  static bool connected = false;
+
   //tính thời gian thông báo của 1 thông báo
   String getNotificationTime(DateTime dateTime) {
     return NotificationRepository().getNotificationTime(dateTime);
   }
 
-  //lấy tiêu đề thông báo
-  String getNotificationTitle(int type) {
-    return NotificationRepository().getNotificationTitle(type);
-  }
+  static Future<List<NotificationInfo>> loadNotifications(int idUser) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
 
-  //lấy danh sách thông báo
-  List<NotificationInfo>? loadNotifications() {
-    return NotificationRepository().getAllNotifications();
-  }
-
-  //lấy thông báo bằng id
-  onclickCard(int idObject, int idType, BuildContext context) {
-    NotificationRepository().readNotification(idObject);
-
-    //chuyển đến chi tiết thông báo theo loại thông báo (sản phầm / đơn hàng)
-    switch (idType) {
-      case 1:
-        
-        break;
-      case 2:
-        
-        break;
-      case 3:
-        
-        break;
-      case 4:
-        
-        break;
+    if (connectivityResult != ConnectivityResult.none) {
+      connected = true;
+      return await NotificationRepository().getAllNotifications(idUser);
+    } else {
+      return NotificationLocal().getAllNotifications();
     }
+  }
+
+  onclickCard(NotificationInfo notification, BuildContext context) async {
+    if (connected) {
+      if (!notification.read) {
+        await NotificationRepository().readNotification(notification.id);
+        notifications = await loadNotifications(GlobalData.user!.id);
+        reload();
+        //chuyển dến chi tiết
+      }
+    }
+  }
+
+  static addNotification(NotificationInfo newNotification) async {
+    await NotificationRepository().addNotification(newNotification);
   }
 }

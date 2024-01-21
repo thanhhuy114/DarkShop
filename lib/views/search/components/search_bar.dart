@@ -22,28 +22,22 @@ class SearchBarState extends State<SearchBar> {
       title: Container(
         height: 30,
         margin: const EdgeInsets.all(20),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
-        child: 
-            TextField(
-              controller: widget.presenter.txtSearch,
-              decoration: InputDecoration(
-                hintText: Constants.search,
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    widget.presenter.getListProductsByKey(
-                      widget.presenter.txtSearch.text
-                    );
-                  },
-                  icon: const Icon(Icons.search_rounded),
-                ),
-              ),
-              onChanged: (value) {
-                  widget.presenter.getSuggestionsByKey();
-                },
-                onTap: widget.presenter.onClickSearchTextField,
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(5)),
+        child: TextField(
+          controller: widget.presenter.txtSearch,
+          decoration: InputDecoration(
+            hintText: Constants.search,
+            suffixIcon: IconButton(padding: const EdgeInsets.only(),
+              onPressed: widget.presenter.exitSearch,
+              icon: const Icon(Icons.cancel),
             ),
-          
-        
+          ),
+          onChanged: (value) {
+            widget.presenter.getSuggestionsByKey();
+          },
+          onTap: widget.presenter.onClickSearchTextField,
+        ),
       ),
       centerTitle: true,
       backgroundColor: MyColors.backgroundAppBar,

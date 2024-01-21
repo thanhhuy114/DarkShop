@@ -20,10 +20,7 @@ class _SearchProductsScreenState extends State<SearchProductsScreen> {
   void initState() {
     super.initState();
 
-    SearchProductsPresenter.getSuggestions().then((value) {
-      presenter = SearchProductsPresenter(
-          suggestions: value, reload: () => setState(() {}));
-    });
+    presenter = SearchProductsPresenter(reload: () => setState(() {}));
   }
 
   @override
@@ -57,27 +54,23 @@ class _SearchProductsScreenState extends State<SearchProductsScreen> {
         backgroundColor: MyColors.backgroundApp,
       );
     }
-    return Container();
-
-    // return Scaffold(
-    //   // appBar: const SearchBar(
-    //   //   // txt: "",
-    //   // ),
-    //   body: Padding(
-    //     padding:  EdgeInsets.all(5.0),
-    //     child: Column(children: [
-    //       MenuSort(
-    //         seletedIndex: seletedIndex,
-    //         updateSeletedIndex: (newIndex) {
-    //           setState(() {
-    //             seletedIndex = newIndex;
-    //           });
-    //         },
-    //       ),
-    //       const ListProducts()
-    //     ]),
-    //   ),
-    //   backgroundColor: MyColors.backgroundApp,
-    // );
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+        Color.fromARGB(255, 232, 187, 187),
+        Color.fromARGB(255, 239, 186, 11)
+      ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/logo.png',
+            width: 150,
+            height: 150,
+          )
+        ],
+      ),
+    );
   }
 }

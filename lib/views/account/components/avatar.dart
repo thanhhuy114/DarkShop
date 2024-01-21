@@ -7,7 +7,7 @@ import '../../../utils/constants.dart';
 
 class Avatar extends StatelessWidget {
   const Avatar({super.key, required this.image, required this.callback});
-  final Uint8List? image;
+  final String? image;
   final Function callback;
 
   @override
@@ -20,7 +20,7 @@ class Avatar extends StatelessWidget {
                         width: 100.0,
                         height: 100.0,
                         child: ClipOval(
-                          child: Image.memory(
+                          child: Image.network(
                             image!,
                             fit: BoxFit.fill,
                           ),

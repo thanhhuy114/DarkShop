@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onClick;
+        onClick();
       },
       child: Padding(
         padding: const EdgeInsets.all(4.0),
@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text(title, style: const TextStyle(fontSize: 16),), const Icon(Icons.arrow_forward)],
+            children: [Text(title, style: const TextStyle(fontSize: 16),), const Icon(Icons.chevron_right)],
           ),
         ),
       ),

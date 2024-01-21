@@ -31,7 +31,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-class AppState {
-  static bool isConnetInternet = true;
-}

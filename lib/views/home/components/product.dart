@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/main.dart';
+import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/utils/screen_size.dart';
 import 'package:darkshop/views/no_internet/no_internet.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class ProductWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       onTap: () {
         Navigator.of(context).push(createRoutePushThrough(
-            screen: AppState.isConnetInternet
+            screen: GlobalData.isConneted!
                 ? Scaffold(
                     appBar: AppBar(),
                     body: Container(color: Colors.yellow),
