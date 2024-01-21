@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-var url = '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
-
 class Product {
   int id;
   int idType;
@@ -32,8 +30,8 @@ class Product {
   Product.empty()
       : id = 0,
         idType = 0,
-        image = null,
-        imageInfo = null,
+        image = '',
+        imageInfo = '',
         name = '',
         description = '',
         price = 0,
@@ -45,8 +43,8 @@ class Product {
     return Product(
       id: json['id'],
       idType: json['idType'],
-      image: json[url + 'image'],
-      imageInfo: json[url + 'imageInfo'],
+      image: json['image'],
+      imageInfo: json['imageInfo'],
       name: json['name'],
       description: json['description'],
       price: json['price'],
@@ -54,5 +52,19 @@ class Product {
       repository: json['repository'],
       postAt: DateTime.parse(json['postAt']),
     );
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['idType'] = this.idType;
+    data['image'] = this.image;
+    data['imageInfo'] = this.imageInfo;
+    data['name'] = this.name;
+    data['description'] = this.description;
+    data['price'] = this.price;
+    data['promotion'] = this.promotion;
+    data['repository'] = this.repository;
+    data['postAt'] = this.postAt;
+    return data;
   }
 }

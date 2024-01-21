@@ -4,21 +4,25 @@ import 'package:flutter/material.dart';
 
 class ProductInfoScreen extends StatefulWidget {
   final Product pro;
-   ProductInfoScreen({super.key,required this.pro});
+  ProductInfoScreen({super.key, required this.pro});
 
   @override
   State<ProductInfoScreen> createState() => _ProductInfoScreenState();
 }
 
 class _ProductInfoScreenState extends State<ProductInfoScreen> {
+  var url =
+      '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
             'Thông số kỹ thuật',
-            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
           ),
+          centerTitle: true,
           backgroundColor: Colors.amber,
         ),
         body: ListView(
@@ -30,7 +34,7 @@ class _ProductInfoScreenState extends State<ProductInfoScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: Image.network(
-                      widget.pro.image.toString(),
+                      url + widget.pro.image.toString(),
                       fit: BoxFit.cover,
                     ),
                   ),
