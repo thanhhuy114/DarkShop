@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onClick;
+        onClick();
       },
       child: Padding(
         padding: const EdgeInsets.all(4.0),

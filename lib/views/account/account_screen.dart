@@ -56,7 +56,9 @@ class _AccountScreenState extends State<AccountScreen> {
                             ),
                           )
                         : Container(),
-                    const UserInfo(),
+                    UserInfo(reload: () {
+                      setState(() {});
+                    }),
                   ],
                 ),
       backgroundColor: MyColors.backgroundApp,

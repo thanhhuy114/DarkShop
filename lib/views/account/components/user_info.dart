@@ -7,7 +7,8 @@ import 'package:darkshop/views/account/components/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class UserInfo extends StatefulWidget {
-  const UserInfo({super.key});
+  const UserInfo({super.key, required this.reload});
+  final Function reload;
 
   @override
   State<UserInfo> createState() => _UserInfoState();
@@ -50,7 +51,7 @@ class _UserInfoState extends State<UserInfo> {
             onClick: () => AccountPresenter().gotoChangePassword(context)),
         CustomButton(
             title: Constants.logout,
-            onClick: () => AccountPresenter().logout()),
+            onClick: () => AccountPresenter().logout(widget.reload)),
       ]),
     );
   }

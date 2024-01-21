@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/user.dart';
 import 'package:darkshop/data/repositories/user_repository.dart';
+import 'package:darkshop/main.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/views/address_management/address_management_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +12,16 @@ import 'package:flutter/services.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+import '../../data/repositories/notification_repository.dart';
+
 class AccountPresenter {
   static User? userLogin;
   static bool connected = false;
 
   static Future<User?> getUserLogin(int id) async {
-    if(await checkConnection()) {
+    if (await checkConnection()) {
       userLogin = await UserRepository().getUserById(id);
-    }else{
+    } else {
       userLogin = await UserLocal().getUser();
     }
 
@@ -49,30 +52,45 @@ class AccountPresenter {
     switch (title) {
       case Constants.fullname:
         if (userLogin!.fullname != content) {
-          UserRepository().update(jsonEncode({"name": content}), userLogin!.id).then((value){
-            getUserLogin(userLogin!.id).then((value){callback();});
+          UserRepository()
+              .update(jsonEncode({"name": content}), userLogin!.id)
+              .then((value) {
+            getUserLogin(userLogin!.id).then((value) {
+              callback();
+            });
           });
         }
         break;
       case Constants.email:
         if (userLogin!.email != content) {
-          UserRepository().update(jsonEncode({"email": content}), userLogin!.id).then((value){
-             getUserLogin(userLogin!.id).then((value){callback();});
+          UserRepository()
+              .update(jsonEncode({"email": content}), userLogin!.id)
+              .then((value) {
+            getUserLogin(userLogin!.id).then((value) {
+              callback();
+            });
           });
         }
         break;
       case Constants.phone:
         if (userLogin!.phone != content) {
-          UserRepository().update(jsonEncode({"phone": content}), userLogin!.id).then((value){
-             getUserLogin(userLogin!.id).then((value){callback();});
+          UserRepository()
+              .update(jsonEncode({"phone": content}), userLogin!.id)
+              .then((value) {
+            getUserLogin(userLogin!.id).then((value) {
+              callback();
+            });
           });
         }
         break;
     }
   }
 
-  logout() {
-    //đăng xuất
+  logout(Function reload) async {
+    MyApp.idUserLogin = null;
+    await UserLocal().clearUser();
+    await NotificationLocal().clearNotifications();
+    reload();
   }
 
   gotoChangePassword(BuildContext context) {
