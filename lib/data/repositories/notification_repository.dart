@@ -157,4 +157,17 @@ class NotificationLocal {
       print(e);
     }
   }
+
+  Future<void> clearNotifications() async {
+    try {
+      final file = await _localFile;
+
+      await file.writeAsString('');
+
+      print("Xóa danh sách thông báo ở local thành công");
+    } catch (e) {
+      print("Xóa danh sách thông báo ở local thất bại");
+      print(e);
+    }
+  }
 }

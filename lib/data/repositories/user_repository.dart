@@ -2,6 +2,7 @@
 //vd: lấy tất cả user, thêm user vào database
 import 'dart:convert';
 import 'dart:io';
+import 'package:darkshop/data/repositories/notification_repository.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -11,7 +12,8 @@ import 'package:http/http.dart' as http;
 class UserRepository {
   Future<User?> getUserById(int id) async {
     try {
-      var response = await http.get(Uri.parse('${Constants.hosting}:3000/users/$id'));
+      var response =
+          await http.get(Uri.parse('${Constants.hosting}:3000/users/$id'));
 
       User user = User.fromJson(jsonDecode(response.body));
 
@@ -21,7 +23,6 @@ class UserRepository {
 
       return user;
     } catch (e) {
-      
       print("Lấy user ở server thất bại");
       print(e);
       return null;
@@ -61,18 +62,15 @@ class UserRepository {
 
   update(String json, int idUser) async {
     try {
-      final response = await http.put(
-        Uri.parse('${Constants.hosting}:3000/users/$idUser'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: json
-      );
+      final response =
+          await http.put(Uri.parse('${Constants.hosting}:3000/users/$idUser'),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+              },
+              body: json);
 
       if (response.statusCode == 200) {
         print('Cập nhật user ở sever thành công');
-        
-
       } else {
         print('Cập nhật user ở sever thất bại');
       }
@@ -89,10 +87,6 @@ class UserRepository {
 
   changePassword(String newPassword, int idUser) async {
     //đổi mất khẩu
-  }
-
-  logout() async {
-    //đăng xuất
   }
 }
 
@@ -149,6 +143,19 @@ class UserLocal {
       print("Lưu User ở local thành công");
     } catch (e) {
       print("Lưu User ở local thất bại");
+      print(e);
+    }
+  }
+
+  Future<void> clearUser() async {
+    try {
+      final file = await _localFile;
+
+      await file.writeAsString('');
+
+      print("Xóa user ở local thành công");
+    } catch (e) {
+      print("Xóa user ở local thất bại");
       print(e);
     }
   }
