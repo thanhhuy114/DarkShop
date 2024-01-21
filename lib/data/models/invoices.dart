@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 class Invoice {
   int id;
   int idUser;
@@ -16,6 +18,15 @@ class Invoice {
     required this.status,
     required this.note,
   });
+
+  Invoice.empty()
+      : id = 0,
+        idUser = 0,
+        createAt = '',
+        idPayment = 0,
+        totalPrice = 0,
+        status = 0,
+        note = '';
 
   factory Invoice.fromJson(Map<String, dynamic> json) {
     return Invoice(

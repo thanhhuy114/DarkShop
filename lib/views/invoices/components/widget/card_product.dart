@@ -17,10 +17,10 @@ class CardProduct extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-         Expanded(
+        Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               Text(
                 'Laptop Apple MacBook Air 13 inch M1 2020 8-core CPU/8GB/256GB/7-core GPU (MGND3SA/A) ',
                 softWrap: true,

@@ -1,5 +1,5 @@
 //màn hình phóng to ảnh
-import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
+// import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class ImgZoonScreen extends StatefulWidget {
