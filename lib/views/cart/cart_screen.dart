@@ -1,18 +1,25 @@
-//giao diện tài khoản
+import 'package:darkshop/data/repositories/Cart_repository.dart';
+import 'package:darkshop/utils/colors.dart';
+import 'package:darkshop/views/cart/cart_presenter.dart';
 import 'package:darkshop/views/cart/components/cart_item.dart';
 import 'package:darkshop/views/cart/components/cart_total.dart';
+import 'package:darkshop/views/productDetail/product_presenter.dart';
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
-class cartScreen extends StatefulWidget {
-  const cartScreen({super.key});
+class CartScreen extends StatefulWidget {
+  final int id_user;
+
+  const CartScreen({Key? key, required this.id_user}) : super(key: key);
 
   @override
-  State<cartScreen> createState() => _cartScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-// ignore: camel_case_types
-class _cartScreenState extends State<cartScreen> {
+class _CartScreenState extends State<CartScreen> {
+  var cartsRepository =
+      CartPresenter(CartRepository()); // Sửa lại thành CartPresenter
+  double Price = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,38 +33,46 @@ class _cartScreenState extends State<cartScreen> {
         ),
         backgroundColor: const Color.fromARGB(255, 203, 66, 107),
       ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            itemCart(
-                productId: 0,
-                count: 1,
-                name:
-                    'Laptop Asus TUF Gaming FX506HF-HN017W i5 11400H/16GB/512GB/GeForce RTX 2050 4GB/Win11',
-                price: '17,990,000'),
-            itemCart(
-                productId: 0,
-                count: 1,
-                name:
-                    'Laptop Asus TUF Gaming FX506HF-HN017W i5 11400H/16GB/512GB/GeForce RTX 2050 4GB/Win11',
-                price: '17,990,000'),
-            itemCart(
-                productId: 0,
-                count: 1,
-                name:
-                    'Laptop Asus TUF Gaming FX506HF-HN017W i5 11400H/16GB/512GB/GeForce RTX 2050 4GB/Win11',
-                price: '17,990,000'),
-            itemCart(
-                productId: 0,
-                count: 1,
-                name:
-                    'Laptop Asus TUF Gaming FX506HF-HN017W i5 11400H/16GB/512GB/GeForce RTX 2050 4GB/Win11',
-                price: '17,990,000'),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder(
+              future: cartsRepository.fetchCartListLocal(
+                  widget.id_user), // Sửa lại thành fetchCartListLocal
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Lỗi: ${snapshot.error}');
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text('Không có mục nào trong giỏ hàng.'),
+                  );
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data?.length,
+                    itemBuilder: (context, index) {
+                      var cart = snapshot.data?[index];
+                      var product = ProductPresenter.getPro(cart!.idProduct);
+                      return ItemCart(
+                        product: product,
+                        count: cart.count,
+                        onPriceChanged: (double price) {
+                          // Xử lý giá đã cập nhật trong CartScreen
+                          Price = price;
+                          print('Updated Price: $price');
+                        },
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+          CartTotal(total: Price),
+        ],
       ),
-      bottomSheet: cartTotal(total: 0),
+      backgroundColor: MyColors.backgroundApp,
     );
   }
 }

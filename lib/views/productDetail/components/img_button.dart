@@ -1,26 +1,58 @@
-//nhấn nút chuyển màn hình phóng to lướt ảnh thủ công
+import 'package:darkshop/views/productDetail/productimgzoom_screen.dart';
 import 'package:flutter/material.dart';
 
-class imgButton extends StatefulWidget {
-  const imgButton({super.key});
+class ImgButton extends StatelessWidget {
+  final Future<List<String>> urlImg;
 
-  @override
-  State<imgButton> createState() => _imgButtonState();
-}
+  ImgButton({Key? key, required this.urlImg}) : super(key: key);
 
-class _imgButtonState extends State<imgButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black.withOpacity(0.5),
-      child: Column(
-        children: [
-          Image.network(
-              'https://images.fpt.shop/unsafe/fit-in/960x640/filters:quality(90):fill(white):upscale()/fptshop.com.vn/Uploads/Originals/2022/4/20/637860593087770791_HASP-ASUS-FX506H-1.jpg',
-              cacheHeight: 50,
-              cacheWidth: 125),
-          const Text('Xem thêm')
-        ],
+    return GestureDetector(
+      onTap: () {
+        // Điều hướng đến màn hình phóng to ảnh và truyền danh sách URL hình ảnh
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ImgZoonScreen(
+              urlImg: urlImg,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            FutureBuilder<List<String>>(
+              future: urlImg,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Lỗi: ${snapshot.error}');
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Text('Không có dữ liệu hình ảnh');
+                } else {
+                  // Hiển thị ảnh đầu tiên từ danh sách URL hình ảnh
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Image.network(
+                      fit: BoxFit.fill,
+                      snapshot.data![0],
+                      cacheHeight: 40,
+                      cacheWidth: 80,
+                    ),
+                  );
+                }
+              },
+            ),
+            const SizedBox(height: 8),
+            const Text('Xem thêm'),
+          ],
+        ),
       ),
     );
   }

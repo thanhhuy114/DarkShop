@@ -1,15 +1,19 @@
 //giao diện product
+import 'package:darkshop/data/models/image_product.dart';
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/views/productDetail/components/button.dart';
-// import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
+import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
+import 'package:darkshop/views/productDetail/components/custom_btn_cart.dart';
 import 'package:darkshop/views/productDetail/components/img_button.dart';
 import 'package:darkshop/views/productDetail/components/product_info.dart';
 import 'package:darkshop/views/productDetail/components/specifications_button.dart';
+import 'package:darkshop/views/productDetail/productInfo_screen.dart';
 import 'package:darkshop/views/productDetail/product_presenter.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+  final int id;
+  const ProductScreen({super.key, required this.id});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -17,45 +21,64 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   late Future<Product> product;
+  late Future<List<String>> productImg;
   @override
   void initState() {
-    product = ProductPresenter.getPro(1);
+    _initializeData();
     super.initState();
+  }
+
+  _initializeData() async {
+    try {
+      setState(() {
+        product = ProductPresenter.getPro(widget.id);
+        productImg = ProductImage.getImg(widget.id);
+      }); 
+    } catch (error) {
+      print("Error fetching product image: $error");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    int count;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 185, 88),
       appBar: AppBar(
-        title: const Text("Thông số kỹ thuật"),
-        backgroundColor: Colors.amber,
+        title: const Text(
+          "Chi tiết sản phẩm",
+          style: TextStyle(
+              fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 255, 185, 88),
       ),
       body: SingleChildScrollView(
         child: FutureBuilder<Product>(
           future: product,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator(); 
+              return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (!snapshot.hasData) {
-              return const Text('No data available'); 
+              return const Text('No data available');
             } else {
               Product product = snapshot.data!;
 
               return Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
-                    // child: MyCarouselSlider(),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child:
+                        MyCarouselSlider(listUrlImg: productImg, height: 250),
                   ),
-                   Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      imgButton(),
-                      specsButton(),
+                    children: [
+                      ImgButton(urlImg: productImg),
+                      specsButton(pro: product),
                     ],
                   ),
                   Padding(
@@ -112,21 +135,30 @@ class _ProductScreenState extends State<ProductScreen> {
                               icon: Icons.shopping_cart_outlined,
                               onPressed: () {},
                             ),
-                            CustomButton(
+                            CustomButtonCart(
                               text: 'Thêm giỏ hàng',
                               icon: Icons.shopping_cart_checkout_sharp,
-                              onPressed: () {},
+                              id_product: product.id,
+                              onQuantitySelected: (int quantity) {
+                                count = quantity;
+                              },
                             ),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  ProductInfo(textInfo: product.description.toString()),
+                  ProductInfo(
+                      textInfo: product.description.toString(), lineShow: true),
                   CustomButton(
                     text: 'Xem thêm',
                     icon: Icons.view_agenda_sharp,
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductInfoScreen(pro: product),
+                      ),
+                    ),
                   ),
                 ],
               );

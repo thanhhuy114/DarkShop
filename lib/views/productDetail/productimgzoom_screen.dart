@@ -1,9 +1,10 @@
 //màn hình phóng to ảnh
-// import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
+import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class ImgZoonScreen extends StatefulWidget {
-  const ImgZoonScreen({super.key});
+  final Future<List<String>> urlImg;
+  ImgZoonScreen({super.key, required this.urlImg});
 
   @override
   State<ImgZoonScreen> createState() => _ImgZoonScreenState();
@@ -13,15 +14,18 @@ class _ImgZoonScreenState extends State<ImgZoonScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
+        appBar: AppBar(backgroundColor: Colors.white),
         body: Container(
-          color: Colors.amber.withOpacity(0.5),
+          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            // children: const [MyCarouselSlider()],
+            children: [
+              MyCarouselSlider(
+                listUrlImg: widget.urlImg,
+                height: 350,
+              )
+            ],
           ),
         ));
   }

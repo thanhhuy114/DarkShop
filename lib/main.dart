@@ -1,4 +1,5 @@
 import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/views/cart/cart_screen.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
 import 'package:darkshop/views/stunning_splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
