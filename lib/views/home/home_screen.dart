@@ -91,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen>
     _scrollProductController.addListener(_scrollProductListener);
     Connectivity().onConnectivityChanged.listen(connectListenner);
     _checkAuth();
+
     super.initState();
   }
 

@@ -1,11 +1,8 @@
 import 'dart:convert';
-
 import 'package:darkshop/data/repositories/repository.dart';
 import 'package:darkshop/utils/screen_size.dart';
-import 'package:flutter/src/material/card.dart';
 import '../models/cart.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/cart_local.dart';
 
 class CartRepository implements Repository {

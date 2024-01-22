@@ -1,9 +1,11 @@
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/views/cart/cart_screen.dart';
+import 'package:darkshop/utils/screen_size.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
 import 'package:darkshop/views/stunning_splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -12,6 +14,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   GlobalData.isToken = await AuthPresenter.isTokenAvailable();
+  socket = IO.io(
+      hosting,
+      OptionBuilder().setTransports(['websocket']) // for Flutter or Dart VM
+          .build());
+
   runApp(const MyApp());
 }
 
