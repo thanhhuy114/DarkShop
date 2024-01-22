@@ -1,15 +1,17 @@
 import 'package:darkshop/data/models/cart.dart';
+import 'package:darkshop/data/models/cart_custom.dart';
 
 abstract class Repository {
-  //GET
-  Future<List<Cart>> getCardList(int id_user);
+  //GET ID USER
+  Future<List<CartCustom>> getCardList(int id_user);
   //PULL
-  Future<String>pullCart(Cart Cart);
+  Future<void> pullCart(Cart Cart,int id);
   //DELETE
-  Future<String>deteleCart(Cart Cart);
+  Future<void> deteleCart(int id_cart);
   //POST
-  Future<String>postCart(Cart Cart);
-
+  Future<void> postCart(Cart Cart);
+  //GET ID CART
+  Future<Cart> getCart(int id);
   //LOCAL
-  Future<List<Cart>>getLocal(int id_user);
+  Future<List<CartCustom>> getLocal(int id_user);
 }

@@ -1,6 +1,7 @@
 //xử lý tương tác bên giao diện
 //vd: nhấn nút ...
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:darkshop/data/models/image_product.dart';
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/utils/screen_size.dart';
@@ -12,7 +13,6 @@ class ProductPresenter {
 
   static Future<Product> getPro(int id) async {
     var uri = '$hosting/products/$id';
-
     try {
       var response = await http.get(Uri.parse(uri));
 
@@ -31,18 +31,32 @@ class ProductPresenter {
 
     return Product.empty();
   }
+
+  Future<void> deleteProduct(int idProduct) async {
+  var uri = '$hosting/products/$idProduct';
+  try {
+    var response = await http.delete(Uri.parse(uri));
+    if (response.statusCode == 200) {
+      print('Xóa thành công');
+    }
+  } catch (e) {
+    print('Lỗi $e');
+  }
+
+//   Future<void> deleteCart(int id) async {
+//   await _repository.deleteProduct(id);//goi ham
+// }
+
+}
+
 }
 
 class ProductImage {
   ImageProduct? proImg;
   ProductImage({required this.proImg});
 
-  static get _hosting => 'http://192.168.1.3';
-
   static Future<List<String>> getImg(int id) async {
-    var uri = '$_hosting:3000/img_products/all/$id';
-    var url =
-        '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
+    var uri = '$hosting/img_products/all/$id';
     try {
       final response = await http.get(Uri.parse(uri));
 
@@ -53,7 +67,7 @@ class ProductImage {
           if (item is Map<String, dynamic> && item.containsKey("image")) {
             String imageUrl = item["image"];
             if (!imageUrl.startsWith("http")) {
-              imageUrl = url + imageUrl;
+              imageUrl = urlImage + imageUrl;
             }
             return imageUrl;
           } else {
@@ -74,4 +88,3 @@ class ProductImage {
     }
   }
 }
-

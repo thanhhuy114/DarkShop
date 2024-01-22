@@ -1,3 +1,4 @@
+import 'package:darkshop/utils/screen_size.dart';
 import 'package:flutter/material.dart';
 
 class CartTotal extends StatefulWidget {
@@ -24,7 +25,7 @@ class _CartTotalState extends State<CartTotal> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                widget.total.toString(),
+                formatCurrency(widget.total.toInt()),
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.redAccent,
