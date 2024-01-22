@@ -75,7 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/Duy/
+    - assets/invoice_screen/
     - assets/data.json
     - assets/image_user/avt_default.png
     - assets/home_screen/

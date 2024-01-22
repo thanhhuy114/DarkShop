@@ -6,6 +6,8 @@ import 'package:darkshop/views/invoices/screen/user/om_user_screen.dart';
 import 'package:darkshop/views/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'views/invoices/screen/admin/om_admin_screen.dart';
+
 class NavigationHomePage extends StatefulWidget {
   const NavigationHomePage({super.key});
 
@@ -30,7 +32,7 @@ class _NavigationHomePageState extends State<NavigationHomePage> {
       const HomeScreen(),
       const cartScreen(),
       const NotificationScreen(),
-      const OMUser(),
+      const OMAdmin(),
       const AccountScreen(),
     ];
   }

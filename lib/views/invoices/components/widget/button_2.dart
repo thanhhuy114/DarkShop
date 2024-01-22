@@ -27,6 +27,8 @@ class ButtonUp2 extends StatelessWidget {
                     ),
                     actions: [
                       ElevatedButton(
+                        //Nút thay đổi trạng thái đơn hàng thành 3
+                        //'Thông báo đơn hàng đang được giao'
                         onPressed: () async {
                           try {
                             await ApiService().updateInvoiceStatus3(invoice.id);

@@ -6,7 +6,7 @@ import '../../../../data/models/invoices.dart';
 import '../../../../data/models/user2.dart';
 import '../../api_service.dart';
 import '../../screen/admin/order_detail_admin_screen.dart';
-import '../widget/button_u_5.dart';
+import '../widget/button_5.dart';
 import '../widget/card_product.dart';
 
 class ListOrderUser extends StatefulWidget {
@@ -169,10 +169,14 @@ class _ListOrderUserState extends State<ListOrderUser> {
                   if (invoice.status == 1)
                     const Text('Chờ xác nhận đơn hàng'),
                   if (invoice.status == 2)
-                    const Text('Đơn hàng đang được chuẩn bị'),
+                    const Text('Đơn hàng đang được chuẩn bị'), 
                   if (invoice.status == 3)
                     const Text('Đơn hàng đang được vận chuyển'),
-                  if (invoice.status == 4) const Text('Giao hàng thành công'),
+
+                  //Thêm thông báo 'Giao hàng thành công' khi thuộc tính status của invoice = 4
+                  if (invoice.status == 4) 
+                  const Text('Giao hàng thành công'),
+
                   if (invoice.status == 5)
                     ButtonUp5(
                         invoice: invoice, updateStatusCallback: fetchData),
