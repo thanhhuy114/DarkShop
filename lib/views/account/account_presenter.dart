@@ -43,8 +43,17 @@ class AccountPresenter {
       List<int> imageBytes = await pickedFile.readAsBytes();
       Uint8List uint8list = Uint8List.fromList(imageBytes);
 
-      await UserRepository().saveAvatar(uint8list, userLogin!.id);
-      callback();
+      String? newAvatarUrl = await UserRepository().uploadAvatar(uint8list);
+
+      if (newAvatarUrl != null) {
+        int startIndex = newAvatarUrl.lastIndexOf("darkshop/image/avata/");
+
+        String croppedUrl = newAvatarUrl.substring(startIndex);
+
+        await UserRepository().update(jsonEncode({"image": croppedUrl}),
+            AccountPresenter.userLogin!.id);
+        callback();
+      }
     }
   }
 
