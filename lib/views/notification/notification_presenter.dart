@@ -37,7 +37,17 @@ class NotificationPresenter {
     }
   }
 
-  static addNotification(NotificationInfo newNotification) async {
+  //thêm thông báo mới (id người nhận thông báo, tiêu đề, nội dung)
+  static addNotification(
+      int idUser, String title, String description, int? idObject) async {
+    NotificationInfo newNotification = NotificationInfo(
+        id: -1,
+        idUser: idUser,
+        date: DateTime.now(),
+        type: title,
+        idObject: idObject??-1,
+        description: description,
+        read: false);
     await NotificationRepository().addNotification(newNotification);
   }
 }
