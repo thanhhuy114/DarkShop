@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/utils/screen_size.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import '../models/user.dart';
@@ -12,7 +11,7 @@ class UserRepository {
   Future<User?> getUserById(int id) async {
     try {
       var response =
-          await http.get(Uri.parse('$hosting/users/$id'));
+          await http.get(Uri.parse('${Constants.hosting}/users/$id'));
 
       User user = User.fromJson(jsonDecode(response.body));
 
@@ -64,7 +63,7 @@ class UserRepository {
   Future<String?> uploadAvatar(Uint8List imageBytes) async {
     try {
       final response = await http.post(
-        Uri.parse('${Constants.hosting}:3000/users/upload_avatar'),
+        Uri.parse('${Constants.hosting}/users/upload_avatar'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -88,7 +87,7 @@ class UserRepository {
   update(String json, int idUser) async {
     try {
       final response =
-          await http.put(Uri.parse('${Constants.hosting}:3000/users/$idUser'),
+          await http.put(Uri.parse('${Constants.hosting}/users/$idUser'),
               headers: <String, String>{
                 'Content-Type': 'application/json; charset=UTF-8',
               },

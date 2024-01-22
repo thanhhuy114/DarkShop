@@ -12,28 +12,28 @@ class Avatar extends StatelessWidget {
     return GestureDetector(
       onTap: () => AccountPresenter().uploadAvatar(callback),
       child: Container(
-                child: image != null
-                    ? SizedBox(
-                        width: 100.0,
-                        height: 100.0,
-                        child: ClipOval(
-                          child: Image.network(
-                            image!,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      )
-                    : SizedBox(
-                        width: 100.0,
-                        height: 100.0,
-                        child: ClipOval(
-                          child: Image.asset(
-                            Constants.avatarDefault,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
+        child: image != null && !image!.contains('null')
+            ? SizedBox(
+                width: 100.0,
+                height: 100.0,
+                child: ClipOval(
+                  child: Image.network(
+                    image!,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              )
+            : SizedBox(
+                width: 100.0,
+                height: 100.0,
+                child: ClipOval(
+                  child: Image.asset(
+                    Constants.avatarDefault,
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
+      ),
     );
   }
 }

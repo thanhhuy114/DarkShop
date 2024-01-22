@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:http/http.dart' as http;
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:device_info/device_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,7 +50,7 @@ class AuthPresenter {
   }
 
   Future<bool> logInWithEmail(email) async {
-    var uri = '$hosting/email-signin';
+    var uri = '${Constants.hosting}/email-signin';
 
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -90,7 +91,7 @@ class AuthPresenter {
   }
 
   Future<bool> logIned(username, password) async {
-    var uri = '$hosting/signin';
+    var uri = '${Constants.hosting}/signin';
 
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -132,7 +133,7 @@ class AuthPresenter {
   }
 
   Future<bool> checkAuthAPI(token) async {
-    var apiUri = '$hosting/check-auth';
+    var apiUri = '${Constants.hosting}/check-auth';
 
     try {
       AndroidDeviceInfo? deviceInfo = await getDeviceInfo();

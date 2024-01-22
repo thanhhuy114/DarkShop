@@ -3,7 +3,8 @@
 import 'dart:convert';
 import 'package:darkshop/data/models/image_product.dart';
 import 'package:darkshop/data/models/product.dart';
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/constants.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:http/http.dart' as http;
 
 class ProductPresenter {
@@ -11,7 +12,7 @@ class ProductPresenter {
   ProductPresenter({required this.pro});
 
   static Future<Product> getPro(int id) async {
-    var uri = '$hosting/products/$id';
+    var uri = '${Constants.hosting}/products/$id';
 
     try {
       var response = await http.get(Uri.parse(uri));

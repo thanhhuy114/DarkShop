@@ -9,13 +9,9 @@ import 'package:intl/intl.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:socket_io_client/socket_io_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 ConnectivityResult _connectionStatus = ConnectivityResult.wifi;
-const urlImage =
-    'https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245';
-const hosting = 'http://192.168.241.206:3000';
 late double screenWidth;
 late double screenHeight;
 
@@ -100,9 +96,10 @@ String formatCurrency(int amount) {
 void logOut() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  if (prefs.containsKey('tokten')) {
+  if (prefs.containsKey('token')) {
     prefs.remove('token');
   }
+
   GlobalData.isToken = false;
   GlobalData.isLogin = false;
   GlobalData.user = null;

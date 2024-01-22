@@ -1,5 +1,5 @@
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

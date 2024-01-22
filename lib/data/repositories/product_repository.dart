@@ -1,14 +1,14 @@
 import 'dart:convert';
-
 import 'package:darkshop/data/models/product.dart';
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/constants.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:http/http.dart' as http;
 
 class ProductRepository {
   static Future<List<Product>> getProductPromotion() async {
     List<Product> products = [];
 
-    var url = Uri.parse('$hosting/products/promotion/all');
+    var url = Uri.parse('${Constants.hosting}/products/promotion/all');
 
     try {
       var result = await http.get(url);
@@ -30,7 +30,9 @@ class ProductRepository {
   static Future<List<Product>> getAllProducts() async {
     List<Product> products = [];
     try {
-      await http.get(Uri.parse('$hosting/products/')).then((response) {
+      await http
+          .get(Uri.parse('${Constants.hosting}/products/'))
+          .then((response) {
         final String jsonBody = response.body;
         final statusCode = response.statusCode;
 

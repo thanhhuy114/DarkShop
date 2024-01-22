@@ -5,6 +5,7 @@ import 'package:darkshop/data/models/user.dart';
 import 'package:darkshop/data/repositories/user_repository.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/address_management/address_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,8 +48,8 @@ class AccountPresenter {
 
         String croppedUrl = newAvatarUrl.substring(startIndex);
 
-        await UserRepository().update(jsonEncode({"image": croppedUrl}),
-            GlobalData.user!.id);
+        await UserRepository()
+            .update(jsonEncode({"image": croppedUrl}), GlobalData.user!.id);
         callback();
       }
     }
@@ -98,6 +99,9 @@ class AccountPresenter {
     await UserLocal().clearUser();
     await NotificationLocal().clearNotifications();
     reload();
+
+    //huy logout
+    logOut();
   }
 
   gotoChangePassword(BuildContext context) {

@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:darkshop/data/models/product.dart';
+import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/no_internet/no_internet.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class ProductWidget extends StatelessWidget {
                     const BorderRadius.vertical(top: Radius.circular(8)),
                 child: CachedNetworkImage(
                   useOldImageOnUrlChange: true,
-                  imageUrl: '$urlImage/${product.image!}',
+                  imageUrl: '${Constants.pathClould}/${product.image!}',
                   fit: BoxFit.contain,
                   placeholder: (BuildContext context, String url) {
                     return Image.asset('assets/logo.png');

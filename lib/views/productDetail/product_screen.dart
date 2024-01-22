@@ -1,5 +1,4 @@
 //giao diện product
-import 'package:darkshop/data/models/image_product.dart';
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/views/productDetail/components/button.dart';
 import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
@@ -51,7 +50,7 @@ class _ProductScreenState extends State<ProductScreen> {
               fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 255, 185, 88),
+        backgroundColor: const Color.fromARGB(255, 255, 185, 88),
       ),
       body: SingleChildScrollView(
         child: FutureBuilder<Product>(

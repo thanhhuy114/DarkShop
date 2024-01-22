@@ -1,5 +1,5 @@
 import 'package:darkshop/data/models/user.dart' as model;
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/constants.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,13 +41,13 @@ class SignUpPresenter {
       "name": user.fullname,
       "email": user.email,
       "phone": user.phone,
-      "image": "path/to/image.jpg",
+      "image": "darkshop/image/avata/orplippkpisuy6hfivpo.jpg",
       "recentAddressId": 'null',
       "blocked": 'false'
     };
 
     try {
-      var result = await http.post(Uri.parse('$hosting/users/'), body: body);
+      var result = await http.post(Uri.parse('${Constants.hosting}/users/'), body: body);
 
       if (result.statusCode == 200) {
         _view.displayMess(true, mess: 'Tạo tài khoản thành công');
@@ -71,7 +71,7 @@ class SignUpPresenter {
     var body = {"phone": phoneNumber};
     try {
       var result =
-          await http.post(Uri.parse('$hosting/check-phone'), body: body);
+          await http.post(Uri.parse('${Constants.hosting}/check-phone'), body: body);
 
       if (result.statusCode == 200) {
         return true;

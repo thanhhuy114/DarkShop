@@ -1,4 +1,4 @@
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/account/account_screen.dart';
 import 'package:darkshop/views/cart/cart_screen.dart';
 import 'package:darkshop/views/home/home_screen.dart';
@@ -38,7 +38,7 @@ class _NavigationHomePageState extends State<NavigationHomePage> {
       const HomeScreen(),
       const CartScreen(id_user: 1),
       const NotificationScreen(),
-      const OMAdmin(),
+      const OMUser(),
       const AccountScreen(),
     ];
   }

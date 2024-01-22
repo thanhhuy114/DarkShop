@@ -1,5 +1,5 @@
 import 'package:darkshop/data/models/product_type.dart';
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:flutter/material.dart';
 
 class ProductType extends StatelessWidget {

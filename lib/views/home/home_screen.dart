@@ -3,7 +3,7 @@ import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/data/models/product_type.dart';
 import 'package:darkshop/data/repositories/product_repository.dart';
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/home/components/countdown.dart';
 import 'package:darkshop/views/home/components/custom_scroll.dart';
 import 'package:darkshop/views/home/components/product.dart';
@@ -236,6 +236,7 @@ class _HomeScreenState extends State<HomeScreen>
       AuthPresenter.getInstance().checkAuth(
           successful: () {},
           onFailure: () {
+            AccountPresenter().logout(() {});
             if (GlobalData.isConneted!) {
               ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
             }

@@ -1,6 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/user.dart';
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/signup/sign_screen_presenter.dart';
 import 'package:darkshop/views/signup/signup_screen_otp.dart';
 import 'package:flutter/material.dart';

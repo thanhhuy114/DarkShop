@@ -1,5 +1,6 @@
+import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
 import 'package:darkshop/views/stunning_splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ void main() async {
   );
   GlobalData.isToken = await AuthPresenter.isTokenAvailable();
   socket = IO.io(
-      hosting,
+      Constants.hosting,
       OptionBuilder().setTransports(['websocket']) // for Flutter or Dart VM
           .build());
 

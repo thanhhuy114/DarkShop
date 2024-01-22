@@ -9,7 +9,7 @@ class NotificationRepository {
   Future<List<NotificationInfo>> getAllNotifications(int idUser) async {
     try {
       var response = await http.get(
-        Uri.parse('${Constants.hosting}:3000/notifications/$idUser'),
+        Uri.parse('${Constants.hosting}/notifications/$idUser'),
       );
 
       List<Map<String, dynamic>> jsonList =
@@ -35,7 +35,7 @@ class NotificationRepository {
   addNotification(NotificationInfo newNotification) async {
     try {
       final response = await http.post(
-        Uri.parse('${Constants.hosting}:3000/notifications/add'),
+        Uri.parse('${Constants.hosting}/notifications/add'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -59,7 +59,7 @@ class NotificationRepository {
     try {
       var response = await http.put(
         Uri.parse(
-            '${Constants.hosting}:3000/notifications/update/$notificationId'),
+            '${Constants.hosting}/notifications/update/$notificationId'),
       );
 
       if (response.statusCode == 200) {
