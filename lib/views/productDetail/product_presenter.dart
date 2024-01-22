@@ -3,16 +3,15 @@
 import 'dart:convert';
 import 'package:darkshop/data/models/image_product.dart';
 import 'package:darkshop/data/models/product.dart';
+import 'package:darkshop/utils/screen_size.dart';
 import 'package:http/http.dart' as http;
 
 class ProductPresenter {
   Product? pro;
   ProductPresenter({required this.pro});
 
-  static get _hosting => 'http://192.168.1.3';
-
   static Future<Product> getPro(int id) async {
-    var uri = '$_hosting:3000/products/${id}';
+    var uri = '$hosting/products/$id';
 
     try {
       var response = await http.get(Uri.parse(uri));
@@ -41,7 +40,7 @@ class ProductImage {
   static get _hosting => 'http://192.168.1.3';
 
   static Future<List<String>> getImg(int id) async {
-    var uri = '$_hosting:3000/img_products/all/${id}';
+    var uri = '$_hosting:3000/img_products/all/$id';
     var url =
         '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
     try {

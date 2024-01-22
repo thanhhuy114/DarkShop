@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:darkshop/data/repositories/repository.dart';
+import 'package:darkshop/utils/screen_size.dart';
 import 'package:flutter/src/material/card.dart';
 import '../models/cart.dart';
 import 'package:http/http.dart' as http;
@@ -8,16 +9,16 @@ import 'package:http/http.dart' as http;
 import '../models/cart_local.dart';
 
 class CartRepository implements Repository {
-  String db = '''http://192.168.1.3:3000''';
+
   @override
   Future<String> deteleCart(Cart Carts) {
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Cart>> getCardList(int id_user) async {
+  Future<List<Cart>> getCardList(int idUser) async {
     List<Cart> cartList = [];
-    var url = Uri.parse('$db/cart/all/$id_user');
+    var url = Uri.parse('$hosting/cart/all/$idUser');
     var repose = await http.get(url);
     print('Trang thai :${repose.statusCode}');
     var body = jsonDecode(repose.body.toString());

@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 ConnectivityResult _connectionStatus = ConnectivityResult.wifi;
 const urlImage =
     'https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245';
-const hosting = 'http://192.168.0.100:3000';
+const hosting = 'http://192.168.45.206:3000';
 late double screenWidth;
 late double screenHeight;
 

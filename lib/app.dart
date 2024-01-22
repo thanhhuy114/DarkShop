@@ -34,7 +34,7 @@ class _NavigationHomePageState extends State<NavigationHomePage> {
   List<Widget> _buildThreePageViewChildren() {
     return <Widget>[
       const HomeScreen(),
-       CartScreen(id_user: 1),
+      const CartScreen(id_user: 1),
       const NotificationScreen(),
       const OMUser(),
       const AccountScreen(),

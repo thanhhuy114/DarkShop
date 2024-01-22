@@ -1,8 +1,6 @@
 import 'package:darkshop/data/models/cart.dart';
 import 'package:darkshop/data/repositories/repository.dart';
 
-import '../../data/models/cart_local.dart';
-
 class CartPresenter {
   final Repository _repository;
   CartPresenter(this._repository);
