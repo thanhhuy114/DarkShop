@@ -8,10 +8,7 @@ import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/views/address_management/address_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// ignore: depend_on_referenced_packages
-
 import 'package:image_picker/image_picker.dart';
-
 import '../../data/repositories/notification_repository.dart';
 
 class AccountPresenter {
