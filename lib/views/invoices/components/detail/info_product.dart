@@ -1,14 +1,59 @@
-// import 'package:darkshop/views/invoices/card_product.dart';
-import 'package:darkshop/views/invoices/components/widget/card_product.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class InfoProduct extends StatelessWidget {
-  const InfoProduct({super.key});
+import '../../../../data/models/invoice_details.dart';
+import '../../../../data/models/invoices.dart';
+import '../../../../data/models/product2.dart';
+import '../../api_service.dart';
 
-  static const double fontSize = 17;
+class InfoProduct extends StatefulWidget {
+  final Invoice invoice;
+  const InfoProduct({super.key, required this.invoice});
+
+  @override
+  State<InfoProduct> createState() => _InfoProductState();
+}
+
+class _InfoProductState extends State<InfoProduct> {
+  List<InvoiceDetails> listIDetails = [];
+  List<Product2> listProducts = [];
+  String baseUrl =
+      'https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/';
+
+  Future<void> getInfo() async {
+    try {
+      var responseIDetails =
+          await ApiService().getAllInvoiceDetails('invoice_details');
+      var responseProducts = await ApiService().getAllProducts('products');
+      List<InvoiceDetails> filteredList = [];
+
+      for (var temp in responseIDetails) {
+        if (temp.idInvoice == widget.invoice.id) {
+          filteredList.add(temp);
+        }
+      }
+      setState(() {
+        listIDetails = filteredList;
+        listProducts = responseProducts;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
+    String formattedPriceInvoice = '';
+    formattedPriceInvoice =
+        NumberFormat.currency(locale: 'vi_VN', symbol: 'VNĐ')
+            .format(widget.invoice.totalPrice);
+
     return Column(
       children: [
         const Align(
@@ -30,65 +75,86 @@ class InfoProduct extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        //list sp
         Expanded(
-          flex: 2,
-          child: ListView(
-            children: const [
-              CardProduct(),
-              SizedBox(
-                height: 10,
-              ),
-              CardProduct(),
-              SizedBox(
-                height: 10,
-              ),
-              CardProduct(),
-              SizedBox(
-                height: 10,
-              ),
-              CardProduct(),
-            ],
-          ),
-        ),
+            child: ListView.builder(
+                itemCount: listIDetails.length,
+                itemBuilder: (context, index) {
+                  InvoiceDetails inDetail = listIDetails[index];
+                  String formattedPriceIDetails = '';
+                  Product2? product;
+
+                  for (var temp in listProducts) {
+                    if (temp.id == inDetail.idProduct) {
+                      product = temp;
+                    }
+                  }
+                  formattedPriceIDetails =
+                      NumberFormat.currency(locale: 'vi_VN', symbol: 'VNĐ')
+                          .format(inDetail.totalPrice);
+                  return Container(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (product != null && product.image != null)
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.35,
+                                    child: Image.network(
+                                      baseUrl + product.image!,
+                                      width: 150,
+                                    ),
+                                  ),
+                                if (product != null)
+                                  Text(
+                                    product.name,
+                                    softWrap: true,
+                                    style: const TextStyle(fontSize: 16),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    'x ${inDetail.count.toString()}',
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    formattedPriceIDetails.toString(),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                })),
         const SizedBox(
           height: 10,
         ),
         //tổng tiền:
-        const Text(
-          'Tổng tiền:',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        Text(
+          'Tổng tiền: ${formattedPriceInvoice.toString()}',
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ],
     );
   }
 }
-
-// Align(
-//           alignment: Alignment.topLeft,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Image.asset(
-//                 'assets/Duy/sp1.jpg',
-//                 width: MediaQuery.of(context).size.width * 0.9,
-//               ),
-//               const Text(
-//                 'Mã sản phẩm: ',
-//                 style: TextStyle(fontSize: fontSize),
-//               ),
-//               const Text(
-//                 'Tên sản phẩm: ',
-//                 style: TextStyle(fontSize: fontSize),
-//               ),
-//               const Text(
-//                 'Giá: ',
-//                 style: TextStyle(fontSize: fontSize),
-//               ),
-//               const Text(
-//                 'Thông tin chi tiết: ',
-//                 style: TextStyle(fontSize: fontSize),
-//               ),
-//             ],
-//           ),
-//         ),

@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:typed_data';
-
 
 class User {
   int id;
@@ -32,14 +32,23 @@ class User {
         blocked = false;
 
   factory User.fromJson(Map<String, dynamic> json) {
+    Uint8List? imageBytes;
+    if (json.containsKey('image') && json['image'] != null) {
+      String? base64Image = json['image'];
+      if (base64Image != null) {
+        imageBytes = base64Decode(base64Image);
+      }
+    }
+
     return User(
-        id: json['id'],
-        isAdmin: json['isAdmin'],
-        fullname: json['fullname'],
-        image: json['image'],
-        phone: json['phone'],
-        email: json['email'],
-        recentAddress: json['recentAddress'],
-        blocked: json['blocked']);
+      id: json['id'],
+      isAdmin: json['isAdmin'],
+      fullname: json['fullname'],
+      image: imageBytes,
+      phone: json['phone'],
+      email: json['email'],
+      recentAddress: json['recentAddress'],
+      blocked: json['blocked'],
+    );
   }
 }

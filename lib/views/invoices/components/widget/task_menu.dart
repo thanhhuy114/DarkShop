@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 
 class TaskMenu extends StatefulWidget {
-  const TaskMenu({Key? key}) : super(key: key);
+  const TaskMenu({Key? key, required this.updateDesiredStatus, required this.desiredStatus}) : super(key: key);
+
+  final int desiredStatus;
+  final Function(int) updateDesiredStatus;
 
   @override
   TaskMenuState createState() => TaskMenuState();
 }
 
 class TaskMenuState extends State<TaskMenu> {
-  int selectedItemIndex = 0;
+  int selectedItemIndex = 1;
 
-  Color getTextColor(int index) {
-    return index == selectedItemIndex ? Colors.red : Colors.black;
+  void updateDesiredStatus(int status) {
+    setState(() {
+      selectedItemIndex = status;
+    });
   }
 
   @override
@@ -26,43 +31,40 @@ class TaskMenuState extends State<TaskMenu> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          buildTaskMenuItem('assets/Duy/1.png', 'Chờ xác nhận', 0),
+          buildTaskMenuItem('Chờ xác nhận', 1),
           const SizedBox(width: 20),
-          buildTaskMenuItem('assets/Duy/2.png', 'Chờ lấy hàng', 2),
+          buildTaskMenuItem('Chờ lấy hàng', 2),
           const SizedBox(width: 20),
-          buildTaskMenuItem('assets/Duy/3.png', 'Đang giao', 3),
+          buildTaskMenuItem('Đang giao', 3),
           const SizedBox(width: 20),
-          buildTaskMenuItem('assets/Duy/4.png', 'Đã giao', 4),
+          buildTaskMenuItem('Đã giao', 4),
           const SizedBox(width: 20),
-          buildTaskMenuItem('assets/Duy/5.png', 'Đã hủy', 5),
+          buildTaskMenuItem('Đã hủy', 5),
           const SizedBox(width: 20),
         ],
       ),
     );
   }
 
-  Widget buildTaskMenuItem(String imagePath, String text, int index) {
-    bool isSelected = selectedItemIndex == index;
+  Widget buildTaskMenuItem(String text, int status) {
+    bool isSelected = widget.desiredStatus == status;
 
     return GestureDetector(
       onTap: () {
         setState(() {
-          selectedItemIndex = index;
+          selectedItemIndex = status;
+          widget.updateDesiredStatus(status); // Gọi hàm callback để cập nhật desiredStatus
         });
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            imagePath,
-            width: 30,
-            height: 30,
-          ),
           const SizedBox(height: 10),
           Text(
             text,
             style: TextStyle(
-              color: getTextColor(index),
+              color: isSelected ? Colors.red : Colors.black,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
             ),
           ),
           const SizedBox(height: 5),

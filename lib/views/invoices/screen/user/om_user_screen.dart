@@ -1,24 +1,51 @@
-import 'package:darkshop/views/invoices/components/order/list_order_ad.dart';
+import 'package:darkshop/views/invoices/components/order/list_order_u.dart';
 import 'package:darkshop/views/invoices/components/widget/task_menu.dart';
 import 'package:darkshop/views/invoices/components/widget/title.dart';
 import 'package:flutter/material.dart';
 
-class OMUser extends StatelessWidget {
-  const OMUser({super.key});
+class OMUser extends StatefulWidget {
+  const OMUser({Key? key}) : super(key: key);
+
+  @override
+  OMUserState createState() => OMUserState();
+}
+
+class OMUserState extends State<OMUser> {
+  int desiredStatus = 1;
+
+  void updateDesiredStatus(int status) {
+    setState(() {
+      desiredStatus = status;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+      backgroundColor: const Color.fromARGB(255, 255, 185, 88),
       appBar: AppBar(
         title: const TitleOM(),
       ),
       body: Container(
         margin: const EdgeInsets.all(5),
-        child: const Column(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            TaskMenu(),
-            ListOrderUser()
+            TaskMenu(
+              desiredStatus: desiredStatus,
+              updateDesiredStatus: updateDesiredStatus,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            ListOrderUser(
+              desiredStatus: desiredStatus,
+            ),
           ],
         ),
       ),

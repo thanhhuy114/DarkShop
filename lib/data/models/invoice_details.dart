@@ -3,7 +3,7 @@ class InvoiceDetails {
   int idInvoice;
   int idProduct;
   int count;
-  double totalPrice;
+  int totalPrice;
 
   InvoiceDetails(
       {required this.id,
