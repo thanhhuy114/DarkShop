@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         primary: Color.fromARGB(255, 255, 185, 88),
       )),
       debugShowCheckedModeBanner: false,
-      home: testLocal(),
+      home: CartScreen(id_user: 1),
     );
   }
 }

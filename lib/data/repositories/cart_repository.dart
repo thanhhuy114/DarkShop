@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/cart_local.dart';
 
-class cartRepository implements Repository {
+class CartRepository implements Repository {
   String db = '''http://192.168.1.3:3000''';
   @override
   Future<String> deteleCart(Cart Carts) {
@@ -19,7 +19,7 @@ class cartRepository implements Repository {
     List<Cart> cartList = [];
     var url = Uri.parse('$db/cart/all/$id_user');
     var repose = await http.get(url);
-    print('Trang thai :$repose.statusCode');
+    print('Trang thai :${repose.statusCode}');
     var body = jsonDecode(repose.body.toString());
     for (var i = 0; i < body.length; i++) {
       cartList.add(Cart.fromJson(body[i]));

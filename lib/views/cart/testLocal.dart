@@ -10,7 +10,7 @@ class testLocal extends StatefulWidget {
 }
 
 class _testLocalState extends State<testLocal> {
-  final cartPresenter cartService = cartPresenter(cartRepository());
+  final CartPresenter cartService = CartPresenter(CartRepository());
 
   @override
   Widget build(BuildContext context) {

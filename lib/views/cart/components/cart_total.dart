@@ -39,9 +39,9 @@ class _CartTotalState extends State<CartTotal> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width / 2,
               decoration: const BoxDecoration(color: Colors.redAccent),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'Thanh toán',
                     textAlign: TextAlign.center,

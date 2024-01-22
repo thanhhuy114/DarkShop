@@ -1,4 +1,4 @@
-import 'package:darkshop/data/repositories/cart_repository.dart';
+import 'package:darkshop/data/repositories/Cart_repository.dart';
 import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/views/cart/cart_presenter.dart';
 import 'package:darkshop/views/cart/components/cart_item.dart';
@@ -16,7 +16,9 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  var cartsRepository = cartPresenter(cartRepository());
+  var cartsRepository = CartPresenter(CartRepository()); // Sửa lại thành CartPresenter
+  double Price = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +36,7 @@ class _CartScreenState extends State<CartScreen> {
         children: [
           Expanded(
             child: FutureBuilder(
-              future: cartsRepository.fetchCartList(widget.id_user),
+              future: cartsRepository.fetchCartListLocal(widget.id_user), // Sửa lại thành fetchCartListLocal
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
@@ -55,6 +57,7 @@ class _CartScreenState extends State<CartScreen> {
                         count: cart?.count,
                         onPriceChanged: (double price) {
                           // Xử lý giá đã cập nhật trong CartScreen
+                          Price = price;
                           print('Updated Price: $price');
                         },
                       );
@@ -64,7 +67,7 @@ class _CartScreenState extends State<CartScreen> {
               },
             ),
           ),
-          CartTotal(total: 0),
+          CartTotal(total: Price),
         ],
       ),
       backgroundColor: MyColors.backgroundApp,
