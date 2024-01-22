@@ -29,7 +29,7 @@ class _specsButtonState extends State<specsButton> {
           decoration: const BoxDecoration(
             color: Colors.white,
           ),
-          child: const Column(
+          child: Column(
             children: [
               Icon(Icons.laptop_mac),
               Text(
