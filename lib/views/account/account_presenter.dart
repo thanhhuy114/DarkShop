@@ -8,10 +8,7 @@ import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/views/address_management/address_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// ignore: depend_on_referenced_packages
-
 import 'package:image_picker/image_picker.dart';
-
 import '../../data/repositories/notification_repository.dart';
 
 class AccountPresenter {
@@ -42,8 +39,17 @@ class AccountPresenter {
       List<int> imageBytes = await pickedFile.readAsBytes();
       Uint8List uint8list = Uint8List.fromList(imageBytes);
 
-      await UserRepository().saveAvatar(uint8list, GlobalData.user!.id);
-      callback();
+      String? newAvatarUrl = await UserRepository().uploadAvatar(uint8list);
+
+      if (newAvatarUrl != null) {
+        int startIndex = newAvatarUrl.lastIndexOf("darkshop/image/avata/");
+
+        String croppedUrl = newAvatarUrl.substring(startIndex);
+
+        await UserRepository().update(jsonEncode({"image": croppedUrl}),
+            GlobalData.user!.id);
+        callback();
+      }
     }
   }
 

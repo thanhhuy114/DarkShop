@@ -29,12 +29,11 @@ class _UserInfoState extends State<UserInfo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Avatar(
-                image: GlobalData.user!.image != null
-                    ? "${Constants.pathClould}${GlobalData.user!.image}"
-                    : null,
-                callback: () {
-                  setState(() {});
-                }),
+              image: GlobalData.user!.image != null
+                  ? "${Constants.pathClould}${GlobalData.user!.image}"
+                  : null,
+              callback: () => setState(() {}),
+            ),
           ],
         ),
         CustomTextfield(
