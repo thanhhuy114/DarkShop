@@ -27,4 +27,6 @@ class InvoiceDetails {
         count: json['count'],
         totalPrice: json['totalPrice']);
   }
+
+  get length => null;
 }

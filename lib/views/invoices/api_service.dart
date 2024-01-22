@@ -62,6 +62,30 @@ class ApiService {
     }
   }
 
+  //GET ALL pay
+  Future<List<Pay>> getAllPays(String endpoint) async {
+    final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = jsonDecode(response.body);
+      return responseData.map((json) => Pay.fromJson(json)).toList();
+    } else {
+      throw Exception(
+          'Failed: ${response.statusCode} - ${response.reasonPhrase}');
+    }
+  }
+
+  //GET ALL address
+  Future<List<Address>> getAllAddresses(String endpoint) async {
+    final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = jsonDecode(response.body);
+      return responseData.map((json) => Address.fromJson(json)).toList();
+    } else {
+      throw Exception(
+          'Failed: ${response.statusCode} - ${response.reasonPhrase}');
+    }
+  }
+
   //GET ONE User2
   Future<User2> getUser(String endpoint, int id) async {
     final response = await http.get(Uri.parse('$baseUrl/$endpoint/$id'));

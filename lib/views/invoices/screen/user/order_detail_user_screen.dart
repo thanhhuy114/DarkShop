@@ -27,7 +27,7 @@ class OrderUserDetailState extends State<OrderUserDetail> {
       body: ListView(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.35,
+            height: MediaQuery.of(context).size.height * 0.55,
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             decoration: BoxDecoration(
@@ -39,7 +39,7 @@ class OrderUserDetailState extends State<OrderUserDetail> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.65,
+            height: MediaQuery.of(context).size.height * 0.45,
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(

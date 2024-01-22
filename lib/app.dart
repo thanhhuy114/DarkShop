@@ -32,7 +32,7 @@ class _NavigationHomePageState extends State<NavigationHomePage> {
       const HomeScreen(),
       const cartScreen(),
       const NotificationScreen(),
-      const OMAdmin(),
+      const OMUser(),
       const AccountScreen(),
     ];
   }

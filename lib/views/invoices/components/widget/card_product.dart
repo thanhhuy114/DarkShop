@@ -7,8 +7,12 @@ import '../../api_service.dart';
 
 class CardInvoiceDetail extends StatefulWidget {
   final InvoiceDetails? relatedInvoiceDetails;
+  final Color itemColor;
 
-  const CardInvoiceDetail({super.key, required this.relatedInvoiceDetails});
+  const CardInvoiceDetail(
+      {super.key,
+      required this.relatedInvoiceDetails,
+      required this.itemColor});
 
   @override
   CardInvoiceDetailState createState() => CardInvoiceDetailState();
@@ -61,8 +65,12 @@ class CardInvoiceDetailState extends State<CardInvoiceDetail> {
       }
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+      width: MediaQuery.of(context).size.width * 0.9,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5), color: widget.itemColor),
       child: Row(
         children: [
           if (relatedProduct != null && relatedProduct.image != null)
@@ -84,20 +92,34 @@ class CardInvoiceDetailState extends State<CardInvoiceDetail> {
                   Text(
                     relatedProduct.name,
                     softWrap: true,
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      // color: Colors.red, // Thay đổi màu sắc chữ
+                      fontWeight: FontWeight.bold, // Làm đậm chữ
+                    ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    'Số lượng: ${relatedInvoiceDetails?.count.toString()}',
+                    'x${relatedInvoiceDetails?.count.toString()}',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      // color: Colors.blue, // Thay đổi màu sắc chữ
+                      fontWeight: FontWeight.bold, // Làm đậm chữ
+                    ),
                   ),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
                     formattedPrice,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      // color: Colors.green, // Thay đổi màu sắc chữ
+                      fontWeight: FontWeight.bold, // Làm đậm chữ
+                    ),
                   ),
                 ),
               ],
@@ -108,4 +130,3 @@ class CardInvoiceDetailState extends State<CardInvoiceDetail> {
     );
   }
 }
-

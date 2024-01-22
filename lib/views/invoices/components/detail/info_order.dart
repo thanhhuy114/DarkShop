@@ -19,7 +19,6 @@ class InfoOrderState extends State<InfoOrder> {
   String namePay = '';
   String nameAddress = '';
   String nameUser = '';
-
   Future<void> getInfo() async {
     try {
       var responseUser =
@@ -34,7 +33,7 @@ class InfoOrderState extends State<InfoOrder> {
         nameUser = responseUser.name;
       });
     } catch (e) {
-      print(e);
+      print('Load Faild: $e');
     }
   }
 
@@ -70,10 +69,12 @@ class InfoOrderState extends State<InfoOrder> {
   Widget build(BuildContext context) {
     const double fontSize = 17;
     String createAtString = getCreateAtString();
-    String formattedPrice = '';
-    formattedPrice = NumberFormat.currency(locale: 'vi_VN', symbol: 'VNĐ')
-        .format(widget.invoice.totalPrice);
+    String formattedPrice =
+        NumberFormat.currency(locale: 'vi_VN', symbol: 'VNĐ')
+            .format(widget.invoice.totalPrice);
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Align(
           alignment: Alignment.center,
@@ -86,57 +87,56 @@ class InfoOrderState extends State<InfoOrder> {
           height: 5,
         ),
         Container(
-          height: 2,
+          height: 3,
           color: Colors.red,
         ),
         const SizedBox(
           height: 10,
         ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                'Mã đơn hàng: ${widget.invoice.id.toString()}',
-                style: const TextStyle(fontSize: fontSize),
-              ),
-              Text(
-                'Tên khách hàng: $nameUser',
-                style: const TextStyle(fontSize: fontSize),
-              ),
-              Text(
-                'Ngày đặt: $createAtString',
-                style: const TextStyle(fontSize: fontSize),
-              ),
-              Text(
-                'Phương thức thanh toán: $namePay',
-                style: const TextStyle(fontSize: fontSize),
-              ),
-              Text(
-                'Tổng tiền: $formattedPrice',
-                style: const TextStyle(fontSize: fontSize),
-              ),
-              Text(
-                'Trạng thái: ${getStatusText(widget.invoice.status)}',
-                style: const TextStyle(fontSize: fontSize),
-              ),
-              Text(
-                'Địa chỉ: $nameAddress',
-                style: const TextStyle(fontSize: fontSize),
-              ),
-              Text(
-                'Ghi chú: ${widget.invoice.note}',
-                softWrap: true,
-                style: const TextStyle(fontSize: 16),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
-        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildInfoRow(
+                'Mã đơn hàng:', widget.invoice.id.toString(), fontSize),
+            buildInfoRow('Tên khách hàng:', nameUser, fontSize),
+            buildInfoRow('Ngày đặt:', createAtString, fontSize),
+            buildInfoRow('Phương thức thanh toán:', namePay, fontSize),
+            buildInfoRow('Tổng tiền:', formattedPrice, fontSize),
+            buildInfoRow(
+                'Trạng thái:', getStatusText(widget.invoice.status), fontSize),
+            buildInfoRow('Địa chỉ:', nameAddress, fontSize),
+            buildInfoRow('Ghi chú:', widget.invoice.note, 16),
+          ],
+        )
       ],
+    );
+  }
+
+  Widget buildInfoRow(String label, String value, double fontSize) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 150, // Set the width for the label
+            child: Text(
+              label,
+              style: TextStyle(
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue),
+            ),
+          ),
+          const SizedBox(width: 10), // Add some spacing between label and value
+          Expanded(
+            child: Text(
+              value,
+              style: TextStyle(fontSize: fontSize),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
