@@ -59,18 +59,17 @@ class _ListOrderAdminState extends State<ListOrderAdmin> {
         itemCount: invoices.length,
         itemBuilder: (context, index) {
           Invoice invoice = invoices[index];
-          InvoiceDetails? relatedInvoiceDetails;
           User2? tempUser;
           String formattedPrice = '';
           String baseUrl =
               'https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/';
-
-          for (InvoiceDetails detail in invoiceDetails) {
-            if (detail.idInvoice == invoice.id) {
-              relatedInvoiceDetails = detail;
-              break;
-            }
-          }
+          List<Color> itemColors = [
+            Colors.blue,
+            Colors.green,
+            Colors.orange,
+            Colors.purple
+          ];
+          Color itemColor = itemColors[index % itemColors.length];
           for (User2 temp in users) {
             if (temp.id == invoice.idUser) {
               tempUser = temp;
@@ -80,17 +79,22 @@ class _ListOrderAdminState extends State<ListOrderAdmin> {
           formattedPrice = NumberFormat.currency(locale: 'vi_VN', symbol: 'VNĐ')
               .format(invoice.totalPrice);
 
-          if (invoice.status == widget.desiredStatus) {
+          bool hasValidInvoiceDetails = invoiceDetails.any((inDetail) =>
+              inDetail.idInvoice == invoice.id &&
+              invoice.status == widget.desiredStatus);
+
+          if (hasValidInvoiceDetails) {
             return GestureDetector(
               onDoubleTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => OrderAdminDetail(invoice: invoice,)),
+                      builder: (context) => OrderAdminDetail(
+                            invoice: invoice,
+                          )),
                 );
               },
               child: Container(
-                // height: 380,
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -141,9 +145,28 @@ class _ListOrderAdminState extends State<ListOrderAdmin> {
                   const SizedBox(
                     height: 10,
                   ),
-                  //Invoice Details
-                  CardInvoiceDetail(
-                      relatedInvoiceDetails: relatedInvoiceDetails),
+
+                  //List Invoice Details
+                  SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                      itemCount: invoiceDetails
+                          .where((inDetail) => inDetail.idInvoice == invoice.id)
+                          .length,
+                      itemBuilder: (context, index) {
+                        InvoiceDetails inDetail = invoiceDetails
+                            .where(
+                                (inDetail) => inDetail.idInvoice == invoice.id)
+                            .elementAt(index);
+
+                        return CardInvoiceDetail(
+                          relatedInvoiceDetails: inDetail,
+                          itemColor: itemColor,
+                        );
+                      },
+                    ),
+                  ),
+
                   //khoảng cách
                   const SizedBox(
                     height: 10,
@@ -161,7 +184,7 @@ class _ListOrderAdminState extends State<ListOrderAdmin> {
                   Text(
                     'Tổng tiền: $formattedPrice',
                     style: const TextStyle(
-                        fontSize: 17, fontWeight: FontWeight.bold),
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   //khoảng cách
                   const SizedBox(
@@ -187,6 +210,17 @@ class _ListOrderAdminState extends State<ListOrderAdmin> {
                       },
                     ),
                   if (invoice.status == 3)
+                    FutureBuilder<void>(
+                      future: Future.delayed(const Duration(seconds: 5)),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          apiService.updateInvoiceStatus4(invoice.id);
+                          fetchData();
+                        }
+                        return Container();
+                      },
+                    ),
+                  if (invoice.status == 3)
                     const Text('Đơn hàng đang được vận chuyển'),
                   if (invoice.status == 4) const Text('Giao hàng thành công'),
                   if (invoice.status == 5)
@@ -198,10 +232,22 @@ class _ListOrderAdminState extends State<ListOrderAdmin> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Mã đơn hàng:'),
-                        Text(invoice.id.toString()),
+                        const Text(
+                          'Mã đơn hàng:',
+                          style: TextStyle(
+                              color: Colors
+                                  .grey), // Sử dụng màu xám cho chữ mờ hơn
+                        ),
+                        Text(
+                          invoice.id.toString(),
+                          style: const TextStyle(
+                              color: Colors.black), // Màu chữ chính
+                        ),
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                 ]),
               ),

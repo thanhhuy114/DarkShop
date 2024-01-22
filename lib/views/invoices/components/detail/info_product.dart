@@ -91,17 +91,28 @@ class _InfoProductState extends State<InfoProduct> {
                   formattedPriceIDetails =
                       NumberFormat.currency(locale: 'vi_VN', symbol: 'VNĐ')
                           .format(inDetail.totalPrice);
+                  List<Color> itemColors = [Colors.blue, Colors.green, Colors.orange, Colors.purple];
+                  Color itemColor = itemColors[index % itemColors.length];
+
                   return Container(
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                     margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                     width: MediaQuery.of(context).size.width * 0.9,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Colors.white),
+                        color: itemColor),
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Row(
                         children: [
+                          if (product != null && product.image != null)
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.35,
+                              child: Image.network(
+                                baseUrl + product.image!,
+                                width: 150,
+                              ),
+                            ),
                           const SizedBox(
                             width: 10,
                           ),
@@ -109,15 +120,6 @@ class _InfoProductState extends State<InfoProduct> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (product != null && product.image != null)
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.35,
-                                    child: Image.network(
-                                      baseUrl + product.image!,
-                                      width: 150,
-                                    ),
-                                  ),
                                 if (product != null)
                                   Text(
                                     product.name,

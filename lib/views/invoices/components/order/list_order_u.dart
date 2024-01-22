@@ -1,11 +1,13 @@
+import 'package:darkshop/views/invoices/components/widget/button_4.dart';
+import 'package:darkshop/views/invoices/screen/user/order_detail_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../data/models/invoice_details.dart';
 import '../../../../data/models/invoices.dart';
+import '../../../../data/models/product2.dart';
 import '../../../../data/models/user2.dart';
 import '../../api_service.dart';
-import '../../screen/admin/order_detail_admin_screen.dart';
 import '../widget/button_5.dart';
 import '../widget/card_product.dart';
 
@@ -20,9 +22,10 @@ class ListOrderUser extends StatefulWidget {
 
 class _ListOrderUserState extends State<ListOrderUser> {
   late ApiService apiService;
-  List<Invoice> invoices = [];
-  List<User2> users = [];
-  List<InvoiceDetails> invoiceDetails = [];
+  List<Invoice> lstInvoices = [];
+  List<User2> lstUsers = [];
+  List<InvoiceDetails> lstInvoiceDetails = [];
+  List<Product2> listProducts = [];
 
   @override
   void initState() {
@@ -38,11 +41,13 @@ class _ListOrderUserState extends State<ListOrderUser> {
       List<User2> fetchedUsers = await apiService.getAllUsers('users');
       List<InvoiceDetails> fetchedInvoiceDetails =
           await apiService.getAllInvoiceDetails('invoice_details');
+      var responseProducts = await ApiService().getAllProducts('products');
 
       setState(() {
-        invoices = fetchedInvoices;
-        invoiceDetails = fetchedInvoiceDetails;
-        users = fetchedUsers;
+        lstInvoices = fetchedInvoices;
+        lstInvoiceDetails = fetchedInvoiceDetails;
+        lstUsers = fetchedUsers;
+        listProducts = responseProducts;
       });
     } catch (e) {
       // ignore: avoid_print
@@ -54,22 +59,22 @@ class _ListOrderUserState extends State<ListOrderUser> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: invoices.length,
+        itemCount: lstInvoices.length,
         itemBuilder: (context, index) {
-          Invoice invoice = invoices[index];
-          InvoiceDetails? relatedInvoiceDetails;
+          List<Color> itemColors = [
+            Colors.blue,
+            Colors.green,
+            Colors.orange,
+            Colors.purple
+          ];
+          Color itemColor = itemColors[index % itemColors.length];
+          Invoice invoice = lstInvoices[index];
           User2? tempUser;
           String formattedPrice = '';
           String baseUrl =
               'https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/';
 
-          for (InvoiceDetails detail in invoiceDetails) {
-            if (detail.idInvoice == invoice.id) {
-              relatedInvoiceDetails = detail;
-              break;
-            }
-          }
-          for (User2 temp in users) {
+          for (User2 temp in lstUsers) {
             if (temp.id == invoice.idUser) {
               tempUser = temp;
               break;
@@ -78,17 +83,22 @@ class _ListOrderUserState extends State<ListOrderUser> {
           formattedPrice = NumberFormat.currency(locale: 'vi_VN', symbol: 'VNĐ')
               .format(invoice.totalPrice);
 
-          if (invoice.status == widget.desiredStatus) {
+          bool hasValidInvoiceDetails = lstInvoiceDetails.any((inDetail) =>
+              inDetail.idInvoice == invoice.id &&
+              invoice.status == widget.desiredStatus);
+
+          if (hasValidInvoiceDetails) {
             return GestureDetector(
               onDoubleTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => OrderAdminDetail(invoice: invoice,)),
+                      builder: (context) => OrderUserDetail(
+                            invoice: invoice,
+                          )),
                 );
               },
               child: Container(
-                // height: 380,
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -126,22 +136,36 @@ class _ListOrderUserState extends State<ListOrderUser> {
                         )
                     ],
                   ),
-                  //khoảng cách
                   const SizedBox(
                     height: 10,
                   ),
-                  //đường kẻ
                   Container(
                     height: 3,
                     color: Colors.red,
                   ),
-                  //khoảng cách
                   const SizedBox(
                     height: 10,
                   ),
-                  //Invoice Details
-                  CardInvoiceDetail(
-                      relatedInvoiceDetails: relatedInvoiceDetails),
+                  //List Invoice Details
+                  SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                          itemCount: lstInvoiceDetails.length,
+                          itemBuilder: (context, index) {
+                            InvoiceDetails inDetail = lstInvoiceDetails[index];
+
+                            for (var temp in lstInvoiceDetails) {
+                              if (temp.id == invoice.id) {
+                                inDetail = temp;
+                                break;
+                              }
+                            }
+
+                            return CardInvoiceDetail(
+                                relatedInvoiceDetails: inDetail,
+                                itemColor: itemColor);
+                          })),
+
                   //khoảng cách
                   const SizedBox(
                     height: 10,
@@ -159,23 +183,42 @@ class _ListOrderUserState extends State<ListOrderUser> {
                   Text(
                     'Tổng tiền: $formattedPrice',
                     style: const TextStyle(
-                        fontSize: 17, fontWeight: FontWeight.bold),
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   //khoảng cách
                   const SizedBox(
                     height: 10,
                   ),
                   //nút
-                  if (invoice.status == 1)
-                    const Text('Chờ xác nhận đơn hàng'),
+                  if (invoice.status == 1) const Text('Chờ xác nhận đơn hàng'),
                   if (invoice.status == 2)
-                    const Text('Đơn hàng đang được chuẩn bị'), 
+                    const Text('Đơn hàng đang được chuẩn bị'),
+                  if (invoice.status == 3)
+                    FutureBuilder<void>(
+                      future: Future.delayed(const Duration(seconds: 5)),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          apiService.updateInvoiceStatus4(invoice.id);
+                          fetchData();
+                        }
+                        return Container();
+                      },
+                    ),
                   if (invoice.status == 3)
                     const Text('Đơn hàng đang được vận chuyển'),
 
                   //Thêm thông báo 'Giao hàng thành công' khi thuộc tính status của invoice = 4
-                  if (invoice.status == 4) 
-                  const Text('Giao hàng thành công'),
+                  if (invoice.status == 4)
+                    Column(
+                      children: [
+                        ButtonUp4(
+                            updateStatusCallback: fetchData, invoice: invoice),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text('Giao hàng thành công'),
+                      ],
+                    ),
 
                   if (invoice.status == 5)
                     ButtonUp5(
@@ -190,6 +233,9 @@ class _ListOrderUserState extends State<ListOrderUser> {
                         Text(invoice.id.toString()),
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                 ]),
               ),
