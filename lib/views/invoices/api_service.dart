@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:darkshop/data/models/invoices.dart';
 import 'package:http/http.dart' as http;
 
-import '../../data/models/user.dart';
 
 class ApiService {
   final String baseUrl = 'http:localhost:3000';

@@ -3,6 +3,7 @@ import 'package:darkshop/views/cart/components/cart_item.dart';
 import 'package:darkshop/views/cart/components/cart_total.dart';
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class cartScreen extends StatefulWidget {
   const cartScreen({super.key});
 
@@ -10,6 +11,7 @@ class cartScreen extends StatefulWidget {
   State<cartScreen> createState() => _cartScreenState();
 }
 
+// ignore: camel_case_types
 class _cartScreenState extends State<cartScreen> {
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,8 @@ class _cartScreenState extends State<cartScreen> {
         ),
         backgroundColor: const Color.fromARGB(255, 203, 66, 107),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.all(20),
         child: Column(
           children: [
             itemCart(

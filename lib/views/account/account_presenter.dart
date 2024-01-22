@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/user.dart';
 import 'package:darkshop/data/repositories/user_repository.dart';
-import 'package:darkshop/main.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/views/address_management/address_management_screen.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable, camel_case_types
 class countProduct extends StatelessWidget {
   int count;
   countProduct({super.key, required this.count});

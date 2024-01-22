@@ -1,9 +1,6 @@
-import 'package:darkshop/data/models/notification.dart';
-import 'package:darkshop/main.dart';
 import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:darkshop/views/notification/components/list_notifications.dart';
 import 'package:darkshop/views/notification/components/request_login.dart';
 import 'package:darkshop/views/notification/notification_presenter.dart';

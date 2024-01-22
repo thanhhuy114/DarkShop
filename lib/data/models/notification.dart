@@ -1,5 +1,4 @@
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/views/account/account_presenter.dart';
 
 class NotificationInfo {
   int id;

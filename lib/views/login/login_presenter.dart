@@ -1,5 +1,3 @@
-import 'package:connectivity/connectivity.dart';
-import 'package:darkshop/main.dart';
 import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/utils/screen_size.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';

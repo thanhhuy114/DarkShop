@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:darkshop/main.dart';
 import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:http/http.dart' as http;
 import 'package:darkshop/utils/screen_size.dart';
 import 'package:device_info/device_info.dart';
@@ -72,7 +72,10 @@ class AuthPresenter {
 
         // luu id
         await prefs.remove('id');
-        await prefs.setString('id', data['id']);
+        await prefs.setInt('id', data['id']);
+
+        AuthPresenter.getIdUserbyStore()
+            .then((idUser) => AccountPresenter.getUserLogin(idUser!));
         return true;
       } else if (response.statusCode == 201) {
         print('Login field: ${response.body}');
@@ -111,7 +114,10 @@ class AuthPresenter {
 
         // luu id
         await prefs.remove('id');
-        await prefs.setString('id', data['id']);
+        await prefs.setInt('id', data['id']);
+
+        AuthPresenter.getIdUserbyStore()
+            .then((idUser) => AccountPresenter.getUserLogin(idUser!));
         return true;
       } else if (response.statusCode == 201) {
         print('Login field: ${response.body}');

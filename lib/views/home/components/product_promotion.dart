@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:darkshop/data/models/product.dart';
+import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/views/no_internet/no_internet.dart';
 import 'package:flutter/material.dart';
 
 class ProductPromotion extends StatelessWidget {
@@ -12,10 +15,12 @@ class ProductPromotion extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         onTap: () {
           Navigator.of(context).push(createRoutePushThrough(
-              screen: Scaffold(
-            appBar: AppBar(),
-            body: Container(color: Colors.yellow),
-          )));
+             screen: GlobalData.isConneted!
+                ? Scaffold(
+                    appBar: AppBar(),
+                    body: Container(color: Colors.yellow),
+                  )
+                : const NoInternetScreen()));
         },
         child: Ink(
           width: (screenWidth - 24) / 3,
@@ -34,10 +39,18 @@ class ProductPromotion extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(product.image!,
-                    height: (screenWidth - 24) / 3, fit: BoxFit.cover),
-              ),
+                  borderRadius: BorderRadius.circular(8),
+                  child: CachedNetworkImage(
+                    useOldImageOnUrlChange: true,
+                    height: (screenWidth - 24) / 3,
+                    fit: BoxFit.cover,
+                    imageUrl: '$urlImage/${product.image!}',
+                    placeholder: (BuildContext context, String url) {
+                      return Image.asset('assets/logo.png');
+                    },
+                    errorWidget: (context, url, error) =>
+                        Image.asset('assets/logo.png'),
+                  )),
               Container(
                 // margin: const EdgeInsets.symmetric(vertical: 0),
                 height: 30,
@@ -53,7 +66,7 @@ class ProductPromotion extends StatelessWidget {
                       child: FittedBox(
                         fit: BoxFit.fitWidth,
                         child: Text(
-                          formatCurrency(product.price),
+                          formatCurrency(product.price - product.price * product.promotion ~/ 100),
                           style: TextStyle(
                               fontSize: screenWidth * 0.029,
                               color: Colors.red,

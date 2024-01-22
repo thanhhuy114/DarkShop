@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class CustomScroll extends StatefulWidget {
   const CustomScroll({super.key, required this.thumbPosition});

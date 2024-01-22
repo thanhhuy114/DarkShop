@@ -1,6 +1,9 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/views/no_internet/no_internet.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:device_info/device_info.dart';
@@ -10,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 ConnectivityResult _connectionStatus = ConnectivityResult.wifi;
 const urlImage =
     'https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245';
-const hosting = 'http://192.168.128.206:3000';
+const hosting = 'http://192.168.0.100:3000';
 late double screenWidth;
 late double screenHeight;
 
@@ -39,6 +42,7 @@ Future<AndroidDeviceInfo?> getDeviceInfo() async {
       //   print('iOS Version: ${iosInfo.systemVersion}');
     }
   } catch (e) {
+    // ignore: avoid_print
     print('Error getting device info: $e');
     return null;
   }
@@ -64,6 +68,9 @@ Route createRoutePushUp({required Widget screen}) {
 }
 
 Route createRoutePushThrough({required Widget screen}) {
+  if (!GlobalData.isConneted!) {
+    screen = const NoInternetScreen();
+  }
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => screen,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -99,13 +106,13 @@ void logOut() async {
 
 bool checkConnet() {
   if (_connectionStatus == ConnectivityResult.none) {
-    _showToast('Không có kết nối mạng!');
+    showToast('Không có kết nối mạng!');
     return false;
   }
   return true;
 }
 
-_showToast(mess, {MaterialColor backgroundColor = Colors.red}) async {
+showToast(mess, {MaterialColor backgroundColor = Colors.red}) async {
   Fluttertoast.showToast(
       msg: mess,
       toastLength: Toast.LENGTH_SHORT,
@@ -119,12 +126,12 @@ _showToast(mess, {MaterialColor backgroundColor = Colors.red}) async {
 void connectListenner(ConnectivityResult result) {
   if (result != ConnectivityResult.none &&
       _connectionStatus == ConnectivityResult.none) {
-    _showToast('Đã có kết nối mạng!', backgroundColor: Colors.green);
+    showToast('Đã có kết nối mạng!', backgroundColor: Colors.green);
   } else if (result == ConnectivityResult.none &&
       _connectionStatus != ConnectivityResult.none) {
-    _showToast('Không có kết nối mạng!');
+    showToast('Không có kết nối mạng!');
   }
   _connectionStatus = result;
 
-  GlobalData.isConneted = (_connectionStatus == ConnectivityResult.none);
+  GlobalData.isConneted = !(_connectionStatus == ConnectivityResult.none);
 }

@@ -39,6 +39,7 @@ class SearchHistoryRepository {
       results = listMap.map((map) => SearchHistory.fromJson(map)).toList();
       return results;
     } catch (e) {
+      // ignore: avoid_print
       print(e);
       return results;
     }
@@ -57,6 +58,7 @@ class SearchHistoryRepository {
 
       await file.writeAsString(jsonString);
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }

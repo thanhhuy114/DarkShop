@@ -2,7 +2,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/notification.dart';
 import 'package:darkshop/data/repositories/notification_repository.dart';
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPresenter {

@@ -4,7 +4,6 @@ import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:darkshop/views/account/components/user_info.dart';
 import 'package:flutter/material.dart';
-import '../../main.dart';
 import '../notification/components/request_login.dart';
 
 class AccountScreen extends StatefulWidget {

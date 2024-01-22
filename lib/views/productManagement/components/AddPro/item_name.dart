@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ItemName extends StatelessWidget {
   final String name;
   TextEditingController nameEdit = TextEditingController(text: '');

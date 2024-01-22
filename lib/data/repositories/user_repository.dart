@@ -2,9 +2,9 @@
 //vd: lấy tất cả user, thêm user vào database
 import 'dart:convert';
 import 'dart:io';
-import 'package:darkshop/data/repositories/notification_repository.dart';
 import 'package:darkshop/utils/constants.dart';
-import 'package:flutter/services.dart';
+import 'package:darkshop/utils/screen_size.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import '../models/user.dart';
 import 'package:http/http.dart' as http;
@@ -13,18 +13,24 @@ class UserRepository {
   Future<User?> getUserById(int id) async {
     try {
       var response =
-          await http.get(Uri.parse('${Constants.hosting}:3000/users/$id'));
+          await http.get(Uri.parse('$hosting/users/$id'));
 
       User user = User.fromJson(jsonDecode(response.body));
 
-      print("Lấy user ở server thành công");
+      if (kDebugMode) {
+        print("Lấy user ở server thành công");
+      }
 
       UserLocal().saveUser(user);
 
       return user;
     } catch (e) {
-      print("Lấy user ở server thất bại");
-      print(e);
+      if (kDebugMode) {
+        print("Lấy user ở server thất bại");
+      }
+      if (kDebugMode) {
+        print(e);
+      }
       return null;
     }
   }
@@ -70,12 +76,18 @@ class UserRepository {
               body: json);
 
       if (response.statusCode == 200) {
-        print('Cập nhật user ở sever thành công');
+        if (kDebugMode) {
+          print('Cập nhật user ở sever thành công');
+        }
       } else {
-        print('Cập nhật user ở sever thất bại');
+        if (kDebugMode) {
+          print('Cập nhật user ở sever thất bại');
+        }
       }
     } catch (e) {
-      print('Lỗi Cập nhật ở sever user: $e');
+      if (kDebugMode) {
+        print('Lỗi Cập nhật ở sever user: $e');
+      }
     }
   }
 
@@ -112,7 +124,9 @@ class UserLocal {
       final localFile = await _localFile;
       s = await localFile.readAsString();
     } catch (e) {
-      print("getStringJsonUser() error: $e");
+      if (kDebugMode) {
+        print("getStringJsonUser() error: $e");
+      }
     }
     return s;
   }
@@ -122,11 +136,17 @@ class UserLocal {
 
     try {
       User user = User.fromJsonLocal(jsonDecode(json));
-      print("Lấy user từ local thành công");
+      if (kDebugMode) {
+        print("Lấy user từ local thành công");
+      }
       return user;
     } catch (e) {
-      print("Lấy user từ local thất bại");
-      print(e);
+      if (kDebugMode) {
+        print("Lấy user từ local thất bại");
+      }
+      if (kDebugMode) {
+        print(e);
+      }
       return null;
     }
   }
@@ -140,10 +160,16 @@ class UserLocal {
       final jsonString = json.encode(userMap);
 
       await file.writeAsString(jsonString);
-      print("Lưu User ở local thành công");
+      if (kDebugMode) {
+        print("Lưu User ở local thành công");
+      }
     } catch (e) {
-      print("Lưu User ở local thất bại");
-      print(e);
+      if (kDebugMode) {
+        print("Lưu User ở local thất bại");
+      }
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
@@ -153,10 +179,16 @@ class UserLocal {
 
       await file.writeAsString('');
 
-      print("Xóa user ở local thành công");
+      if (kDebugMode) {
+        print("Xóa user ở local thành công");
+      }
     } catch (e) {
-      print("Xóa user ở local thất bại");
-      print(e);
+      if (kDebugMode) {
+        print("Xóa user ở local thất bại");
+      }
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }

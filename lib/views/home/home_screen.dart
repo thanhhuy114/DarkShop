@@ -1,6 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/data/models/product_type.dart';
+import 'package:darkshop/data/repositories/product_repository.dart';
 import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/utils/screen_size.dart';
 import 'package:darkshop/views/home/components/countdown.dart';
@@ -9,10 +10,9 @@ import 'package:darkshop/views/home/components/product.dart';
 import 'package:darkshop/views/home/components/product_promotion.dart';
 import 'package:darkshop/views/home/components/product_type.dart';
 import 'package:darkshop/views/home/components/search_bar.dart';
+import 'package:darkshop/views/home/components/skeleton.dart';
 import 'package:darkshop/views/home/components/slider_image.dart';
 import 'package:darkshop/views/home/home_presenter.dart';
-import 'package:darkshop/main.dart';
-import 'package:darkshop/utils/screen_size.dart';
 import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:darkshop/views/login/login_screen.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen>
   late HomePresenter _presenter;
   List<ProductTypeModel> _productTypes = [];
   List<Product> products = [];
+  List<Product> productPromotions = [];
   late final ScrollController _scrollProductTypeController;
   late final ScrollController _scrollProductController;
   int _itemProductVisible = 10;
@@ -77,73 +78,19 @@ class _HomeScreenState extends State<HomeScreen>
         ));
   }
 
-  _scrollProductListener() {
-    if (_scrollProductController.hasClients) {
-      final double maxScrollSize =
-          _scrollProductController.position.maxScrollExtent;
-      final double currentPosition = _scrollProductController.position.pixels;
-
-      if (maxScrollSize == currentPosition) {
-        setState(() => _isLoading = true);
-        Future.delayed(const Duration(seconds: 3), () async {
-          setState(() {
-            _isLoading = false;
-            _itemProductVisible += 10;
-            if (_itemProductVisible > products.length) {
-              _itemProductVisible = products.length;
-            }
-          });
-        });
-      }
-    }
-  }
-
-  Future<void> _reLoad() async {
-    await _presenter.loadProductType();
-    await _presenter.loadAllProducts();
-    _itemProductVisible = 10;
-    setState(() {
-      if (!GlobalData.isToken!) {
-        Future.delayed(const Duration(seconds: 4), () {
-          ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
-        });
-      } else {
-        AuthPresenter.getInstance().checkAuth(
-            successful: () {},
-            onFailure: () {
-              ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
-            });
-      }
-    });
-  }
-
   @override
   void initState() {
+    ProductRepository.getProductPromotion();
     _scrollProductTypeController = ScrollController();
     _presenter = HomePresenter(this);
     _presenter.loadProductType();
     _presenter.loadAllProducts();
+    _presenter.loadProductPromotion();
     _scrollProductTypeController.addListener(_scrollProductTypeListener);
     _scrollProductController = ScrollController();
     _scrollProductController.addListener(_scrollProductListener);
     Connectivity().onConnectivityChanged.listen(connectListenner);
-
-    if (!GlobalData.isToken!) {
-      //thịnh viết  phần lấy thông tin đăng nhập id = 3
-      AuthPresenter.getIdUserbyStore()
-          .then((idUser) => AccountPresenter.getUserLogin(idUser!));
-
-      Future.delayed(const Duration(seconds: 4), () {
-        ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
-      });
-    } else {
-      AuthPresenter.getInstance().checkAuth(
-          successful: () {},
-          onFailure: () {
-            ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
-          });
-    }
-
+    _checkAuth();
     super.initState();
   }
 
@@ -160,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen>
           ],
         ),
         backgroundColor: Colors.black.withOpacity(0.65),
-        duration: const Duration(minutes: 5),
+        duration: const Duration(seconds: 20),
         action: SnackBarAction(
           textColor: const Color.fromARGB(255, 203, 66, 107),
           label: 'Đăng nhập',
@@ -176,13 +123,16 @@ class _HomeScreenState extends State<HomeScreen>
       padding: const EdgeInsets.only(top: 13),
       child: MasonryGridView.count(
         shrinkWrap: true,
-        itemCount: products.isEmpty ? 0 : _itemProductVisible,
+        itemCount: _itemProductVisible,
         padding: const EdgeInsets.symmetric(horizontal: 14),
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         mainAxisSpacing: screenWidth * 0.022,
         crossAxisSpacing: screenWidth * 0.022,
         itemBuilder: (context, index) {
+          if (products.isEmpty) {
+            return const Skeleton(key: Key(''), height: 200);
+          }
           return ProductWidget(product: products[index]);
         },
       ),
@@ -241,14 +191,72 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
+  _scrollProductListener() {
+    if (_isLoading) return;
+    if (_scrollProductController.hasClients) {
+      final double maxScrollSize =
+          _scrollProductController.position.maxScrollExtent;
+      final double currentPosition = _scrollProductController.position.pixels;
+
+      if (maxScrollSize == currentPosition) {
+        setState(() => _isLoading = true);
+        Future.delayed(const Duration(seconds: 3), () async {
+          setState(() {
+            _isLoading = false;
+            _itemProductVisible += 10;
+            if (_itemProductVisible > products.length && products.isNotEmpty) {
+              _itemProductVisible = products.length;
+            }
+          });
+        });
+      }
+    }
+  }
+
+  Future<void> _reLoad() async {
+    await _presenter.loadProductType();
+    await _presenter.loadAllProducts();
+    await _presenter.loadProductPromotion();
+    _itemProductVisible = 10;
+    _checkAuth();
+    setState(() {});
+  }
+
+  _checkAuth() {
+    if (!GlobalData.isToken!) {
+      Future.delayed(const Duration(seconds: 4), () {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
+      });
+    } else {
+      //thịnh viết  phần lấy thông tin đăng nhập id = 3
+      AuthPresenter.getIdUserbyStore()
+          .then((idUser) => AccountPresenter.getUserLogin(idUser!));
+
+      AuthPresenter.getInstance().checkAuth(
+          successful: () {},
+          onFailure: () {
+            if (GlobalData.isConneted!) {
+              ScaffoldMessenger.of(context).showSnackBar(snackBar(context));
+            }
+          });
+    }
+  }
+
   Widget _buildPromotionCatalog() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 6),
       height: screenWidth * 0.41,
       child: MasonryGridView.count(
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => ProductPromotion(product: test),
+        itemBuilder: (context, index) {
+          if (productPromotions.isEmpty) {
+            return Skeleton(
+                key: const Key(''), width: (screenWidth - 24) / 3, height: 5);
+          }
+          return ProductPromotion(product: productPromotions[index]);
+        },
         crossAxisCount: 1,
+        itemCount: productPromotions.isEmpty ? 10 : productPromotions.length,
         mainAxisSpacing: 6,
       ),
     );
@@ -262,21 +270,14 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   displayProducts(List<Product> list) {
     setState(() {
+      _itemProductVisible = 10;
       list.shuffle();
       products = list;
     });
   }
 
-  var test = Product(
-      id: 1,
-      idType: 1,
-      image: 'assets/home_screen/product_test.jpg',
-      imageInfo: null,
-      name:
-          'Laptop Lenovo Thinkpad P52 Core i7-8750H, Ram 32GB, SSD 512GB, 15.6 Inch FHD, Nvidia Quadro P1000',
-      description: 'assets/logo.png',
-      price: 5000,
-      promotion: 51,
-      repository: 1,
-      postAt: DateTime.now());
+  @override
+  displayProductPromotion(List<Product> list) {
+    setState(() => productPromotions = list);
+  }
 }

@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:darkshop/utils/screen_size.dart';
-import 'package:darkshop/views/home/home_presenter.dart';
 import 'package:flutter/material.dart';
 
 class SliderImage extends StatefulWidget {

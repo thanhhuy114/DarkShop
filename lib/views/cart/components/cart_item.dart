@@ -7,7 +7,7 @@ class itemCart extends StatefulWidget {
   final String name;
   final String price;
 
-  itemCart({
+  const itemCart({
     Key? key,
     required this.productId,
     required this.count,

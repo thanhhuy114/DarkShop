@@ -19,12 +19,14 @@ class NotificationRepository {
           .map((notificationMap) => NotificationInfo.fromJson(notificationMap))
           .toList();
 
+      // ignore: avoid_print
       print("Lấy danh sách thông báo ở sever thành công");
 
       NotificationLocal().saveNotifications(notifications);
 
       return notifications;
     } catch (e) {
+      // ignore: avoid_print
       print(e);
       return [];
     }
@@ -41,11 +43,14 @@ class NotificationRepository {
       );
 
       if (response.statusCode == 201) {
+        // ignore: avoid_print
         print('Thêm mới thông báo thành công');
       } else {
+        // ignore: avoid_print
         print('Lỗi khi thêm mới thông báo');
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Lỗi: $e');
     }
   }
@@ -58,11 +63,14 @@ class NotificationRepository {
       );
 
       if (response.statusCode == 200) {
+        // ignore: avoid_print
         print('Cập nhật thông báo thành Đã đọc');
       } else {
+        // ignore: avoid_print
         print('Cập nhật thông báo thất bại, mã lỗi: ${response.statusCode}');
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Lỗi khi gọi API cập nhật thông báo: $e');
     }
   }
@@ -109,6 +117,7 @@ class NotificationLocal {
       final localFile = await _localFile;
       s = await localFile.readAsString();
     } catch (e) {
+      // ignore: avoid_print
       print("getStringJsonNotifications() error: $e");
     }
     return s;
@@ -120,6 +129,7 @@ class NotificationLocal {
     try {
       list = jsonDecode(json).cast<Map<String, dynamic>>();
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
 
@@ -132,10 +142,13 @@ class NotificationLocal {
 
     try {
       results = listMap.map((map) => NotificationInfo.fromJson(map)).toList();
+      // ignore: avoid_print
       print("Lấy danh sách thông bào từ local thành công");
       return results;
     } catch (e) {
+      // ignore: avoid_print
       print("Lấy danh sách thông bào từ local thất bại");
+      // ignore: avoid_print
       print(e);
       return results;
     }
@@ -151,9 +164,12 @@ class NotificationLocal {
       final jsonString = json.encode(notificationListMap);
 
       await file.writeAsString(jsonString);
+      // ignore: avoid_print
       print("Lưu danh sách thông báo ở local thành công");
     } catch (e) {
+      // ignore: avoid_print
       print("Lưu danh sách thông báo ở local thất bại");
+      // ignore: avoid_print
       print(e);
     }
   }
@@ -164,9 +180,12 @@ class NotificationLocal {
 
       await file.writeAsString('');
 
+      // ignore: avoid_print
       print("Xóa danh sách thông báo ở local thành công");
     } catch (e) {
+      // ignore: avoid_print
       print("Xóa danh sách thông báo ở local thất bại");
+      // ignore: avoid_print
       print(e);
     }
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ImgButton extends StatelessWidget {
   VoidCallback ontap;
   ImgButton({super.key, required this.ontap});
@@ -9,7 +10,7 @@ class ImgButton extends StatelessWidget {
     return GestureDetector(
         onTap: ontap,
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: SizedBox(
             height: MediaQuery.of(context).size.height / 20,
             child: Image.asset(

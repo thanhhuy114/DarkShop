@@ -71,9 +71,9 @@ class _AddressManagementScreenState extends State<AddressManagementScreen> {
                             borderRadius: BorderRadius.circular(5),
                             color: MyColors.backgroundButton,
                           ),
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                             Icon(Icons.add),
                             Text(Constants.addAddress, style: TextStyle(fontSize: 14),)
                           ]),

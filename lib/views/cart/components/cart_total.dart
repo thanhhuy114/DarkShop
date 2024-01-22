@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable, camel_case_types
 class cartTotal extends StatefulWidget {
   int total;
   cartTotal({super.key, required this.total});
@@ -8,6 +9,7 @@ class cartTotal extends StatefulWidget {
   State<cartTotal> createState() => _cartTotalState();
 }
 
+// ignore: camel_case_types
 class _cartTotalState extends State<cartTotal> {
   @override
   Widget build(BuildContext context) {
@@ -39,9 +41,9 @@ class _cartTotalState extends State<cartTotal> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width / 2,
               decoration: const BoxDecoration(color: Colors.redAccent),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'Thanh toán',
                     textAlign: TextAlign.center,

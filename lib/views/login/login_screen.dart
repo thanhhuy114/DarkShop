@@ -1,5 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/views/signup/signup_screen_1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'components/password_textfield.dart';
@@ -129,12 +130,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontSize: screenWidth * 0.03,
                 fontWeight: FontWeight.bold),
           ),
-          Text(
-            'Đăng ký ',
-            style: TextStyle(
-                color: const Color.fromARGB(255, 253, 253, 253),
-                fontSize: screenWidth * 0.03,
-                fontWeight: FontWeight.bold),
+          GestureDetector(
+            onTap: () =>   Navigator.of(context)
+                .push(createRoutePushThrough(screen: const SignUpScreen1())),
+            child: Text(
+              'Đăng ký ',
+              style: TextStyle(
+                  color: const Color.fromARGB(255, 253, 253, 253),
+                  fontSize: screenWidth * 0.03,
+                  fontWeight: FontWeight.bold),
+            ),
           )
         ],
       ),
@@ -183,12 +188,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
                 child: Text('Đăng nhập',
-                    style: TextStyle(fontSize: screenWidth * 0.044))),
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.05, color: Colors.white))),
           ),
           SizedBox(height: screenHeight * 0.02),
           GestureDetector(
             onTap: () {
-              print('Click');
+                showToast('Vui lòng liên hệ quản trị viên để được hỗ trợ\nSDT: 0944221401\nMail: huycherry14@gmail.com\nCảm ơn', backgroundColor: Colors.green);
             },
             child: Text(
               'Quên mật khẩu?',
@@ -225,17 +231,18 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 extension CustomTextStyles on TextTheme {
-  TextStyle get customHeadlineLarge1 {
-    return headlineLarge!.copyWith(
-        fontSize: screenWidth * 0.09,
-        color: const Color.fromARGB(255, 203, 66, 107),
-        fontWeight: FontWeight.w800);
-  }
-
   TextStyle get customHeadlineLarge2 {
     return headlineLarge!.copyWith(
         fontSize: screenWidth * 0.041,
         color: const Color.fromARGB(255, 203, 66, 107),
         fontWeight: FontWeight.w700);
   }
+   TextStyle get customHeadlineLarge1 {
+    return headlineLarge!.copyWith(
+        fontSize: screenWidth * 0.062,
+        color: const Color.fromARGB(255, 203, 66, 107),
+        fontWeight: FontWeight.w800);
+  }
 }
+
+

@@ -6,7 +6,7 @@ import 'package:darkshop/views/invoices/screen/user/om_user_screen.dart';
 import 'package:darkshop/views/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
 
-class NavigationHomePage extends StatefulWidget { 
+class NavigationHomePage extends StatefulWidget {
   const NavigationHomePage({super.key});
 
   @override
@@ -17,8 +17,13 @@ class _NavigationHomePageState extends State<NavigationHomePage> {
   final PageController _controller = PageController();
 
   int _currentIndex = 0;
-  
+
   onTap(int index) {
+    // if (!GlobalData.isLogin!) {
+    //   Navigator.of(context).push(createRoutePushThrough(
+    //       screen: const LoginScreen()));
+    //   return;
+    // }
     if (index != _currentIndex) {
       setState(() {
         _currentIndex = index;

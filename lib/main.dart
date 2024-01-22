@@ -11,7 +11,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   GlobalData.isToken = await AuthPresenter.isTokenAvailable();
-  
   runApp(const MyApp());
 }
 

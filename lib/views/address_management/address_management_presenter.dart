@@ -1,7 +1,6 @@
 import 'package:darkshop/data/models/address.dart';
 import 'package:darkshop/data/repositories/address_repository.dart';
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/views/account/account_presenter.dart';
 import 'package:flutter/material.dart';
 
 class AddressManagementPresenter {
