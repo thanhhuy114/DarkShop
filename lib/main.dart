@@ -1,6 +1,4 @@
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/views/cart/cart_screen.dart';
-import 'package:darkshop/views/productDetail/product_screen.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
 import 'package:darkshop/views/stunning_splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +26,7 @@ class MyApp extends StatelessWidget {
         primary: Color.fromARGB(255, 255, 185, 88),
       )),
       debugShowCheckedModeBanner: false,
-      home:  ProductScreen(id: 2),
+      home:  SplashScreen(),
     );
   }
 }

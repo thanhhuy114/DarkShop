@@ -1,25 +1,34 @@
+import 'package:darkshop/data/models/cart.dart';
 import 'package:darkshop/utils/screen_size.dart';
 import 'package:flutter/material.dart';
-import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/views/cart/components/count_product.dart';
 
+import '../../../data/repositories/cart_repository.dart';
+import '../cart_presenter.dart';
+
 class ItemCart extends StatefulWidget {
+  final int idcart;
+  final int idProduct;
   final String Name;
   final int Price;
   final String ImagePro;
   final int Promotion;
+  final int id_user;
   int Count;
   final Function(double)? onPriceChanged;
   final void Function(bool isChecked)? onCheck;
 
   ItemCart({
     Key? key,
+    required this.idcart,
+    required this.idProduct,
     required this.onCheck,
     required this.Name,
     required this.Price,
     required this.ImagePro,
     required this.Count,
     required this.Promotion,
+    required this.id_user,
     this.onPriceChanged,
   }) : super(key: key);
 
@@ -29,6 +38,8 @@ class ItemCart extends StatefulWidget {
 
 class _ItemCartState extends State<ItemCart> {
   bool isChecked = false;
+  late Cart carts;
+  var cartsRepository = CartPresenter(CartRepository());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -71,7 +82,21 @@ class _ItemCartState extends State<ItemCart> {
                       fontSize: 14,
                     ),
                   ),
-                  Flexible(child: CountProduct(count: widget.Count)),
+                  Flexible(
+                      child: CountProduct(
+                    count: widget.Count,
+                    onCountChanged: (count) {
+                      setState(() {
+                        widget.Count = count;
+                        carts = Cart(
+                            id: widget.idcart,
+                            idProduct: widget.idProduct,
+                            count: widget.Count,
+                            id_user: widget.idcart);
+                        cartsRepository.updateCart(carts);
+                      });
+                    },
+                  )),
                   Checkbox(
                     value: isChecked,
                     onChanged: (value) {

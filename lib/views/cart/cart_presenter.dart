@@ -34,7 +34,7 @@ class CartPresenter {
   }
 
 //Update cart
-  Future<void> updateCart(Cart cart, int idCart) async {
-    return _repository.pullCart(cart, idCart);
+  Future<Cart> updateCart(Cart cart) async {
+    return _repository.putCart(cart);
   }
 }

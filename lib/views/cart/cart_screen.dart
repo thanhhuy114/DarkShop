@@ -1,3 +1,4 @@
+import 'package:darkshop/data/models/cart.dart';
 import 'package:darkshop/data/models/cart_custom.dart';
 import 'package:darkshop/data/repositories/Cart_repository.dart';
 import 'package:darkshop/utils/colors.dart';
@@ -65,7 +66,10 @@ class _CartScreenState extends State<CartScreen> {
                 var cart = selectedCarts[index];
                 return ItemCart(
                   key: ValueKey(cart
-                      .id), // Key để giúp Flutter xác định sự thay đổi của ItemCart
+                      .id),
+                  idProduct: cart.idProduct,
+                  id_user: cart.idUser,
+                  idcart: cart.id,
                   Name: cart.name,
                   Price: cart.price,
                   ImagePro: cart.image,

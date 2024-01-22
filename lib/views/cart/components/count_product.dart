@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class CountProduct extends StatefulWidget {
   int count;
-
-  CountProduct({Key? key, required this.count}) : super(key: key);
+  final void Function(int count)? onCountChanged;
+  CountProduct({Key? key, required this.count, this.onCountChanged})
+      : super(key: key);
 
   @override
   State<CountProduct> createState() => _CountProductState();
@@ -15,6 +16,7 @@ class _CountProductState extends State<CountProduct> {
       // Tăng giá trị count khi người dùng nhấn nút tăng
       if (widget.count < 9) {
         widget.count++;
+        widget.onCountChanged?.call(widget.count);
       }
     });
   }
@@ -24,6 +26,7 @@ class _CountProductState extends State<CountProduct> {
       // Giảm giá trị count khi người dùng nhấn nút giảm
       if (widget.count > 0) {
         widget.count--;
+        widget.onCountChanged?.call(widget.count);
       }
     });
   }

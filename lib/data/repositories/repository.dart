@@ -5,7 +5,7 @@ abstract class Repository {
   //GET ID USER
   Future<List<CartCustom>> getCardList(int id_user);
   //PULL
-  Future<void> pullCart(Cart Cart,int id);
+  Future<Cart> putCart(Cart Cart);
   //DELETE
   Future<void> deteleCart(int id_cart);
   //POST

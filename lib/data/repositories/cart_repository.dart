@@ -34,10 +34,10 @@ class CartRepository implements Repository {
     try {
       final response = await http.post(
         Uri.parse('$hosting/cart/'),
-        body:{
-          "idProduct":cart.idProduct.toString(),
-          "count":cart.count.toString(),
-          "id_user":cart.id_user.toString()
+        body: {
+          "idProduct": cart.idProduct.toString(),
+          "count": cart.count.toString(),
+          "id_user": cart.id_user.toString()
         },
       );
       print(response.body);
@@ -58,25 +58,6 @@ class CartRepository implements Repository {
   }
 
   @override
-  Future<void> pullCart(Cart Cart, int id_product) async {
-    try {
-      final response = await http.put(Uri.parse('${hosting}/cart/$id_product'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: json);
-
-      if (response.statusCode == 200) {
-        print('Cập nhật Cart ở sever thành công');
-      } else {
-        print('Cập nhật user ở sever thất bại');
-      }
-    } catch (e) {
-      print('Lỗi Cập nhật ở sever user: $e');
-    }
-  }
-
-  @override
   Future<List<CartCustom>> getLocal(int idUser) async {
     List<CartCustom> cartData = await getCardList(idUser);
     CartService cartService = CartService();
@@ -92,5 +73,55 @@ class CartRepository implements Repository {
     var body = jsonDecode(repose.body.toString());
 
     return body;
+  }
+
+  @override
+  Future<Cart> putCart(Cart cart) async {
+    if (cart.id == null) {
+      throw Exception('Cart ID is null.');
+    }
+
+    Map<String, dynamic> request = {
+      "id": cart.id ?? 0,
+      "id_user": cart.id_user,
+      "idProduct": cart.idProduct,
+      "count": cart.count
+    };
+
+    Future<Cart> putCart(Cart cart) async {
+      if (cart.id == null) {
+        throw Exception('ID của Cart là null.');
+      }
+
+      Map<String, dynamic> request = {
+        "id": cart.id ?? 0,
+        "id_user": cart.id_user,
+        "idProduct": cart.idProduct,
+        "count": cart.count
+      };
+
+      try {
+        final uri = Uri.parse('$hosting/cart/${cart.id}');
+        final response = await http.put(uri, body: jsonEncode(request));
+        print(response.body);
+
+        if (response.statusCode == 200) {
+          if (response.body.isNotEmpty) {
+            return Cart.fromJson(json.decode(response.body));
+          } else {
+            // Xử lý trường hợp body của response rỗng
+            throw Exception('Body của response rỗng sau khi cập nhật.');
+          }
+        } else {
+          // Xử lý các mã trạng thái không phải là 200
+          throw Exception('Lỗi: ${response.statusCode}, ${response.body}');
+        }
+      } catch (e) {
+        // Xử lý lỗi kết nối
+        throw Exception('Lỗi kết nối: $e');
+      }
+    }
+
+    return cart;
   }
 }
