@@ -28,6 +28,7 @@ class AccountPresenter {
     var connectivityResult = await (Connectivity().checkConnectivity());
 
     connected = connectivityResult != ConnectivityResult.none;
+    GlobalData.isConneted = connected;
     return connected;
   }
 
@@ -93,6 +94,7 @@ class AccountPresenter {
 
   logout(Function reload) async {
     GlobalData.user = null;
+    GlobalData.isLogin = false;
     await UserLocal().clearUser();
     await NotificationLocal().clearNotifications();
     reload();
