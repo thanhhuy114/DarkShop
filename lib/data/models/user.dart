@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:darkshop/data/repositories/user_repository.dart';
 
 class User {
@@ -31,6 +34,14 @@ class User {
         blocked = false;
 
   factory User.fromJson(Map<String, dynamic> json) {
+    Uint8List? imageBytes;
+    if (json.containsKey('image') && json['image'] != null) {
+      String? base64Image = json['image'];
+      if (base64Image != null) {
+        // imageBytes = base64Decode(base64Image);
+      }
+    }
+
     return User(
         id: json['id'],
         isAdmin: json['isAdmin'],

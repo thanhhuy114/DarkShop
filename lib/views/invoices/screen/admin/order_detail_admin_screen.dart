@@ -2,9 +2,17 @@ import 'package:darkshop/views/invoices/components/detail/info_order.dart';
 import 'package:darkshop/views/invoices/components/detail/info_product.dart';
 import 'package:flutter/material.dart';
 
-class OrderAdminDetail extends StatelessWidget {
-  const OrderAdminDetail({super.key});
+import '../../../../data/models/invoices.dart';
 
+class OrderAdminDetail extends StatefulWidget {
+  final Invoice invoice;
+  const OrderAdminDetail({Key? key, required this.invoice}) : super(key: key);
+
+  @override
+  OrderAdminDetailState createState() => OrderAdminDetailState();
+}
+
+class OrderAdminDetailState extends State<OrderAdminDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,18 +31,22 @@ class OrderAdminDetail extends StatelessWidget {
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white),
-            child: const InfoOrder(),
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.white,
+            ),
+            child: InfoOrder(
+              invoice: widget.invoice,
+            ),
           ),
           Container(
             height: MediaQuery.of(context).size.height * 0.65,
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white),
-            child: const InfoProduct(),
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.white,
+            ),
+            child: InfoProduct(invoice: widget.invoice),
           ),
         ],
       ),
