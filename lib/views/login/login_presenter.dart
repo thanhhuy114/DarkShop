@@ -75,7 +75,7 @@ class LogInPresenter {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return const AlertDialog(
+        return AlertDialog(
           content: Row(
             children: [
               CircularProgressIndicator(),

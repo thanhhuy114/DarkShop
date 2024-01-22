@@ -30,7 +30,7 @@ class NotificationInfo {
 
   factory NotificationInfo.fromJson(Map<String, dynamic> json) {
     return NotificationInfo(
-        id: json["id"],
+        id: json["id"]??-1,
         idUser: json["idUser"],
         date: DateTime.parse(json['date']),
         type: json["type"],

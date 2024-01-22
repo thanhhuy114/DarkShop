@@ -4,6 +4,6 @@ class GlobalData {
   static bool? isLogin;
   static User? user;
   static bool? isToken;
-  static bool? isConneted;
+  static bool? isConneted = false;
   static String? token;
 }
