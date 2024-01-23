@@ -66,7 +66,7 @@ class ApiService {
 
   //GET ALL pay
   Future<List<Pay>> getAllPays(String endpoint) async {
-    final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
+    final response = await http.get(Uri.parse('${Constants.pathClould}/$endpoint'));
     if (response.statusCode == 200) {
       final List<dynamic> responseData = jsonDecode(response.body);
       return responseData.map((json) => Pay.fromJson(json)).toList();
@@ -78,7 +78,7 @@ class ApiService {
 
   //GET ALL address
   Future<List<Address>> getAllAddresses(String endpoint) async {
-    final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
+    final response = await http.get(Uri.parse('${Constants.pathClould}/$endpoint'));
     if (response.statusCode == 200) {
       final List<dynamic> responseData = jsonDecode(response.body);
       return responseData.map((json) => Address.fromJson(json)).toList();

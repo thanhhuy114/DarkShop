@@ -1,9 +1,13 @@
+import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/utils/untils.dart';
+import 'package:darkshop/views/home/search/search_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:search_page/search_page.dart';
 
 class CustomSearchBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomSearchBar({super.key});
+  const CustomSearchBar({super.key, required this.products});
 
+  final List<Product> products;
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -16,7 +20,10 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   Widget build(BuildContext context) {
     return AppBar(
         title: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(createRoutePushUp(
+                screen: SearchScreen(products: widget.products)));
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -52,7 +59,10 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                             end: Alignment.bottomLeft)),
                     child: Center(
                         child: Text('Tìm',
-                            style: TextStyle(fontSize: screenWidth * 0.033, color: const Color.fromARGB(255, 235, 229, 229)))),
+                            style: TextStyle(
+                                fontSize: screenWidth * 0.033,
+                                color:
+                                    const Color.fromARGB(255, 235, 229, 229)))),
                   )
                 ]),
               )

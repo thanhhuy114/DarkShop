@@ -18,6 +18,7 @@ import 'package:darkshop/views/login/login_screen.dart';
 import 'package:darkshop/views/stunning_splash_screen/auth_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:search_page/search_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -48,7 +49,9 @@ class _HomeScreenState extends State<HomeScreen>
 
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        appBar: const CustomSearchBar(),
+        appBar: CustomSearchBar(
+          products: products,
+        ),
         body: RefreshIndicator(
           color: Colors.red,
           onRefresh: _reLoad,
@@ -90,6 +93,8 @@ class _HomeScreenState extends State<HomeScreen>
     _scrollProductController = ScrollController();
     _scrollProductController.addListener(_scrollProductListener);
     Connectivity().onConnectivityChanged.listen(connectListenner);
+    socket.on(
+        'sendOrder', (data) => showToast(data, backgroundColor: Colors.amber));
     _checkAuth();
 
     super.initState();

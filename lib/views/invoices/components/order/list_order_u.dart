@@ -1,3 +1,4 @@
+import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/views/invoices/components/widget/button_4.dart';
 import 'package:darkshop/views/invoices/screen/user/order_detail_user_screen.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +86,7 @@ class _ListOrderUserState extends State<ListOrderUser> {
 
           bool hasValidInvoiceDetails = lstInvoiceDetails.any((inDetail) =>
               inDetail.idInvoice == invoice.id &&
+              invoice.idUser == GlobalData.user!.id &&
               invoice.status == widget.desiredStatus);
 
           if (hasValidInvoiceDetails) {

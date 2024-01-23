@@ -12,11 +12,16 @@ class RequestLogin extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text("Bạn cần đăng nhập để sử dụng chức năng này!", style: TextStyle(fontSize: 16),),
+          const Text(
+            "Bạn cần đăng nhập để sử dụng chức năng này!",
+            style: TextStyle(fontSize: 16),
+          ),
           ElevatedButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const LoginScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()));
               },
               child: const Text("Đăng nhập"))
         ],

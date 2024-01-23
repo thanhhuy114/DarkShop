@@ -1,6 +1,8 @@
+import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/views/invoices/components/order/list_order_a.dart';
 import 'package:darkshop/views/invoices/components/widget/task_menu.dart';
 import 'package:darkshop/views/invoices/components/widget/title.dart';
+import 'package:darkshop/views/notification/components/request_login.dart';
 import 'package:flutter/material.dart';
 
 class OMAdmin extends StatefulWidget {
@@ -31,7 +33,8 @@ class OMAdminState extends State<OMAdmin> {
       appBar: AppBar(
         title: const TitleOM(),
       ),
-      body: Container(
+      body:  GlobalData.user == null
+          ? const RequestLogin(): Container(
         margin: const EdgeInsets.all(5),
         child: Column(
           mainAxisSize: MainAxisSize.min,

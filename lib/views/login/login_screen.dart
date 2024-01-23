@@ -244,5 +244,3 @@ extension CustomTextStyles on TextTheme {
         fontWeight: FontWeight.w800);
   }
 }
-
-

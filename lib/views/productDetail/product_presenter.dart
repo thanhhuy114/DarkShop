@@ -38,12 +38,15 @@ class ProductImage {
   ImageProduct? proImg;
   ProductImage({required this.proImg});
 
-  static get _hosting => 'http://192.168.1.3';
-
   static Future<List<String>> getImg(int id) async {
-    var uri = '$_hosting:3000/img_products/all/$id';
-    var url =
-        '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
+    return [
+      'darkshop/image/product/mobile/hyat6tjplobotd4otw1f.webp',
+      'darkshop/image/product/mobile/hhvhfgamcox0bydnmetx.webp',
+      'darkshop/image/product/mobile/u5i8wk21m9wct9slhde0.webp',
+      'darkshop/image/product/mobile/hyat6tjplobotd4otw1f.webp',
+      'darkshop/image/product/mobile/fydznv388h0nvva3100c.webp'
+    ];
+    var uri = '${Constants.hosting}/img_products/all/$id';
     try {
       final response = await http.get(Uri.parse(uri));
 
@@ -54,7 +57,7 @@ class ProductImage {
           if (item is Map<String, dynamic> && item.containsKey("image")) {
             String imageUrl = item["image"];
             if (!imageUrl.startsWith("http")) {
-              imageUrl = url + imageUrl;
+              imageUrl = Constants.pathClould + imageUrl;
             }
             return imageUrl;
           } else {
@@ -75,4 +78,3 @@ class ProductImage {
     }
   }
 }
-

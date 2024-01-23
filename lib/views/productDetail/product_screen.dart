@@ -1,5 +1,8 @@
 //giao diện product
 import 'package:darkshop/data/models/product.dart';
+import 'package:darkshop/utils/untils.dart';
+import 'package:darkshop/views/checkout/checkout_screen.dart';
+import 'package:darkshop/views/login/login_screen.dart';
 import 'package:darkshop/views/productDetail/components/button.dart';
 import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:darkshop/views/productDetail/components/custom_btn_cart.dart';
@@ -32,7 +35,9 @@ class _ProductScreenState extends State<ProductScreen> {
       setState(() {
         product = ProductPresenter.getPro(widget.id);
         productImg = ProductImage.getImg(widget.id);
-      }); 
+        product.then(
+            (image) => productImg.then((value) => value[0] = image.image!));
+      });
     } catch (error) {
       print("Error fetching product image: $error");
     }
@@ -132,7 +137,10 @@ class _ProductScreenState extends State<ProductScreen> {
                             CustomButton(
                               text: 'Mua ngay',
                               icon: Icons.shopping_cart_outlined,
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(createRoutePushUp(
+                                    screen: const CheckoutScreen()));
+                              },
                             ),
                             CustomButtonCart(
                               text: 'Thêm giỏ hàng',
@@ -159,6 +167,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10)
                 ],
               );
             }

@@ -27,7 +27,7 @@ class _NotificationCardState extends State<NotificationCard> {
           height: 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: MyColors.backgroundCard,
+            color: const Color.fromARGB(255, 247, 247, 247),
           ),
           child: Row(
             children: [

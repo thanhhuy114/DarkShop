@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-var url = '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
+import 'package:darkshop/utils/constants.dart';
+
 
 class ImageProduct {
   int id;
@@ -20,7 +21,7 @@ class ImageProduct {
   factory ImageProduct.fromJson(Map<String, dynamic> json) {
     return ImageProduct(
       id: json['id'],
-      image: json[url + 'image'],
+      image: json[Constants.pathClould + 'image'],
       id_product: json['id_product'],
     );
   }

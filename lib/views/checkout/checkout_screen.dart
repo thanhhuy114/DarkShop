@@ -1,4 +1,6 @@
+import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/utils/untils.dart';
+import 'package:darkshop/views/notification/components/request_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -11,12 +13,22 @@ class CheckoutScreen extends StatefulWidget {
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
+  void initState() {
+    socket.on(
+        'sendOrder', (data) => 
+        showToast(data, backgroundColor: Colors.amber));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
             icon: Icon(
               size: screenWidth * 0.075,
               Icons.arrow_back,
@@ -29,52 +41,56 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               color: const Color.fromARGB(255, 203, 66, 107)),
         ),
       ),
-      body: SingleChildScrollView(
-          child: Column(children: [
-        _buildAddressInfo(),
-        Container(height: screenWidth * 0.055, color: Colors.transparent),
-        _buildBroductOrder(),
-        const SizedBox(height: 5),
-        _buildPaymentMethod(),
-        Container(
-            padding: const EdgeInsets.all(10),
-            height: screenHeight * 0.1,
-            color: const Color.fromARGB(255, 225, 224, 221),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Tiền tạm tính',
-                        style: TextStyle(
-                            color: const Color.fromARGB(255, 121, 120, 118),
-                            fontWeight: FontWeight.w400,
-                            fontSize: screenWidth * 0.038)),
-                    Text('100.000.000 ₫',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: screenWidth * 0.038))
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Phí vận chuyển',
-                        style: TextStyle(
-                            color: const Color.fromARGB(255, 121, 120, 118),
-                            fontWeight: FontWeight.w400,
-                            fontSize: screenWidth * 0.038)),
-                    Text('30.000 ₫',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: screenWidth * 0.036))
-                  ],
-                )
-              ],
-            ))
-      ])),
+      body: GlobalData.user == null
+          ? const RequestLogin()
+          : SingleChildScrollView(
+              child: Column(children: [
+              _buildAddressInfo(),
+              Container(height: screenWidth * 0.055, color: Colors.transparent),
+              _buildBroductOrder(),
+              const SizedBox(height: 5),
+              _buildPaymentMethod(),
+              Container(
+                  padding: const EdgeInsets.all(10),
+                  height: screenHeight * 0.1,
+                  color: const Color.fromARGB(255, 225, 224, 221),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Tiền tạm tính',
+                              style: TextStyle(
+                                  color:
+                                      const Color.fromARGB(255, 121, 120, 118),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: screenWidth * 0.038)),
+                          Text('100.000.000 ₫',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: screenWidth * 0.038))
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Phí vận chuyển',
+                              style: TextStyle(
+                                  color:
+                                      const Color.fromARGB(255, 121, 120, 118),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: screenWidth * 0.038)),
+                          Text('30.000 ₫',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: screenWidth * 0.036))
+                        ],
+                      )
+                    ],
+                  ))
+            ])),
       bottomNavigationBar: _buildBottmBar(),
     );
   }
@@ -115,7 +131,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 children: [
                   Row(
                     children: [
-                      Image.asset('assets/checkout_screen/cash.png',
+                      Image.asset('assets/checkout_screen/momo.png',
                           height: screenWidth * 0.083,
                           width: screenWidth * 0.083),
                       const SizedBox(width: 5),
@@ -167,25 +183,25 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               fit: BoxFit.contain,
               height: 80,
             ),
-            Expanded(
+            const Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 0, left: 8),
+                padding: EdgeInsets.only(top: 0, left: 8),
                 child: SizedBox(
                   height: 104,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         'Laptop Lenovo Thinkpad P52 Core i7-8750H, Ram 32GB, SSD 512GB, 15.6 Inch FHD, Nvidia Quadro P1000',
                         style: TextStyle(
                             fontSize: 11.5, fontWeight: FontWeight.w400),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 29),
+                      SizedBox(height: 29),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text('100.000.000 ₫',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 11)),
@@ -220,12 +236,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ],
         ),
         const SizedBox(width: 3),
-        Expanded(
+        const Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
-                children: const [
+                children: [
                   Text(
                     'Võ Thành Huy',
                     style:
@@ -238,8 +254,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 6),
-              const Text(
+              SizedBox(height: 6),
+              Text(
                 '42/76 Hoàng Hoa Thám, Q.Bình Thạnh, P.7, TP.Hồ Chí Minh',
                 style: TextStyle(
                     color: Color.fromARGB(255, 63, 60, 60),
@@ -283,7 +299,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     Size(screenWidth * 0.21, screenWidth * 0.12)),
                 backgroundColor: const MaterialStatePropertyAll(
                     Color.fromARGB(255, 203, 66, 107))),
-            onPressed: () {},
+            onPressed: () {
+              socket.emit('order', '${GlobalData.user!.fullname} vừa đặt hàng');
+            },
             child: Text('Đặt hàng',
                 style: TextStyle(fontSize: screenWidth * 0.038))),
         SizedBox(width: screenWidth * 0.035)

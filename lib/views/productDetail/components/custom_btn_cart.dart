@@ -1,3 +1,4 @@
+import 'package:darkshop/utils/untils.dart';
 import 'package:flutter/material.dart';
 
 class CustomButtonCart extends StatefulWidget {
@@ -6,7 +7,8 @@ class CustomButtonCart extends StatefulWidget {
   final int id_product;
   final void Function(int quantity) onQuantitySelected; // Callback
 
-  CustomButtonCart({
+  const CustomButtonCart({
+    super.key,
     required this.text,
     required this.icon,
     required this.id_product,
@@ -18,7 +20,8 @@ class CustomButtonCart extends StatefulWidget {
 }
 
 class _CustomButtonCartState extends State<CustomButtonCart> {
-  TextEditingController _quantityController = TextEditingController(text: '1');
+  final TextEditingController _quantityController =
+      TextEditingController(text: '1');
   int count = 1;
   @override
   Widget build(BuildContext context) {
@@ -32,13 +35,15 @@ class _CustomButtonCartState extends State<CustomButtonCart> {
             const MaterialStatePropertyAll(Color.fromARGB(255, 203, 66, 107)),
         iconColor: const MaterialStatePropertyAll(Colors.amberAccent),
       ),
-      icon: Icon(widget.icon, size: 25),
+      icon: Icon(widget.icon, size: screenWidth * 0.056),
       label: Row(
         children: [
           Text(
             widget.text,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: screenWidth * 0.037),
           ),
         ],
       ),
@@ -50,7 +55,7 @@ class _CustomButtonCartState extends State<CustomButtonCart> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Nhập số lượng'),
+          title: const Text('Nhập số lượng'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

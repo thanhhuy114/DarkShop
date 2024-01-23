@@ -4,6 +4,7 @@ import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/no_internet/no_internet.dart';
+import 'package:darkshop/views/productDetail/product_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductPromotion extends StatelessWidget {
@@ -17,10 +18,7 @@ class ProductPromotion extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(createRoutePushThrough(
              screen: GlobalData.isConneted!
-                ? Scaffold(
-                    appBar: AppBar(),
-                    body: Container(color: Colors.yellow),
-                  )
+                ? ProductScreen(id: product.id)
                 : const NoInternetScreen()));
         },
         child: Ink(

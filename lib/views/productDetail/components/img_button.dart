@@ -1,10 +1,11 @@
+import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/views/productDetail/productimgzoom_screen.dart';
 import 'package:flutter/material.dart';
 
 class ImgButton extends StatelessWidget {
   final Future<List<String>> urlImg;
 
-  ImgButton({Key? key, required this.urlImg}) : super(key: key);
+  const ImgButton({Key? key, required this.urlImg}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +31,18 @@ class ImgButton extends StatelessWidget {
               future: urlImg,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Lỗi: ${snapshot.error}');
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Text('Không có dữ liệu hình ảnh');
+                  return const Text('Không có dữ liệu hình ảnh');
                 } else {
                   // Hiển thị ảnh đầu tiên từ danh sách URL hình ảnh
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: Image.network(
                       fit: BoxFit.fill,
-                      snapshot.data![0],
+                      Constants.pathClould + snapshot.data![0],
                       cacheHeight: 40,
                       cacheWidth: 80,
                     ),
