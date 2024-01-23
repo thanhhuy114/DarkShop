@@ -1,6 +1,7 @@
 //xử lý tương tác bên giao diện
 //vd: nhấn nút ...
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:darkshop/data/models/image_product.dart';
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/utils/constants.dart';
@@ -13,7 +14,6 @@ class ProductPresenter {
 
   static Future<Product> getPro(int id) async {
     var uri = '${Constants.hosting}/products/$id';
-
     try {
       var response = await http.get(Uri.parse(uri));
 
@@ -32,6 +32,22 @@ class ProductPresenter {
 
     return Product.empty();
   }
+
+  Future<void> deleteProduct(int idProduct) async {
+    var uri = '${Constants.hosting}/products/$idProduct';
+    try {
+      var response = await http.delete(Uri.parse(uri));
+      if (response.statusCode == 200) {
+        print('Xóa thành công');
+      }
+    } catch (e) {
+      print('Lỗi $e');
+    }
+
+//   Future<void> deleteCart(int id) async {
+//   await _repository.deleteProduct(id);//goi ham
+// }
+  }
 }
 
 class ProductImage {
@@ -39,13 +55,6 @@ class ProductImage {
   ProductImage({required this.proImg});
 
   static Future<List<String>> getImg(int id) async {
-    return [
-      'darkshop/image/product/mobile/hyat6tjplobotd4otw1f.webp',
-      'darkshop/image/product/mobile/hhvhfgamcox0bydnmetx.webp',
-      'darkshop/image/product/mobile/u5i8wk21m9wct9slhde0.webp',
-      'darkshop/image/product/mobile/hyat6tjplobotd4otw1f.webp',
-      'darkshop/image/product/mobile/fydznv388h0nvva3100c.webp'
-    ];
     var uri = '${Constants.hosting}/img_products/all/$id';
     try {
       final response = await http.get(Uri.parse(uri));

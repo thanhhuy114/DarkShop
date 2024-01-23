@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 
 class Cart {
-  int id;
+  int ?id;
   int id_user;
   int idProduct;
   int count;
 
   Cart({
-    required this.id,
+     this.id,
     required this.id_user,
     required this.idProduct,
     required this.count

@@ -95,7 +95,6 @@ class UserRepository {
 
       if (response.statusCode == 200) {
         print('Cập nhật user ở sever thành công');
-        GlobalData.user = await getUserById(idUser);
       } else {
         if (kDebugMode) {
           print('Cập nhật user ở sever thất bại');

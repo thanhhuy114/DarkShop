@@ -1,3 +1,5 @@
+import 'package:darkshop/data/models/cart.dart';
+import 'package:darkshop/data/models/cart_custom.dart';
 import 'package:darkshop/data/repositories/Cart_repository.dart';
 import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/views/cart/cart_presenter.dart';
@@ -16,15 +18,37 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  var cartsRepository =
-      CartPresenter(CartRepository()); // Sửa lại thành CartPresenter
-  double Price = 0.0;
+  var cartsRepository = CartPresenter(CartRepository());
+  double totalPrice = 0.0;
+  List<CartCustom> selectedCarts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCartList();
+  }
+
+  Future<void> fetchCartList() async {
+    try {
+      var carts = await cartsRepository.fetchCartListLocal(widget.id_user);
+      var listCarts = await cartsRepository.fetchCartListLocal(widget.id_user);
+      setState(() {
+        // Tính tổng giá tiền cho danh sách đã chọn
+        totalPrice = selectedCarts
+            .map<double>((cart) =>
+                (cart.price - (cart.price * cart.promotion / 100)) * cart.count)
+            .fold<double>(0.0, (acc, price) => acc + price);
+        selectedCarts = List.from(listCarts); // Tạo một danh sách mới
+      });
+    } catch (error) {
+      print('Lỗi: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: const [Icon(Icons.delete)],
         actionsIconTheme: const IconThemeData(size: 40),
         title: const Text(
           'Giỏ hàng',
@@ -36,40 +60,47 @@ class _CartScreenState extends State<CartScreen> {
       body: Column(
         children: [
           Expanded(
-            child: FutureBuilder(
-              future: cartsRepository.fetchCartListLocal(
-                  widget.id_user), // Sửa lại thành fetchCartListLocal
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Lỗi: ${snapshot.error}');
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(
-                    child: Text('Không có mục nào trong giỏ hàng.'),
-                  );
-                } else {
-                  return ListView.builder(
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (context, index) {
-                      var cart = snapshot.data?[index];
-                      var product = ProductPresenter.getPro(cart!.idProduct);
-                      return ItemCart(
-                        product: product,
-                        count: cart.count,
-                        onPriceChanged: (double price) {
-                          // Xử lý giá đã cập nhật trong CartScreen
-                          Price = price;
-                          print('Updated Price: $price');
-                        },
-                      );
-                    },
-                  );
-                }
+            child: ListView.builder(
+              itemCount: selectedCarts.length,
+              itemBuilder: (context, index) {
+                var cart = selectedCarts[index];
+                return ItemCart(
+                  key: ValueKey(cart
+                      .id),
+                  idProduct: cart.idProduct,
+                  id_user: cart.idUser,
+                  idcart: cart.id,
+                  Name: cart.name,
+                  Price: cart.price,
+                  ImagePro: cart.image,
+                  Count: cart.count,
+                  Promotion: cart.promotion,
+                  onCheck: (bool value) {
+                    setState(() {
+                      List<CartCustom> updatedCarts = List.from(selectedCarts);
+
+                      if (value) {
+                        updatedCarts.add(cart);
+                      } else {
+                        updatedCarts.remove(cart);
+                      }
+
+                      // Tính tổng giá tiền cho danh sách đã chọn
+                      totalPrice = updatedCarts
+                          .map<double>((cart) =>
+                              (cart.price -
+                                  (cart.price * (cart.promotion / 100))) *
+                              cart.count)
+                          .fold<double>(0.0, (acc, price) => acc + price);
+
+                      selectedCarts = updatedCarts;
+                    });
+                  },
+                );
               },
             ),
           ),
-          CartTotal(total: Price),
+          CartTotal(total: totalPrice),
         ],
       ),
       backgroundColor: MyColors.backgroundApp,

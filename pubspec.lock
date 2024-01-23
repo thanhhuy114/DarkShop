@@ -744,6 +744,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+<<<<<<< HEAD
   search_page:
     dependency: "direct main"
     description:
@@ -752,6 +753,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
+=======
+>>>>>>> origin/Nam_3
   shared_preferences:
     dependency: "direct main"
     description:

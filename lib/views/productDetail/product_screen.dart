@@ -1,8 +1,9 @@
 //giao diện product
+import 'package:darkshop/data/models/cart.dart';
+import 'package:darkshop/data/models/image_product.dart';
 import 'package:darkshop/data/models/product.dart';
-import 'package:darkshop/utils/untils.dart';
-import 'package:darkshop/views/checkout/checkout_screen.dart';
-import 'package:darkshop/views/login/login_screen.dart';
+import 'package:darkshop/data/repositories/Cart_repository.dart';
+import 'package:darkshop/views/cart/cart_presenter.dart';
 import 'package:darkshop/views/productDetail/components/button.dart';
 import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:darkshop/views/productDetail/components/custom_btn_cart.dart';
@@ -24,6 +25,9 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
   late Future<Product> product;
   late Future<List<String>> productImg;
+  var cart = CartPresenter(CartRepository());
+  int count = 1; // Mặc định là 1 sản phẩm khi chưa chọn số lượng
+
   @override
   void initState() {
     _initializeData();
@@ -35,8 +39,6 @@ class _ProductScreenState extends State<ProductScreen> {
       setState(() {
         product = ProductPresenter.getPro(widget.id);
         productImg = ProductImage.getImg(widget.id);
-        product.then(
-            (image) => productImg.then((value) => value[0] = image.image!));
       });
     } catch (error) {
       print("Error fetching product image: $error");
@@ -45,7 +47,9 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var cart = CartPresenter(CartRepository());
     int count;
+    late Cart carts;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 185, 88),
       appBar: AppBar(
@@ -138,8 +142,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               text: 'Mua ngay',
                               icon: Icons.shopping_cart_outlined,
                               onPressed: () {
-                                Navigator.of(context).push(createRoutePushUp(
-                                    screen: const CheckoutScreen()));
+                                // Xử lý khi nhấn nút "Mua ngay"
                               },
                             ),
                             CustomButtonCart(
@@ -147,7 +150,16 @@ class _ProductScreenState extends State<ProductScreen> {
                               icon: Icons.shopping_cart_checkout_sharp,
                               id_product: product.id,
                               onQuantitySelected: (int quantity) {
-                                count = quantity;
+                                setState(() {
+                                  count = quantity;
+                                });
+                                carts = Cart(
+                                    idProduct: widget.id,
+                                    count: quantity,
+                                    id_user: 2,
+                                    id: null);
+                                // Gọi hàm để thêm sản phẩm vào giỏ hàng
+                                cart.postCartItem(carts);
                               },
                             ),
                           ],

@@ -13,7 +13,8 @@ class ProductRepository {
     try {
       var result = await http.get(url);
 
-      if (result.statusCode != 200) return [];
+      if (result.statusCode != 200) 
+      return [];
 
       products = (json.decode(result.body) as List)
           .map((product) => Product.fromJson(product))
