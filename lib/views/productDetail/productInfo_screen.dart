@@ -1,18 +1,18 @@
 import 'package:darkshop/data/models/product.dart';
+import 'package:darkshop/utils/constants.dart';
 import 'package:darkshop/views/productDetail/components/product_info.dart';
 import 'package:flutter/material.dart';
 
 class ProductInfoScreen extends StatefulWidget {
   final Product pro;
-  ProductInfoScreen({super.key, required this.pro});
+  const ProductInfoScreen({super.key, required this.pro});
 
   @override
   State<ProductInfoScreen> createState() => _ProductInfoScreenState();
 }
 
 class _ProductInfoScreenState extends State<ProductInfoScreen> {
-  var url =
-      '''https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/''';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class _ProductInfoScreenState extends State<ProductInfoScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: Image.network(
-                      url + widget.pro.image.toString(),
+                      Constants.pathClould + widget.pro.image.toString(),
                       fit: BoxFit.cover,
                     ),
                   ),

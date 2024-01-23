@@ -55,6 +55,14 @@ class ProductImage {
   ProductImage({required this.proImg});
 
   static Future<List<String>> getImg(int id) async {
+    return [
+      'darkshop/image/product/mobile/hyat6tjplobotd4otw1f.webp',
+      'darkshop/image/product/mobile/hhvhfgamcox0bydnmetx.webp',
+      'darkshop/image/product/mobile/u5i8wk21m9wct9slhde0.webp',
+      'darkshop/image/product/mobile/hyat6tjplobotd4otw1f.webp',
+      'darkshop/image/product/mobile/fydznv388h0nvva3100c.webp'
+    ];
+
     var uri = '${Constants.hosting}/img_products/all/$id';
     try {
       final response = await http.get(Uri.parse(uri));

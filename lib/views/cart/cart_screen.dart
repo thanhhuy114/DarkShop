@@ -1,14 +1,17 @@
 import 'package:darkshop/data/models/cart.dart';
 import 'package:darkshop/data/models/cart_custom.dart';
-import 'package:darkshop/data/repositories/Cart_repository.dart';
+import 'package:darkshop/data/models/cart_local.dart';
+
 import 'package:darkshop/utils/colors.dart';
 import 'package:darkshop/views/cart/cart_presenter.dart';
 import 'package:darkshop/views/cart/components/cart_item.dart';
 import 'package:darkshop/views/cart/components/cart_total.dart';
-import 'package:darkshop/views/productDetail/product_presenter.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/repositories/cart_repository.dart';
+
 class CartScreen extends StatefulWidget {
+  // ignore: non_constant_identifier_names
   final int id_user;
 
   const CartScreen({Key? key, required this.id_user}) : super(key: key);
@@ -19,6 +22,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   var cartsRepository = CartPresenter(CartRepository());
+  var cartService = CartService(); // Tạo đối tượng CartService
   double totalPrice = 0.0;
   List<CartCustom> selectedCarts = [];
 
@@ -30,19 +34,37 @@ class _CartScreenState extends State<CartScreen> {
 
   Future<void> fetchCartList() async {
     try {
-      var carts = await cartsRepository.fetchCartListLocal(widget.id_user);
-      var listCarts = await cartsRepository.fetchCartListLocal(widget.id_user);
+      // Sử dụng CartService để lấy dữ liệu giỏ hàng
+      var listCarts = await cartService.getCart();
+
       setState(() {
-        // Tính tổng giá tiền cho danh sách đã chọn
         totalPrice = selectedCarts
             .map<double>((cart) =>
                 (cart.price - (cart.price * cart.promotion / 100)) * cart.count)
             .fold<double>(0.0, (acc, price) => acc + price);
-        selectedCarts = List.from(listCarts); // Tạo một danh sách mới
+        selectedCarts = List.from(listCarts);
       });
     } catch (error) {
       print('Lỗi: $error');
     }
+  }
+
+  void saveCartToLocal(List<CartCustom> updatedCarts) async {
+    // Sử dụng CartService để lưu dữ liệu giỏ hàng được cập nhật
+    await cartService.saveCart(updatedCarts);
+    print('Đã lưu giỏ hàng local');
+  }
+
+  Future<void> getCartFromLocal() async {
+    // Sử dụng CartService để lấy dữ liệu giỏ hàng từ local
+    var localCarts = await cartService.getCart();
+    setState(() {
+      selectedCarts = localCarts;
+      totalPrice = localCarts
+          .map<double>((cart) =>
+              (cart.price - (cart.price * cart.promotion / 100)) * cart.count)
+          .fold<double>(0.0, (acc, price) => acc + price);
+    });
   }
 
   @override
@@ -65,8 +87,7 @@ class _CartScreenState extends State<CartScreen> {
               itemBuilder: (context, index) {
                 var cart = selectedCarts[index];
                 return ItemCart(
-                  key: ValueKey(cart
-                      .id),
+                  key: ValueKey(cart.id),
                   idProduct: cart.idProduct,
                   id_user: cart.idUser,
                   idcart: cart.id,
@@ -85,13 +106,15 @@ class _CartScreenState extends State<CartScreen> {
                         updatedCarts.remove(cart);
                       }
 
-                      // Tính tổng giá tiền cho danh sách đã chọn
                       totalPrice = updatedCarts
                           .map<double>((cart) =>
                               (cart.price -
                                   (cart.price * (cart.promotion / 100))) *
                               cart.count)
                           .fold<double>(0.0, (acc, price) => acc + price);
+
+                      // Lưu giỏ hàng vào local khi giỏ hàng thay đổi
+                      saveCartToLocal(updatedCarts);
 
                       selectedCarts = updatedCarts;
                     });
@@ -100,7 +123,7 @@ class _CartScreenState extends State<CartScreen> {
               },
             ),
           ),
-          CartTotal(total: totalPrice),
+          CartTotal(total: totalPrice)
         ],
       ),
       backgroundColor: MyColors.backgroundApp,

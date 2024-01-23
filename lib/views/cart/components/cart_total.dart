@@ -1,4 +1,4 @@
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:flutter/material.dart';
 
 class CartTotal extends StatefulWidget {
@@ -40,7 +40,7 @@ class _CartTotalState extends State<CartTotal> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width / 2,
               decoration: const BoxDecoration(color: Colors.redAccent),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(

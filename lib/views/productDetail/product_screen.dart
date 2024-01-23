@@ -3,7 +3,11 @@ import 'package:darkshop/data/models/cart.dart';
 import 'package:darkshop/data/models/image_product.dart';
 import 'package:darkshop/data/models/product.dart';
 import 'package:darkshop/data/repositories/Cart_repository.dart';
+import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/cart/cart_presenter.dart';
+import 'package:darkshop/views/checkout/checkout_screen.dart';
+import 'package:darkshop/views/notification/components/request_login.dart';
 import 'package:darkshop/views/productDetail/components/button.dart';
 import 'package:darkshop/views/productDetail/components/carousel_slider.dart';
 import 'package:darkshop/views/productDetail/components/custom_btn_cart.dart';
@@ -39,6 +43,8 @@ class _ProductScreenState extends State<ProductScreen> {
       setState(() {
         product = ProductPresenter.getPro(widget.id);
         productImg = ProductImage.getImg(widget.id);
+        product.then(
+            (image) => productImg.then((value) => value[0] = image.image!));
       });
     } catch (error) {
       print("Error fetching product image: $error");
@@ -61,7 +67,9 @@ class _ProductScreenState extends State<ProductScreen> {
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 255, 185, 88),
       ),
-      body: SingleChildScrollView(
+      body: GlobalData.user == null
+          ? const RequestLogin()
+          : SingleChildScrollView(
         child: FutureBuilder<Product>(
           future: product,
           builder: (context, snapshot) {
@@ -143,6 +151,8 @@ class _ProductScreenState extends State<ProductScreen> {
                               icon: Icons.shopping_cart_outlined,
                               onPressed: () {
                                 // Xử lý khi nhấn nút "Mua ngay"
+                                Navigator.of(context).push(createRoutePushUp(
+                                    screen: const CheckoutScreen()));
                               },
                             ),
                             CustomButtonCart(

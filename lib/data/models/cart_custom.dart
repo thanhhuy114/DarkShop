@@ -24,11 +24,11 @@ class CartCustom {
     id = json['id'];
     idUser = json['id_user'];
     count = json['count'];
-    name = json['name'];
+    name = json['name'] ?? '';
     idProduct = json['idProduct'];
-    image = json['image'];
-    price = json['price'];
-    promotion = json['promotion'];
+    image = json['image'] ?? '';
+    price = json['price'] ?? 1;
+    promotion = json['promotion'] ?? 1;
   }
 
   Map<String, dynamic> toJson() {

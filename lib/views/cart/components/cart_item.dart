@@ -1,5 +1,7 @@
 import 'package:darkshop/data/models/cart.dart';
-import 'package:darkshop/utils/screen_size.dart';
+import 'package:darkshop/utils/constants.dart';
+import 'package:darkshop/utils/untils.dart';
+
 import 'package:flutter/material.dart';
 import 'package:darkshop/views/cart/components/count_product.dart';
 
@@ -56,7 +58,7 @@ class _ItemCartState extends State<ItemCart> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.network(
-              (urlImage + widget.ImagePro).toString(),
+              (Constants.pathClould + widget.ImagePro).toString(),
               cacheHeight: 100,
               fit: BoxFit.cover,
             ),

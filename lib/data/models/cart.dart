@@ -28,11 +28,11 @@ class Cart {
   }
 
    Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['id_user'] = id_user;
-    data['idProduct'] = idProduct;
-    data['count'] = count;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['id_user'] = this.id_user;
+    data['idProduct'] = this.idProduct;
+    data['count'] = this.count;
     return data;
   }
 }

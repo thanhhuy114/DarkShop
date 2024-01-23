@@ -15,8 +15,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   void initState() {
     socket.on(
-        'sendOrder', (data) => 
-        showToast(data, backgroundColor: Colors.amber));
+        'sendOrder', (data) => showToast(data, backgroundColor: Colors.amber));
     super.initState();
   }
 

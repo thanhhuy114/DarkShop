@@ -1,3 +1,4 @@
+import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/utils/untils.dart';
 import 'package:darkshop/views/account/account_screen.dart';
 import 'package:darkshop/views/cart/cart_screen.dart';
@@ -36,7 +37,7 @@ class _NavigationHomePageState extends State<NavigationHomePage> {
   List<Widget> _buildThreePageViewChildren() {
     return <Widget>[
       const HomeScreen(),
-      const CartScreen(id_user: 1),
+      const CartScreen(id_user:  3),
       const NotificationScreen(),
       const OMUser(),
       const AccountScreen(),

@@ -1,5 +1,5 @@
 import 'package:darkshop/utils/global_data.dart';
-import 'package:darkshop/views/invoices/components/order/list_order_u.dart';
+import 'package:darkshop/views/invoices/components/order/list_order_a.dart';
 import 'package:darkshop/views/invoices/components/widget/task_menu.dart';
 import 'package:darkshop/views/invoices/components/widget/title.dart';
 import 'package:darkshop/views/notification/components/request_login.dart';
@@ -48,7 +48,7 @@ class OMUserState extends State<OMUser> {
                   const SizedBox(
                     height: 5,
                   ),
-                  ListOrderUser(
+                  ListOrderAdmin(
                     desiredStatus: desiredStatus,
                   ),
                 ],

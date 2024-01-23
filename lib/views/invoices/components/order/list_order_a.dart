@@ -82,6 +82,7 @@ class _ListOrderAdminState extends State<ListOrderAdmin> {
 
           bool hasValidInvoiceDetails = invoiceDetails.any((inDetail) =>
               inDetail.idInvoice == invoice.id &&
+              invoice.idUser == GlobalData.user!.id &&
               invoice.status == widget.desiredStatus);
 
           if (hasValidInvoiceDetails) {
