@@ -3,6 +3,7 @@ import 'package:darkshop/data/models/cart_custom.dart';
 import 'package:darkshop/data/models/cart_local.dart';
 
 import 'package:darkshop/utils/colors.dart';
+import 'package:darkshop/utils/global_data.dart';
 import 'package:darkshop/views/cart/cart_presenter.dart';
 import 'package:darkshop/views/cart/components/cart_item.dart';
 import 'package:darkshop/views/cart/components/cart_total.dart';
@@ -35,7 +36,7 @@ class _CartScreenState extends State<CartScreen> {
   Future<void> fetchCartList() async {
     try {
       // Sử dụng CartService để lấy dữ liệu giỏ hàng
-      var listCarts = await cartService.getCart();
+      var listCarts = await cartsRepository.fetchCartList(GlobalData.user!.id);
 
       setState(() {
         totalPrice = selectedCarts

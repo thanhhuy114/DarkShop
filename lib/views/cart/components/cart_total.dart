@@ -16,6 +16,7 @@ class _CartTotalState extends State<CartTotal> {
       color: Colors.amber.withOpacity(0.5),
       height: 80,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,11 +35,11 @@ class _CartTotalState extends State<CartTotal> {
             ],
           ),
           const SizedBox(
-            width: 11.5,
+            width: 0,
           ),
           Container(
               height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width / 2,
+              width: MediaQuery.of(context).size.width / 3,
               decoration: const BoxDecoration(color: Colors.redAccent),
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +48,7 @@ class _CartTotalState extends State<CartTotal> {
                     'Thanh toán',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 10,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),

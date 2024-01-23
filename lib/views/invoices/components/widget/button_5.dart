@@ -1,3 +1,5 @@
+import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/views/notification/notification_presenter.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/invoices.dart';
@@ -102,6 +104,11 @@ class ButtonUp5 extends StatelessWidget {
                         //'Thông báo đặt lại thành công!'
                         onPressed: () async {
                           try {
+                            NotificationPresenter.addNotification(
+                                GlobalData.user!.id,
+                                "Thông báo đặt lại thành công!",
+                                'OK',
+                                null);
                             await ApiService().updateInvoiceStatus1(invoice.id);
                             updateStatusCallback();
                           } catch (e) {

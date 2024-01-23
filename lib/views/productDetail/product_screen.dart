@@ -67,9 +67,7 @@ class _ProductScreenState extends State<ProductScreen> {
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 255, 185, 88),
       ),
-      body: GlobalData.user == null
-          ? const RequestLogin()
-          : SingleChildScrollView(
+      body: SingleChildScrollView(
         child: FutureBuilder<Product>(
           future: product,
           builder: (context, snapshot) {
@@ -166,7 +164,9 @@ class _ProductScreenState extends State<ProductScreen> {
                                 carts = Cart(
                                     idProduct: widget.id,
                                     count: quantity,
-                                    id_user: 2,
+                                    id_user: GlobalData.user == null
+                                        ? 2
+                                        : GlobalData.user!.id,
                                     id: null);
                                 // Gọi hàm để thêm sản phẩm vào giỏ hàng
                                 cart.postCartItem(carts);

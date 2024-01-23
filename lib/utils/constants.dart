@@ -12,7 +12,7 @@ class Constants {
   static const int sapHetHang = 3;
 
   static const String pathClould = "https://res.cloudinary.com/dvrzyngox/image/upload/v1705543245/";
-  static const String hosting = 'http://192.168.114.206:3000';
+  static const String hosting = 'http://192.168.215.206:3000';
 
   static const String avatarDefault = "assets/image_user/avt_default.png";
   static const String logo = 'assets/logo.png';

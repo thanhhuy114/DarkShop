@@ -12,9 +12,9 @@ class ItemCart extends StatefulWidget {
   final int idcart;
   final int idProduct;
   final String Name;
-  final int Price;
+  int Price;
   final String ImagePro;
-  final int Promotion;
+  int Promotion;
   final int id_user;
   int Count;
   final Function(double)? onPriceChanged;
@@ -58,8 +58,8 @@ class _ItemCartState extends State<ItemCart> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.network(
-              (Constants.pathClould + widget.ImagePro).toString(),
-              cacheHeight: 100,
+              ('${Constants.pathClould}${widget.ImagePro}').toString(),
+              width: screenWidth * 0.4,
               fit: BoxFit.cover,
             ),
             const SizedBox(
@@ -72,6 +72,8 @@ class _ItemCartState extends State<ItemCart> {
                 children: [
                   Text(
                     widget.Name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,

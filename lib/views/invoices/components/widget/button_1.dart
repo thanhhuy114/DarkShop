@@ -1,3 +1,5 @@
+import 'package:darkshop/utils/global_data.dart';
+import 'package:darkshop/views/notification/notification_presenter.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/invoices.dart';
@@ -32,6 +34,11 @@ class ButtonUp1 extends StatelessWidget {
                         //'Thông báo đơn hàng đã đươc hủy'
                         onPressed: () async {
                           try {
+                            NotificationPresenter.addNotification(
+                                GlobalData.user!.id,
+                                "Thông báo đơn hàng đã đươc hủy",
+                                'OK',
+                                null);
                             await ApiService().updateInvoiceStatus5(invoice.id);
                             updateStatusCallback();
                           } catch (e) {
@@ -104,6 +111,11 @@ class ButtonUp1 extends StatelessWidget {
                         //'Thông báo đơn hàng đang được chuẩn bị'
                         onPressed: () async {
                           try {
+                            NotificationPresenter.addNotification(
+                                GlobalData.user!.id,
+                                "Thông báo đơn hàng đang được chuẩn bị",
+                                'OK',
+                                null);
                             //gọi hàm update status -> 2
                             await ApiService().updateInvoiceStatus2(invoice.id);
                             //load data lại
